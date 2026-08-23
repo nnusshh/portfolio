@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anoushka Aggarwal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #1A1A19;
+    --sb:      #282826;
+    --text:    #ededed;
+    --muted:   #9a9a97;
+    --dim:     #787874;
+    --faint:   #35342f;
+    --border:  #33322e;
+    --hover:   rgba(255,255,255,0.05);
+    --active:  rgba(255,255,255,0.07);
+    --font:    "Manrope", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --sw:      250px;
+    --bc:      40px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  strong { font-weight: 600; color: var(--text); }
+  img { max-width: 100%; display: block; }
+
+  /* ── SIDEBAR ──────────────────────────────────────── */
+  .sb {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--sw);
+    background: var(--sb);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.7rem 0.9rem;
+    z-index: 30;
+    overflow-y: auto;
+  }
+
+  .sb__name {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.45rem;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.1s;
+    margin-bottom: 0.2rem;
+  }
+  .sb__name:hover { background: var(--hover); }
+
+  .sb__av {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #2a2a28;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 600; color: #666;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .sb__av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+
+  .n-sect { margin-top: 1.7rem; }
+
+  .n-label {
+    font-size: 12px;
+    letter-spacing: 0;
+    color: var(--dim);
+    padding: 0 0.45rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .n-list { list-style: none; }
+  .n-list li a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.55rem;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    line-height: 1.4;
+    user-select: none;
+  }
+  .n-list li + li { margin-top: 0.1rem; }
+  .n-list li a:hover { background: var(--hover); color: var(--text); }
+  .n-list li a.on  { background: var(--active); color: var(--text); }
+
+  .n-icon {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .n-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .n-av {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #2a2a28;
+    border: 1px solid var(--border);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 8px; font-weight: 600; color: #666;
+    flex-shrink: 0;
+  }
+  .n-xt { margin-left: auto; opacity: 0.3; font-size: 11px; }
+
+  .sb__foot {
+    margin-top: auto;
+    padding: 0.75rem 0.45rem 0;
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  /* ── BREADCRUMB BAR ───────────────────────────────── */
+  .bc {
+    position: fixed;
+    top: 0;
+    left: var(--sw);
+    right: 0;
+    height: var(--bc);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    z-index: 20;
+  }
+
+  .bc__trail {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .bc__trail a { cursor: pointer; transition: color 0.1s; }
+  .bc__trail a:hover { color: var(--text); }
+  .bc__sep { margin: 0 0.3rem; opacity: 0.35; font-size: 12px; }
+  .bc__cur { color: var(--text); }
+
+  .bc__copy {
+    font-size: 12px;
+    color: var(--dim);
+    cursor: pointer;
+    padding: 0.22rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    font-family: var(--font);
+    transition: background 0.1s, color 0.1s;
+  }
+  .bc__copy:hover { background: var(--hover); color: var(--text); }
+
+  /* mobile nav trigger + scrim (hidden on desktop) */
+  .bc__left { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+  .bc__ham {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 30px; height: 30px;
+    margin-left: -0.3rem;
+    border: none; background: transparent; color: var(--text);
+    cursor: pointer; border-radius: 5px; flex-shrink: 0;
+  }
+  .bc__ham:hover { background: var(--hover); }
+  .sb-scrim {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 25;
+  }
+
+  /* ── MAIN ─────────────────────────────────────────── */
+  .main {
+    margin-left: var(--sw);
+    padding-top: var(--bc);
+  }
+
+  [data-view] { display: none; }
+  [data-view].on { display: block; }
+
+  /* ── HOME ─────────────────────────────────────────── */
+  .h-wrap { padding: 2.5rem 2.5rem 5rem; }
+
+  .h-av {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #252522;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; color: #555;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .h-av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+
+  .h-hl {
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    max-width: 52ch;
+    margin-bottom: 0.7rem;
+  }
+
+  .h-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .h-sub strong { color: var(--text); font-weight: 600; }
+
+  .h-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-top: 1rem;
+    font-size: 13px;
+    color: var(--dim);
+  }
+  .h-meta__item { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .h-meta__item svg { opacity: 0.85; }
+  .h-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); }
+
+  .s-div {
+    margin-top: 2.5rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--border);
+  }
+  .s-lbl {
+    font-size: 12px;
+    letter-spacing: 0;
+    color: var(--dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-t { width: 100%; border-collapse: collapse; }
+  .exp-t tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .exp-t tr:first-child { border-top: 1px solid var(--border); }
+  .exp-t tr:hover { background: var(--hover); }
+  .exp-t td { padding: 0.75rem 0.4rem; vertical-align: middle; }
+  .exp-t td.ic { width: 36px; padding-left: 0; }
+  .exp-t td.yr { text-align: right; font-size: 14px; color: var(--dim); white-space: nowrap; padding-right: 0; }
+  .co-ic {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .co-ic img { width: 100%; height: 100%; object-fit: contain; }
+  .co-n  { font-size: 14px; font-weight: 500; color: var(--text); }
+  .co-sep { color: var(--faint); margin: 0 0.5rem; }
+  .co-r  { font-size: 14px; color: var(--muted); }
+
+  /* ── PROJECT WALL (home) ─────────────────────────── */
+  .pw { display: grid; gap: 1.5rem; margin-top: 0.25rem; }
+
+  .pw-item {
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: opacity 0.15s;
+  }
+  .pw-item:hover { opacity: 0.82; }
+
+  .pw-hero {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pw-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .pw-hero-letter {
+    font-size: 96px;
+    font-weight: 700;
+    opacity: 0.08;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .pw-info {
+    padding: 0.9rem 1rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--sb);
+  }
+  .pw-name { font-size: 14px; font-weight: 500; }
+  .pw-cat  { font-size: 12px; color: var(--muted); margin-top: 0.15rem; }
+  .pw-desc { font-size: 13px; color: var(--dim); margin-top: 0.45rem; line-height: 1.55; }
+
+  /* ── ABOUT ────────────────────────────────────────── */
+  .ab-hero {
+    width: 100%;
+    height: 460px;
+    background: linear-gradient(145deg, #1c1a14 0%, #111108 40%, #0d0c0b 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .ab-hero video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block; z-index: 0;
+  }
+  .ab-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(rgba(255,235,180,0.02) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(90deg, rgba(255,235,180,0.02) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(180deg, transparent 55%, rgba(26,26,25,0.55) 100%);
+  }
+
+  .ab-wrap { padding: 2.5rem 2.5rem 5rem; }
+
+  .ab-ht {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .ab-p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 62ch;
+    margin-bottom: 0.9rem;
+  }
+
+  /* about — structured facts */
+  .ab-sec {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--dim);
+    margin: 3rem 0 1.2rem;
+  }
+  .ab-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem 2rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--border);
+    align-items: center;
+  }
+  .ab-row:last-child { border-bottom: 1px solid var(--border); }
+  .ab-row__l { display: flex; align-items: center; gap: 0.85rem; }
+  .ab-logo {
+    width: 38px; height: 38px;
+    border-radius: 9px;
+    overflow: hidden;
+    background: #fff;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ab-logo img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+  .ab-row__main { font-size: 14px; font-weight: 500; color: var(--text); }
+  .ab-row__sub  { font-size: 13px; color: var(--muted); margin-top: 0.15rem; }
+  .ab-row__meta { font-size: 12px; color: var(--dim); white-space: nowrap; text-align: right; }
+
+  .ab-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    max-width: 62ch;
+  }
+  .ab-tag {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+  .ab-tag--tool { color: var(--dim); }
+
+  /* about — two-column personal block */
+  .ab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 2.75rem 0 0; }
+  .ab-col { min-width: 0; }
+
+  /* On Loop */
+  .loop { display: flex; flex-direction: column; margin-top: 0.15rem; }
+  .loop-item {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding: 0.5rem 0.6rem; margin: 0 -0.6rem;
+    border-radius: 8px; text-decoration: none; transition: background 0.12s;
+  }
+  .loop-item:hover { background: var(--hover); }
+  .loop-art { width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0; }
+  .loop-meta { flex: 1; min-width: 0; }
+  .loop-t { font-size: 14px; color: var(--text); font-weight: 500; }
+  .loop-a { font-size: 13px; color: var(--muted); margin-top: 0.1rem; }
+  .loop-go { font-size: 11px; color: #1DB954; opacity: 0; transition: opacity 0.12s; white-space: nowrap; flex-shrink: 0; }
+  .loop-item:hover .loop-go { opacity: 1; }
+
+  /* compact entry (2-col experience / education / recognition) */
+  .ab-entry { display: flex; gap: 0.85rem; align-items: flex-start; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+  .ab-entry:last-child { border-bottom: 1px solid var(--border); }
+  .ab-entry__meta { font-size: 12px; color: var(--dim); margin-top: 0.3rem; }
+
+  /* Find me */
+  .ab-links { display: flex; flex-direction: column; margin-top: 0.15rem; }
+  .ab-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.65rem 0; border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--text); text-decoration: none; transition: color 0.1s;
+  }
+  .ab-link:first-child { border-top: 1px solid var(--border); }
+  .ab-link span { color: var(--dim); font-size: 12px; }
+  .ab-link:hover { color: var(--muted); }
+
+  /* Core values */
+  .values { display: flex; flex-direction: column; gap: 1.15rem; margin-top: 0.15rem; }
+  .value-t { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+  .value-d { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── PROJECT PAGES ────────────────────────────────── */
+  .p-hero {
+    width: 100%;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a0a08;
+  }
+  .p-hero img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+  }
+  .p-hero-ph {
+    width: 100%;
+    height: 380px;
+  }
+
+  .p-wrap { padding: 2.5rem 2.5rem 6rem; }
+
+  .p-title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .p-tag {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 60ch;
+    line-height: 1.55;
+    margin-bottom: 2rem;
+  }
+
+  .p-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.75rem;
+  }
+
+  .p-meta-lbl {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 12px;
+    color: var(--dim);
+    margin-bottom: 0.35rem;
+  }
+
+  .p-meta-val {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .p-git {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+  }
+  .p-git a { text-decoration: underline; text-underline-offset: 2px; color: var(--text); }
+
+  .p-body {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.72;
+    max-width: 66ch;
+  }
+  .p-body p { margin-bottom: 1rem; }
+  .p-body p:last-child { margin-bottom: 0; }
+
+  .p-slbl {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 2.5rem 0 0.6rem;
+  }
+
+  .p-shead {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    max-width: 46ch;
+    margin-bottom: 1.1rem;
+  }
+
+  .p-img {
+    margin: 2rem 0 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0a0a08;
+  }
+  .p-img img { width: 100%; height: auto; }
+  .p-img-cap {
+    font-size: 12px;
+    color: var(--dim);
+    margin-top: 0.45rem;
+    padding-left: 0.1rem;
+  }
+
+  /* interactive embed (live prototype iframe) */
+  .p-embed {
+    margin: 1.5rem 0 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FAFAFC;
+  }
+  .p-embed__bar {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.55rem 0.85rem;
+    background: var(--sb);
+    border-bottom: 1px solid var(--border);
+  }
+  .p-embed__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--faint); flex-shrink: 0; }
+  .p-embed__url { font-size: 12px; color: var(--muted); margin-left: 0.5rem; }
+  .p-embed__open { margin-left: auto; font-size: 12px; color: var(--dim); text-decoration: none; white-space: nowrap; }
+  .p-embed__open:hover { color: var(--text); }
+  .p-embed__frame { display: block; width: 100%; height: 660px; border: 0; background: #FAFAFC; }
+  @media (max-width: 768px) { .p-embed__frame { height: 480px; } }
+
+  .p-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0 0;
+  }
+
+  /* next steps */
+  .ns-pre  { font-size: 11px; color: var(--dim); margin-bottom: 0.3rem; }
+  .ns-head {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin: 2.5rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .ns-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1.4rem;
+  }
+  .ns-ic { font-size: 16px; flex-shrink: 0; margin-top: 0.05rem; }
+  .ns-t  { font-size: 14px; font-weight: 600; margin-bottom: 0.2rem; }
+  .ns-d  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  /* project CTA footer */
+  .p-cta {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .p-cta p { font-size: 14px; color: var(--muted); margin-bottom: 0.2rem; }
+  .p-cta-btns {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  .p-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.48rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    font-family: var(--font);
+    cursor: pointer;
+    background: transparent;
+    color: var(--text);
+    transition: background 0.1s;
+    text-decoration: none;
+  }
+  .p-btn:hover { background: var(--hover); }
+
+  /* ── UX AUDIT SPECIFIC ─────────────────────────── */
+  .ua-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1.8rem 0 0;
+  }
+  .ua-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.2rem 1.3rem;
+  }
+  .ua-card__num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    margin-bottom: 0.55rem;
+  }
+  .ua-card__title { font-size: 13px; font-weight: 600; margin-bottom: 0.4rem; }
+  .ua-card__body  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .ua-finding {
+    border-left: 2px solid var(--border);
+    padding-left: 1.25rem;
+    margin: 2rem 0 0;
+  }
+  /* finding with paired screenshot */
+  .ua-find {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 2.25rem;
+    margin: 2.5rem 0 0;
+    align-items: center;
+  }
+  .ua-find--right { grid-template-columns: 1fr 340px; }
+  .ua-find--right .ua-find__img  { order: 2; }
+  .ua-find--right .ua-find__text { order: 1; }
+  .ua-find__img {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #2563eb;
+  }
+  .ua-find__img img { width: 100%; height: auto; display: block; }
+  .ua-finding__name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .ua-finding__body { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 0.8rem; }
+  .ua-finding__rec  { font-size: 13px; color: var(--text); line-height: 1.55; }
+  .ua-impact {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    margin-bottom: 0.6rem;
+  }
+  .ua-impact--high   { background: rgba(239,68,68,0.12); color: #f87171; }
+  .ua-impact--medium { background: rgba(234,179,8,0.12);  color: #facc15; }
+  .ua-impact--low    { background: rgba(34,197,94,0.12);  color: #4ade80; }
+
+  .ua-dq {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
+    border-left: 3px solid var(--dim);
+    padding: 0.6rem 0 0.6rem 1.4rem;
+    margin: 2rem 0;
+    max-width: 52ch;
+  }
+
+  .ua-personas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+  }
+  .ua-persona {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.1rem 1.2rem;
+  }
+  .ua-persona__name { font-size: 13px; font-weight: 600; margin-bottom: 0.6rem; }
+  .ua-persona__item { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .ua-persona__item::before { content: "→ "; color: var(--dim); }
+
+  .ua-testimonial {
+    margin: 2.5rem 0 0;
+    padding: 1.4rem 1.6rem;
+    background: var(--sb);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .ua-testimonial__label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.8rem; }
+  .ua-testimonial__quote { font-size: 14px; color: var(--muted); line-height: 1.7; font-style: italic; margin-bottom: 0.9rem; }
+  .ua-testimonial__attr  { font-size: 12px; color: var(--dim); }
+
+  .ua-context {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 1.8rem 0 0;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .ua-context__lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.6rem; }
+  .ua-context__item { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+  /* ── TWO-COLUMN CASE STUDY LAYOUT ───────────────── */
+  .cs-row {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 2.5rem;
+    padding: 2.75rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .cs-row:first-of-type { border-top: none; }
+  .cs-aside {
+    position: sticky;
+    top: calc(var(--bc) + 1.5rem);
+    align-self: start;
+  }
+  .cs-aside__num  { font-size: 12px; font-weight: 700; color: var(--dim); letter-spacing: 0.06em; }
+  .cs-aside__ttl  { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.35rem; color: var(--text); }
+  .cs-body p { font-size: 16px; color: var(--muted); line-height: 1.75; max-width: 60ch; margin-bottom: 0.9rem; }
+  .cs-body p strong { color: var(--text); font-weight: 600; }
+  .cs-body p:last-child { margin-bottom: 0; }
+
+  /* design question */
+  .cs-dq {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1.6rem;
+    max-width: 26ch;
+  }
+  .cs-dq em { color: #7ea2ff; font-style: normal; }
+
+  /* comparison table */
+  .cs-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 0; }
+  .cs-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--dim);
+    padding: 0 1rem 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cs-table td {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    padding: 0.9rem 1rem 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .cs-table td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; width: 1%; }
+  .cs-table td:last-child, .cs-table th:last-child { padding-right: 0; }
+
+  /* GIF placeholder grid */
+  .cs-gifs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.75rem 0 0;
+  }
+  .cs-gif { display: flex; flex-direction: column; gap: 0.5rem; }
+  .cs-gif__media {
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #2563eb;
+  }
+  .cs-gif__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-gif__ph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--sb);
+    border: 1px dashed var(--faint);
+    border-radius: 12px;
+    color: var(--dim);
+  }
+  .cs-gif__ph svg { opacity: 0.55; }
+  .cs-gif__ph span { font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .cs-gif__cap { font-size: 12px; color: var(--muted); }
+  .cs-gif__cap b { color: var(--text); font-weight: 600; }
+
+  /* per-factor rows — text left, image right */
+  .cs-factors { margin: 1.75rem 0 0; }
+  .cs-factor {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    align-items: center;
+  }
+  .cs-factor:first-child { border-top: none; padding-top: 0.75rem; }
+  .cs-factor__screen { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); margin-bottom: 0.9rem; }
+  .cs-factor__block { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.7rem; }
+  .cs-factor__block:last-child { margin-bottom: 0; }
+  .cs-factor__ico { flex-shrink: 0; margin-top: 2px; }
+  .cs-factor__ico--problem { color: #f87171; }
+  .cs-factor__ico--rec { color: #4ade80; }
+  .cs-factor__txt { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .cs-factor__txt.rec { color: var(--text); }
+  .cs-factor__media {
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #2563eb;
+  }
+  .cs-factor__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* blue impact block */
+  .cs-impact {
+    background: #1e3ba8;
+    border-radius: 16px;
+    padding: 2.25rem 2.25rem 2.5rem;
+    margin: 1.5rem 0 0;
+    color: #fff;
+  }
+  .cs-impact__eyebrow { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; }
+  .cs-impact__head { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2rem; }
+  .cs-impact__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .cs-impact__num  { font-size: 26px; font-weight: 800; margin-bottom: 0.7rem; }
+  .cs-impact__t    { font-size: 15px; font-weight: 600; margin-bottom: 0.5rem; }
+  .cs-impact__d    { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.72); }
+
+  /* feedback block */
+  .cs-feedbacks { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 1rem; align-items: start; }
+  .cs-feedback {
+    background: var(--sb);
+    border: 1px solid rgba(34,211,238,0.32);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 0 22px rgba(34,211,238,0.10), inset 0 0 0 1px rgba(34,211,238,0.05);
+  }
+  .cs-feedback__q { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 1.1rem; }
+  .cs-feedback__a { display: flex; align-items: center; gap: 0.65rem; font-size: 12px; color: var(--dim); line-height: 1.4; }
+  .cs-feedback__av { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; background: #00566A; color: #fff; display: flex; align-items: center; justify-content: center; }
+
+  /* placeholder note */
+  .cs-note {
+    border: 1px dashed var(--faint);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  /* persona cards */
+  .cs-persona { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 1rem; }
+  .cs-persona__head { display: flex; gap: 0.85rem; align-items: center; padding: 1rem 1.15rem; border-bottom: 1px solid var(--border); }
+  .cs-persona__av {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    font-size: 13px; font-weight: 700; color: #fff; background: #00566A;
+  }
+  .cs-persona__av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-persona__name { font-size: 15px; font-weight: 600; color: var(--text); }
+  .cs-persona__role { font-size: 12px; color: var(--dim); margin-top: 0.15rem; }
+  .cs-persona__body { padding: 1.15rem 1.15rem; }
+  .cs-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .cs-ba__col { border-radius: 8px; padding: 0.85rem 0.95rem; border: 1px solid var(--border); }
+  .cs-ba__lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.45rem; }
+  .cs-ba__col--b .cs-ba__lbl { color: var(--dim); }
+  .cs-ba__col--a .cs-ba__lbl { color: var(--dim); }
+  .cs-ba__txt { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .cs-flow { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; margin-top: 1rem; }
+  .cs-flow span { font-size: 11px; padding: 0.25rem 0.6rem; border: 1px solid var(--border); border-radius: 5px; background: var(--sb); color: var(--muted); }
+  .cs-flow b { font-size: 11px; color: var(--dim); font-weight: 400; }
+  /* flow badge 'appear' animation (guarded so content is never stuck hidden) */
+  @keyframes appearBadge { from { opacity: 0; transform: translateY(5px) scale(0.96); } to { opacity: 1; transform: none; } }
+  .cs-flow.anim > * { opacity: 0; }
+  .cs-flow.anim.in > * { animation: appearBadge 0.4s cubic-bezier(0.22,0.61,0.36,1) forwards; }
+  .cs-flow.anim.in > *:nth-child(1){animation-delay:0s}
+  .cs-flow.anim.in > *:nth-child(2){animation-delay:.07s}
+  .cs-flow.anim.in > *:nth-child(3){animation-delay:.14s}
+  .cs-flow.anim.in > *:nth-child(4){animation-delay:.21s}
+  .cs-flow.anim.in > *:nth-child(5){animation-delay:.28s}
+  .cs-flow.anim.in > *:nth-child(6){animation-delay:.35s}
+  .cs-flow.anim.in > *:nth-child(7){animation-delay:.42s}
+  .cs-flow.anim.in > *:nth-child(8){animation-delay:.49s}
+  .cs-flow.anim.in > *:nth-child(9){animation-delay:.56s}
+  .cs-flow.anim.in > *:nth-child(10){animation-delay:.63s}
+  .cs-flow.anim.in > *:nth-child(11){animation-delay:.70s}
+
+  /* agents — 4-column vertical */
+  .cs-agents { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.75rem 0 0; }
+  .cs-agent {
+    border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.15rem 1.35rem;
+  }
+  .cs-agent__av {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: #00566A; border: none;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; margin-bottom: 0.95rem;
+  }
+  .cs-agent__name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+  .cs-agent__cadence { font-size: 10px; color: #4BCD3E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.7rem; }
+  .cs-agent__desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  /* agents appear one after another, slowly, along the line */
+  @keyframes agentIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .cs-agents.anim .cs-agent { opacity: 0; }
+  .cs-agents.anim.in .cs-agent { animation: agentIn 0.5s ease-out forwards; }
+  .cs-agents.anim.in .cs-agent:nth-child(1){animation-delay:.1s}
+  .cs-agents.anim.in .cs-agent:nth-child(2){animation-delay:.8s}
+  .cs-agents.anim.in .cs-agent:nth-child(3){animation-delay:1.5s}
+  .cs-agents.anim.in .cs-agent:nth-child(4){animation-delay:2.2s}
+  @media (prefers-reduced-motion: reduce) {
+    .cs-agents.anim.in .cs-agent { animation: none; opacity: 1; }
+  }
+  .cs-src { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--faint); }
+  .cs-src:hover { color: var(--text); border-color: var(--dim); }
+
+  /* simple bulleted list (opportunity / solution) */
+  .cs-list { display: flex; flex-direction: column; gap: 0.55rem; }
+  .cs-list span { display: block; font-size: 13px; color: var(--muted); line-height: 1.5; padding-left: 0.95rem; position: relative; }
+  .cs-list span::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 4px; height: 4px; border-radius: 50%; background: var(--dim); }
+
+  /* opportunity → solution transform pairs */
+  .cs-transform { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.25rem; }
+  .cs-tf-head { display: grid; grid-template-columns: 1fr 46px 1fr; margin-bottom: 0.15rem; }
+  .cs-tf-head__l, .cs-tf-head__r { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; padding: 0 1.2rem; }
+  .cs-tf-head__l { color: var(--text); }
+  .cs-tf-head__r { grid-column: 3; color: #4BCD3E; }
+  .cs-tf {
+    display: grid; grid-template-columns: 1fr 46px 1fr; align-items: stretch;
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  }
+  .cs-tf__side { padding: 1.05rem 1.2rem; display: flex; flex-direction: column; gap: 0.55rem; }
+  .cs-tf__from { background: var(--sb); }
+  .cs-tf__to { background: rgba(75,205,62,0.08); }
+  .cs-tf__top { display: flex; align-items: center; gap: 0.5rem; }
+  .cs-tf__ico { color: var(--dim); display: flex; }
+  .cs-tf__to .cs-tf__ico { color: #4BCD3E; }
+  .cs-tf__txt { font-size: 16px; line-height: 1.4; color: var(--text); }
+  .cs-tf__arrow { display: flex; align-items: center; justify-content: center; background: var(--bg); color: var(--dim); }
+  @keyframes appearRow { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .cs-transform.anim .cs-tf { opacity: 0; }
+  .cs-transform.anim.in .cs-tf { animation: appearRow 0.5s cubic-bezier(0.22,0.61,0.36,1) forwards; }
+  .cs-transform.anim.in .cs-tf:nth-child(2){animation-delay:.05s}
+  .cs-transform.anim.in .cs-tf:nth-child(3){animation-delay:.16s}
+  .cs-transform.anim.in .cs-tf:nth-child(4){animation-delay:.27s}
+  .cs-transform.anim.in .cs-tf:nth-child(5){animation-delay:.38s}
+
+  /* 3-column vertical personas */
+  .cs-personas3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  .cs-personas3 .cs-persona { margin-top: 0; display: flex; flex-direction: column; }
+  .cs-personas3 .cs-persona__head { padding: 1rem; }
+  .cs-personas3 .cs-persona__av { width: 40px; height: 40px; font-size: 13px; }
+  .cs-personas3 .cs-persona__body { padding: 1.1rem; }
+  .cs-personas3 .cs-ba { grid-template-columns: 1fr; gap: 0.7rem; }
+  .cs-personas3 .cs-ba__txt { font-size: 16px; }
+  .cs-personas3 .cs-persona__name { font-size: 16px; }
+  .cs-personas3 .cs-flow { flex-direction: column; align-items: flex-start; gap: 0.12rem; }
+  .cs-personas3 .cs-flow span { text-align: left; }
+  .cs-personas3 .cs-flow b { display: block; text-align: left; transform: rotate(90deg); line-height: 1; margin: 0.04rem 0; }
+  /* ladder: each rung steps to the right */
+  .cs-personas3 .cs-flow span:nth-of-type(2){ margin-left: 13px; }
+  .cs-personas3 .cs-flow span:nth-of-type(3){ margin-left: 26px; }
+  .cs-personas3 .cs-flow span:nth-of-type(4){ margin-left: 39px; }
+  .cs-personas3 .cs-flow span:nth-of-type(5){ margin-left: 52px; }
+  .cs-personas3 .cs-flow span:nth-of-type(6){ margin-left: 65px; }
+  .cs-personas3 .cs-flow b:nth-of-type(1){ margin-left: 6px; }
+  .cs-personas3 .cs-flow b:nth-of-type(2){ margin-left: 19px; }
+  .cs-personas3 .cs-flow b:nth-of-type(3){ margin-left: 32px; }
+  .cs-personas3 .cs-flow b:nth-of-type(4){ margin-left: 45px; }
+  .cs-personas3 .cs-flow b:nth-of-type(5){ margin-left: 58px; }
+
+  /* FIS impact block — teal bg, all white text */
+  .cs-impact--fis { background: #00566A; }
+  /* FIS body copy reads at 16px */
+  [data-view="nav"] .ns-t { font-size: 16px; }
+  [data-view="nav"] .ns-d { font-size: 16px; line-height: 1.6; }
+  [data-view="nav"] .cs-feedback__q { font-size: 16px; }
+
+  /* stat row */
+  .cs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 1.75rem 0 0; }
+  .cs-stat { background: var(--sb); padding: 1.1rem 1.2rem; }
+  .cs-stat__n { font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 0.4rem; }
+  .cs-stat__l { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .cs-stat__s { font-size: 10px; color: var(--dim); margin-top: 0.4rem; letter-spacing: 0.03em; }
+
+  /* ── TABLET ───────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .p-meta  { grid-template-columns: repeat(3, 1fr) !important; row-gap: 1.5rem; }
+    .ua-cards { grid-template-columns: repeat(2, 1fr) !important; }
+    .cs-factor { grid-template-columns: 1fr 300px; gap: 2rem; }
+    .ua-find { grid-template-columns: 280px 1fr; }
+    .ua-find--right { grid-template-columns: 1fr 280px; }
+  }
+
+  /* ── MOBILE (off-canvas nav) ──────────────────────── */
+  @media (max-width: 768px) {
+    .sb {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      width: 250px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.55);
+    }
+    body.nav-open .sb { transform: none; }
+    body.nav-open .sb-scrim { display: block; }
+    .bc { left: 0; padding: 0 0.9rem; }
+    .bc__ham { display: inline-flex; }
+    .main { margin-left: 0; }
+
+    .h-wrap, .ab-wrap, .p-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .p-wrap { padding-top: 1.75rem; }
+
+    .p-hero { min-height: 200px; }
+    .p-hero-ph { height: 220px; }
+    .ab-hero { height: 260px; }
+
+    .p-title { font-size: 22px; }
+    .p-tag { max-width: 100% !important; }
+    .p-meta { grid-template-columns: repeat(2, 1fr) !important; gap: 1.25rem; }
+
+    .ua-cards { grid-template-columns: 1fr !important; }
+    .ua-personas, .ua-context, .p-two { grid-template-columns: 1fr; }
+    .ua-find, .ua-find--right { grid-template-columns: 1fr; }
+
+    .cs-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 2rem 0; }
+    .cs-aside { position: static; }
+    .cs-dq { font-size: 20px; max-width: 100%; }
+    .cs-gifs, .cs-impact__grid { grid-template-columns: 1fr; }
+    .cs-impact { padding: 1.75rem 1.5rem 2rem; }
+    .cs-factor { grid-template-columns: 1fr; gap: 1rem; }
+    .cs-factor__media { max-width: 340px; }
+    .cs-stats { grid-template-columns: 1fr; }
+    .ab-cols { grid-template-columns: 1fr; gap: 2rem; }
+    .cs-agents { grid-template-columns: 1fr; }
+    .cs-feedbacks { grid-template-columns: 1fr; }
+    .cs-ba { grid-template-columns: 1fr; }
+    .cs-tf { grid-template-columns: 1fr; }
+    .cs-tf-head { display: none; }
+    .cs-tf__arrow { padding: 0.3rem 0; }
+    .cs-tf__arrow svg { transform: rotate(90deg); }
+    .cs-impact__grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .cs-agents { grid-template-columns: repeat(2, 1fr); }
+    .cs-personas3 { grid-template-columns: 1fr; }
+    .cs-impact__grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+
+  /* ── SCROLL REVEAL (case studies only) ────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s cubic-bezier(0.22,0.61,0.36,1),
+                transform 0.6s cubic-bezier(0.22,0.61,0.36,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+
+  /* ── screens walkthrough (overview gif, dashboard, drill-down) ── */
+  .scr-media {
+    position: relative;
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+    background: #0b1119; line-height: 0; margin-top: 0.9rem;
+  }
+  .scr-media img, .scr-media video { width: 100%; height: auto; display: block; }
+  .scr-sound {
+    position: absolute; bottom: 16px; right: 16px; z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.5rem; line-height: 1;
+    padding: 0.65rem 1rem; border-radius: 999px; cursor: pointer;
+    background: #00566A; border: 1.5px solid #4BCD3E; color: #fff;
+    font-size: 13px; font-weight: 600; font-family: inherit;
+    box-shadow: 0 0 0 4px rgba(75,205,62,0.12), 0 8px 22px rgba(0,0,0,0.45);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .scr-sound:hover { background: #026d86; box-shadow: 0 0 0 5px rgba(75,205,62,0.18), 0 8px 22px rgba(0,0,0,0.5); transform: translateY(-1px); }
+  .scr-sound svg { color: #4BCD3E; }
+  .scr-sound .ic-on { display: none; }
+  .scr-sound.is-on .ic-off { display: none; }
+  .scr-sound.is-on .ic-on { display: inline-flex; }
+  .scr-progress {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    height: 5px; background: rgba(255,255,255,0.14); cursor: pointer;
+    transition: height 0.15s;
+  }
+  .scr-progress:hover { height: 9px; }
+  .scr-progress__fill {
+    height: 100%; width: 0%;
+    background: #4BCD3E; box-shadow: 0 0 8px rgba(75,205,62,0.6);
+  }
+
+  /* ── reusable scroll-to-play video player (button + progress bar) ── */
+  .vplay {
+    position: relative; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border); background: #0b1210; line-height: 0; margin-top: 1.1rem;
+  }
+  .vplay video { width: 100%; height: auto; display: block; }
+  .vplay__sound {
+    position: absolute; bottom: 16px; right: 16px; z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.5rem; line-height: 1;
+    padding: 0.65rem 1rem; border-radius: 999px; cursor: pointer;
+    background: var(--vp-btn, #1F3F32); border: 1.5px solid var(--vp-bar, #6D9D8F); color: #fff;
+    font-size: 13px; font-weight: 600; font-family: inherit;
+    box-shadow: 0 0 0 4px rgba(109,157,143,0.14), 0 8px 22px rgba(0,0,0,0.45);
+    transition: filter 0.2s, box-shadow 0.2s, transform 0.15s;
+  }
+  .vplay__sound:hover { filter: brightness(1.18); box-shadow: 0 0 0 5px rgba(109,157,143,0.22), 0 8px 22px rgba(0,0,0,0.5); transform: translateY(-1px); }
+  .vplay__sound svg { color: var(--vp-bar, #6D9D8F); }
+  .vplay__sound .ic-on { display: none; }
+  .vplay__sound.is-on .ic-off { display: none; }
+  .vplay__sound.is-on .ic-on { display: inline-flex; }
+  .vplay__progress {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    height: 5px; background: rgba(255,255,255,0.14); cursor: pointer; transition: height 0.15s;
+  }
+  .vplay__progress:hover { height: 9px; }
+  .vplay__fill { height: 100%; width: 0%; background: var(--vp-bar, #6D9D8F); box-shadow: 0 0 8px rgba(109,157,143,0.55); }
+  .scr-usp {
+    font-size: 21px; line-height: 1.5; font-weight: 500; letter-spacing: -0.01em;
+    color: var(--text); max-width: 34ch; margin: 3.25rem 0 0.4rem;
+  }
+  .scr-usp em { color: #2dd4bf; font-style: normal; }
+  .scr-cap { font-size: 14px; line-height: 1.6; color: var(--muted); max-width: 70ch; margin-top: 0.85rem; }
+  .scr-cap b { color: var(--text); font-weight: 600; }
+
+  /* ── highlighted inline link that opens the audit drawer ── */
+  .ua-drawer-link {
+    display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+    font-size: 16px; font-weight: 600; color: #2dd4bf;
+    padding: 0.55rem 0.95rem; border-radius: 8px;
+    background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.3);
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .ua-drawer-link:hover { background: rgba(45,212,191,0.15); border-color: rgba(45,212,191,0.55); transform: translateY(-1px); }
+  .ua-drawer-link svg { transition: transform 0.2s; }
+  .ua-drawer-link:hover svg { transform: translateX(3px); }
+
+  /* ── side drawer ── */
+  .drawer-scrim {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 90;
+    backdrop-filter: blur(2px);
+  }
+  .drawer-scrim.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; height: 100%; width: min(920px, 94vw);
+    background: var(--bg); border-left: 1px solid var(--border);
+    transform: translateX(100%); transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
+    z-index: 91; display: flex; flex-direction: column;
+    box-shadow: -24px 0 60px rgba(0,0,0,0.5);
+  }
+  .drawer.open { transform: none; }
+  .drawer__head {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    padding: 1.6rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .drawer__eyebrow { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.35rem; }
+  .drawer__title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); }
+  .drawer__sub { font-size: 13px; color: var(--muted); margin-top: 0.35rem; max-width: 60ch; line-height: 1.5; }
+  .drawer__close {
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--sb); border: 1px solid var(--border); color: var(--muted);
+    transition: background 0.2s, color 0.2s;
+  }
+  .drawer__close:hover { background: var(--faint); color: var(--text); }
+  /* tabs */
+  .drawer__tabs {
+    display: flex; gap: 0.3rem; padding: 0.85rem 1.75rem 0; overflow-x: auto;
+    border-bottom: 1px solid var(--border); flex-shrink: 0; scrollbar-width: thin;
+  }
+  .drawer__tab {
+    flex-shrink: 0; cursor: pointer; white-space: nowrap;
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    padding: 0.6rem 0.9rem; border: none; background: none;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .drawer__tab:hover { color: var(--text); }
+  .drawer__tab.on { color: #2dd4bf; border-bottom-color: #2dd4bf; }
+  .drawer__tab-opt { font-size: 10px; color: var(--dim); margin-left: 0.35rem; }
+  /* panel / table */
+  .drawer__body { overflow-y: auto; padding: 1.5rem 1.75rem 2.5rem; flex: 1; }
+  .drawer__panel-head { margin-bottom: 1.1rem; }
+  .drawer__panel-cat { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #2dd4bf; margin-bottom: 0.3rem; }
+  .drawer__panel-title { font-size: 18px; font-weight: 700; color: var(--text); }
+  .audit-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .audit-table th {
+    text-align: left; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--dim); font-weight: 600; padding: 0 0.85rem 0.6rem; border-bottom: 1px solid var(--border);
+    vertical-align: bottom;
+  }
+  .audit-table td { padding: 0.85rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: var(--muted); }
+  .audit-table td.audit-param { color: var(--text); font-weight: 600; width: 20%; }
+  .audit-table td.audit-prompt { color: #9fb4c9; font-style: italic; }
+  .audit-table tr:last-child td { border-bottom: none; }
+  .audit-table tr:hover td { background: rgba(255,255,255,0.015); }
+  @media (max-width: 720px) {
+    .drawer { width: 100vw; }
+    .audit-table, .audit-table thead, .audit-table tbody, .audit-table tr, .audit-table td { display: block; }
+    .audit-table thead { display: none; }
+    .audit-table td { border-bottom: none; padding: 0.25rem 0; }
+    .audit-table td.audit-param { width: auto; font-size: 15px; margin-top: 0.6rem; }
+    .audit-table td::before { content: attr(data-lbl); display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--dim); margin-bottom: 0.15rem; }
+    .audit-table td.audit-param::before { display: none; }
+    .audit-table tr { border-bottom: 1px solid var(--border); padding-bottom: 0.7rem; margin-bottom: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sb">
+  <a class="sb__name" onclick="go('home')">
+    <span class="sb__av"><img src="assets/profile.jpg" alt="Anoushka Aggarwal" onerror="this.parentElement.textContent='AA'"></span>
+    Anoushka Aggarwal
+  </a>
+
+  <nav>
+    <ul class="n-list" style="margin-top:.3rem">
+      <li>
+        <a onclick="go('about')" data-nav="about">
+          <span class="n-av">AA</span>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="n-sect">
+      <div class="n-label">Projects</div>
+      <ul class="n-list">
+        <li>
+          <a onclick="go('tiaa')" data-nav="tiaa">
+            <span class="n-icon" style="background:#e9e7de"><img src="assets/tiaa/thumb-square.png" alt="" onerror="var p=this.parentElement;p.style.background='#0e2618';p.style.color='#4ade80';p.textContent='T'"></span>
+            TIAA
+          </a>
+        </li>
+        <li>
+          <a onclick="go('nav')" data-nav="nav">
+            <span class="n-icon" style="background:#00566A"><img src="assets/vantage/thumb-square.png" alt="" onerror="var p=this.parentElement;p.style.background='#00566A';p.style.color='#4BCD3E';p.textContent='N'"></span>
+            Navigator
+          </a>
+        </li>
+        <li>
+          <a onclick="go('carma')" data-nav="carma">
+            <span class="n-icon"><img src="assets/agtuall/thumb-square.png" alt=""></span>
+            Carma
+          </a>
+        </li>
+        <li>
+          <a onclick="go('uxaudit')" data-nav="uxaudit">
+            <span class="n-icon"><img src="assets/uxaudit/thumb-square.png" alt=""></span>
+            UX Audit
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="n-sect">
+      <div class="n-label">Contact</div>
+      <ul class="n-list">
+        <li>
+          <a href="mailto:aggarwalanoushka02@gmail.com">
+            Email <span class="n-xt">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">
+            LinkedIn <span class="n-xt">↗</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="sb__foot">© Anoushka Aggarwal, 2026</div>
+</aside>
+
+<!-- ═══ BREADCRUMB BAR ═══ -->
+<div class="bc">
+  <div class="bc__left">
+    <button class="bc__ham" id="bc-ham" aria-label="Open menu" onclick="toggleNav()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <div class="bc__trail" id="bc-trail">
+      <span style="color:var(--muted)">Home</span>
+    </div>
+  </div>
+  <button class="bc__copy" id="bc-copy" onclick="copyLink()">Copy link</button>
+</div>
+
+<!-- mobile nav scrim -->
+<div class="sb-scrim" id="sb-scrim" onclick="closeNav()"></div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+
+  <!-- ── HOME ── -->
+  <div data-view="home" class="on">
+    <div class="h-wrap">
+      <div class="h-av"><img src="assets/profile.jpg" alt="Anoushka Aggarwal" onerror="this.parentElement.textContent='AA'"></div>
+      <h1 class="h-hl">A digital Product Designer from Himachal, India weaving mindful designs for human connections.</h1>
+      <p class="h-sub" style="margin-top:.1rem">Prev. <strong>Accenture Song</strong></p>
+      <div class="h-meta">
+        <span class="h-meta__item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          Pune, India
+        </span>
+        <span class="h-meta__item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="local-time">—</span>
+        </span>
+        <span class="h-meta__item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          Shipped 7 products
+        </span>
+      </div>
+
+      <div class="s-div">
+        <div class="s-lbl">Experience</div>
+        <table class="exp-t">
+          <tr>
+            <td class="ic">
+              <span class="co-ic" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
+            </td>
+            <td>
+              <span class="co-n">Accenture Song</span><span class="co-sep">/</span><span class="co-r">Interaction Designer</span>
+            </td>
+            <td class="yr">Present</td>
+          </tr>
+          <tr>
+            <td class="ic">
+              <span class="co-ic" style="background:#fff"><img src="assets/Logos/studio-carbon.png" alt=""></span>
+            </td>
+            <td>
+              <span class="co-n">Studio Carbon</span><span class="co-sep">/</span><span class="co-r">Product Design Intern</span>
+            </td>
+            <td class="yr">2024</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="s-div">
+        <div class="s-lbl">Selected Work</div>
+        <div class="pw">
+
+          <div class="pw-item" onclick="go('tiaa')">
+            <div class="pw-hero" style="background:#e7e7dd;padding:0"><img src="assets/tiaa/thumb-wide.png" alt="TIAA"></div>
+            <div class="pw-info">
+              <div class="pw-name">TIAA</div>
+              <div class="pw-cat">Interaction Design</div>
+              <div class="pw-desc">Building a UX testing process from nothing on a platinum financial client — 80+ screens, three releases.</div>
+            </div>
+          </div>
+
+          <div class="pw-item" onclick="go('nav')">
+            <div class="pw-hero" style="background:#00566A;padding:0">
+              <img src="assets/vantage/thumb-wide.png" alt="FIS 360 Navigator">
+            </div>
+            <div class="pw-info">
+              <div class="pw-name">Vantage 360 Value Navigator for FIS</div>
+              <div class="pw-cat">SaaS Product · Data Visualization · Agentic AI</div>
+              <div class="pw-desc">An FP&amp;A dashboard that brings together real-time data, variance analysis, and AI-driven commentary across all five core metrics — built for the FIS finance team.</div>
+            </div>
+          </div>
+
+          <div class="pw-item" onclick="go('carma')">
+            <div class="pw-hero" style="background:#ff5d00;padding:0">
+              <img src="assets/agtuall/thumb-wide.png" alt="Carma · Agtuall">
+            </div>
+            <div class="pw-info">
+              <div class="pw-name">Carma · Agtuall</div>
+              <div class="pw-cat">B2B SaaS · Product Design</div>
+              <div class="pw-desc">A shipped climate-risk platform helping insurers build ag-insurance that de-risks smallholder farmers.</div>
+            </div>
+          </div>
+
+          <div class="pw-item" onclick="go('uxaudit')">
+            <div class="pw-hero" style="background:#0b1782;padding:0">
+              <img src="assets/uxaudit/thumb-wide.png" alt="Unilever UX Audit">
+            </div>
+            <div class="pw-info">
+              <div class="pw-name">UX Audit</div>
+              <div class="pw-cat">UX Research · Audit</div>
+              <div class="pw-desc">Systematic evaluation of product experiences to identify friction, gaps, and opportunities.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="p-cta">
+        <p>If you want to know the details of any project or my availability – get in touch!</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <div class="p-cta-btns">
+          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <div data-view="about">
+    <div class="ab-hero"><video src="assets/about-cover.mp4" autoplay loop muted playsinline preload="auto" aria-label="About cover"></video></div>
+    <div class="ab-wrap">
+      <h2 class="ab-ht">Background</h2>
+      <p class="ab-p">I'm a product &amp; interaction designer focused on early product thinking in complex, data-rich enterprise and financial systems. I design AI-integrated and agentic product experiences — crafting secure, accessible, scalable interfaces while keeping human judgment in the loop where it matters.</p>
+      <p class="ab-p">Fluent in design articulation and systematic in execution — and always collecting odd little design-psychology facts about why people behave the way they do.</p>
+
+      <!-- Experience | Education -->
+      <div class="ab-cols">
+        <div class="ab-col">
+          <div class="ab-sec" style="margin-top:0">Experience</div>
+          <div class="ab-entry">
+            <span class="ab-logo" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
+            <div>
+              <div class="ab-row__main">Interaction Designer</div>
+              <div class="ab-row__sub">Accenture Song · FP&amp;A, TIAA, Unilever</div>
+              <div class="ab-entry__meta">Pune, IN · 2024–Present</div>
+            </div>
+          </div>
+          <div class="ab-entry">
+            <span class="ab-logo"><img src="assets/Logos/studio-carbon.png" alt=""></span>
+            <div>
+              <div class="ab-row__main">Product Design Intern</div>
+              <div class="ab-row__sub">Studio Carbon · Agtuall / Carma</div>
+              <div class="ab-entry__meta">Gandhinagar, IN · 2024</div>
+            </div>
+          </div>
+        </div>
+        <div class="ab-col">
+          <div class="ab-sec" style="margin-top:0">Education</div>
+          <div class="ab-entry">
+            <span class="ab-logo"><img src="assets/Logos/mitid.png" alt=""></span>
+            <div>
+              <div class="ab-row__main">M.Des, User Experience Design</div>
+              <div class="ab-row__sub">MIT ADT University</div>
+              <div class="ab-entry__meta">Pune, IN · 2022–2024</div>
+            </div>
+          </div>
+          <div class="ab-entry">
+            <span class="ab-logo"><img src="assets/Logos/manipal.png" alt=""></span>
+            <div>
+              <div class="ab-row__main">B.Des, Interior Design</div>
+              <div class="ab-row__sub">MAHE Manipal</div>
+              <div class="ab-entry__meta">Manipal, IN · 2018–2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- On Loop | Find Me + Core Values -->
+      <div class="ab-cols">
+        <div class="ab-col">
+          <div class="ab-sec" style="margin-top:0">On Loop</div>
+          <div class="loop">
+            <a class="loop-item" href="https://open.spotify.com/search/The%20Rapture%20Pt%20III%20Black%20Coffee" target="_blank" rel="noopener"><span class="loop-art" style="background:#0ea5a4"></span><div class="loop-meta"><div class="loop-t">The Rapture, Pt. III</div><div class="loop-a">Black Coffee</div></div><span class="loop-go">Spotify ↗</span></a>
+            <a class="loop-item" href="https://open.spotify.com/search/Adore%20U%20Fred%20again" target="_blank" rel="noopener"><span class="loop-art" style="background:#6366f1"></span><div class="loop-meta"><div class="loop-t">Adore U</div><div class="loop-a">Fred again..</div></div><span class="loop-go">Spotify ↗</span></a>
+            <a class="loop-item" href="https://open.spotify.com/search/Good%20Morning%20Kanye%20West" target="_blank" rel="noopener"><span class="loop-art" style="background:#f59e0b"></span><div class="loop-meta"><div class="loop-t">Good Morning</div><div class="loop-a">Kanye West</div></div><span class="loop-go">Spotify ↗</span></a>
+            <a class="loop-item" href="https://open.spotify.com/search/Luther%20Kendrick%20Lamar%20SZA" target="_blank" rel="noopener"><span class="loop-art" style="background:#ec4899"></span><div class="loop-meta"><div class="loop-t">Luther</div><div class="loop-a">Kendrick Lamar &amp; SZA</div></div><span class="loop-go">Spotify ↗</span></a>
+            <a class="loop-item" href="https://open.spotify.com/search/Ice%20Palace%20Qrion" target="_blank" rel="noopener"><span class="loop-art" style="background:#38bdf8"></span><div class="loop-meta"><div class="loop-t">Ice Palace</div><div class="loop-a">Qrion</div></div><span class="loop-go">Spotify ↗</span></a>
+          </div>
+        </div>
+        <div class="ab-col">
+          <div class="ab-sec" style="margin-top:0">Find Me</div>
+          <div class="ab-links">
+            <a class="ab-link" href="assets/resume.pdf" target="_blank" rel="noopener">Resume <span>↗</span></a>
+            <a class="ab-link" href="mailto:aggarwalanoushka02@gmail.com">Email <span>↗</span></a>
+            <a class="ab-link" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
+          </div>
+
+          <div class="ab-sec">My Core Values</div>
+          <div class="values">
+            <div class="value-item"><div class="value-t">Staying humble</div><div class="value-d">Respect everyone around you.</div></div>
+            <div class="value-item"><div class="value-t">Think with your head, not your gut</div><div class="value-d">Logic over personal bias.</div></div>
+            <div class="value-item"><div class="value-t">Always look back to move forward</div><div class="value-d">Retros after every ship.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills | Recognition -->
+      <div class="ab-cols">
+        <div class="ab-col">
+          <div class="ab-sec" style="margin-top:0">Skills &amp; Tools</div>
+          <div class="ab-tags">
+            <span class="ab-tag">Product Design</span>
+            <span class="ab-tag">Information Architecture</span>
+            <span class="ab-tag">Design Systems</span>
+            <span class="ab-tag">User Research</span>
+            <span class="ab-tag">Accessibility (WCAG)</span>
+            <span class="ab-tag">Prototyping</span>
+            <span class="ab-tag">Data Viz</span>
+            <span class="ab-tag ab-tag--tool">Figma</span>
+            <span class="ab-tag ab-tag--tool">Jira</span>
+            <span class="ab-tag ab-tag--tool">Notion</span>
+            <span class="ab-tag ab-tag--tool">Photoshop</span>
+            <span class="ab-tag ab-tag--tool">Illustrator</span>
+          </div>
+        </div>
+        <div class="ab-col">
+          <div class="ab-sec" style="margin-top:0">Recognition</div>
+          <div class="ab-entry">
+            <span class="ab-logo" style="background:#0e7490"><img src="assets/Logos/iaap.png" alt="" onerror="var p=this.parentElement;p.style.color='#fff';p.style.fontSize='8px';p.style.fontWeight='700';p.textContent='IAAP'"></span>
+            <div>
+              <div class="ab-row__main">Accessibility Certification</div>
+              <div class="ab-row__sub">IAAP · CPACC</div>
+            </div>
+          </div>
+          <div class="ab-entry">
+            <span class="ab-logo" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
+            <div>
+              <div class="ab-row__main">iChamp Client Award</div>
+              <div class="ab-row__sub">Accenture</div>
+            </div>
+          </div>
+          <div class="ab-entry">
+            <span class="ab-logo" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
+            <div>
+              <div class="ab-row__main">Client Hero Award</div>
+              <div class="ab-row__sub">Accenture · TIAA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-cta">
+        <p>If you want to know the details of any project or my availability – get in touch!</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <div class="p-cta-btns">
+          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TIAA ── -->
+  <div data-view="tiaa">
+    <div class="p-hero">
+      <img src="assets/tiaa/thumb-wide.png" alt="TIAA" style="background:#e7e7dd" onerror="this.closest('.p-hero').innerHTML='&lt;div class=&quot;p-hero-ph&quot; style=&quot;background:#2d5a27&quot;&gt;&lt;/div&gt;'">
+    </div>
+    <div class="p-wrap">
+      <h1 class="p-title">TIAA, Interaction Design</h1>
+      <p class="p-tag">Building a UX testing process from nothing on a platinum financial client — three releases, 80+ screens, zero prior process.</p>
+
+      <div class="p-meta">
+        <div>
+          <div class="p-meta-lbl">Timeline</div>
+          <div class="p-meta-val">2024<br>Accenture Song</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Role / Context</div>
+          <div class="p-meta-val">Interaction Designer<br>UX Testing Lead</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Leveraged Skills</div>
+          <div class="p-meta-val">Process design, defect taxonomy, stakeholder management</div>
+        </div>
+      </div>
+
+      <p class="p-git">If you'd like to learn more, <a href="mailto:aggarwalanoushka02@gmail.com">please get in touch</a>.</p>
+
+      <div class="p-body">
+        <p>At TIAA, I sat offshore on a platinum Accenture Song engagement — closer to the build than the onshore design team, catching defects the day they were created. I became the de facto point of contact for developers, PMs, and product owners on all design quality questions.</p>
+        <p>The problem was structural: <strong>no UXT process existed.</strong> Design quality between handoff and deployment was everyone's responsibility — which meant it was no one's.</p>
+      </div>
+
+      <div class="p-slbl">Problem</div>
+      <div class="p-shead">Design quality was everyone's responsibility.<br>Which meant it was no one's.</div>
+
+      <div class="p-body">
+        <p>I diagnosed five root causes across R1 and R2: no defined scope at kickoff, unclear stakeholder ownership, no shared defect language, no canonical Figma source of truth, and one person doing five jobs simultaneously.</p>
+        <p>Each cause had a concrete effect. Each effect had a fix I designed, documented, and got adopted.</p>
+      </div>
+
+      <div class="p-slbl">What I Built</div>
+      <div class="p-shead">A six-phase UXT process — two full phases before a single screen is touched.</div>
+
+      <div class="p-body">
+        <p>Phase 1: <strong>UXT Kickoff</strong> — lock scope, timelines, and source of truth. Phase 2: <strong>Align with POCs</strong> — map all 36 capabilities releasing in R3 to named owners, take knowledge transfer. Only then: screen analysis, defect logging, Jira tickets, QA-ready sign-off.</p>
+        <p>I also authored a <strong>five-category defect taxonomy</strong> — design fidelity, design system compliance, UX copy, accessibility, responsive behavior. It gave the scrum master a shared language to triage and route every ticket without debate.</p>
+      </div>
+
+      <div class="p-slbl">Across Three Releases</div>
+      <div class="p-shead">Discovery → Consequence → Maturity</div>
+
+      <div class="p-body">
+        <p><strong>R1 (Discovery):</strong> Built the checklist from scratch. Logged 22 defects, none shipped. Ran the retro that surfaced the five gaps.</p>
+        <p><strong>R2 (Consequence):</strong> Scope confusion meant wrong modules got tested. Built the kickoff doc mid-release in response. Introduced the defect taxonomy.</p>
+        <p><strong>R3 (Maturity):</strong> Kickoff doc became standard practice. Ticket creation delegated. The process now outlasts any one person.</p>
+      </div>
+
+      <div class="p-slbl">The Tradeoff</div>
+      <div class="p-shead">Making the cost of not fixing visible — not just the defect itself.</div>
+
+      <div class="p-body">
+        <p>When a PM said "we don't have time," the taxonomy let me answer: <strong>this isn't a design preference, it's a product-quality standard.</strong> Functionality always ships first, so visual defects are structural, not incidental — which is exactly why the role exists.</p>
+      </div>
+
+      <div class="p-slbl" style="margin-top:3rem">If I had more time on the project —</div>
+      <div class="ns-head">NEXT STEPS ↘</div>
+
+      <div class="ns-item">
+        <div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 6.6a3 3 0 0 1 0 5.8M17.5 19a5.5 5.5 0 0 0-2-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div>
+          <div class="ns-t">Expand the taxonomy documentation</div>
+          <div class="ns-d">Package the five-category system as a transferable artifact that teams can adopt without needing me to explain it from scratch each release</div>
+        </div>
+      </div>
+      <div class="ns-item">
+        <div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 21V11M12 21V5M19 21v-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div>
+          <div class="ns-t">Track defect patterns over time</div>
+          <div class="ns-d">Build a lightweight dashboard showing which categories recur most — turning individual releases into a learning system for the whole team</div>
+        </div>
+      </div>
+
+      <div class="p-cta">
+        <p>If you want to know the details of this project or my availability – get in touch!</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <div class="p-cta-btns">
+          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NAVIGATOR ── -->
+  <div data-view="nav">
+    <div class="p-hero">
+      <img src="assets/vantage/thumb-wide.png" alt="FIS 360 Navigator" style="background:#00566A" onerror="this.closest('.p-hero').style.minHeight='380px'">
+    </div>
+    <div class="p-wrap">
+      <h1 class="p-title">Vantage 360 Navigator</h1>
+      <p class="p-tag" style="max-width:62%">A secure, access-controlled platform giving each persona streamlined, personalised access to firm-wide FP&amp;A reporting — one intelligent hub for every metric deployed to date.</p>
+
+      <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
+        <div><div class="p-meta-lbl">Role</div><div class="p-meta-val">Product Designer, Design Strategist</div></div>
+        <div><div class="p-meta-lbl">Client</div><div class="p-meta-val">FIS</div></div>
+        <div><div class="p-meta-lbl">Credits</div><div class="p-meta-val">Accenture Song</div></div>
+        <div><div class="p-meta-lbl">Domain</div><div class="p-meta-val">FP&amp;A · Enterprise Finance</div></div>
+        <div><div class="p-meta-lbl">Evolution</div><div class="p-meta-val">Power BI → Agentic AI</div></div>
+        <div><div class="p-meta-lbl">Year</div><div class="p-meta-val">2025</div></div>
+      </div>
+
+      <p class="p-git">If you'd like to learn more, <a href="mailto:aggarwalanoushka02@gmail.com">please get in touch</a>.</p>
+
+      <!-- 01 · Context -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">01</div>
+          <div class="cs-aside__ttl">Context</div>
+        </div>
+        <div class="cs-body">
+          <p>FIS is a global fintech across four segments — Banking Solutions, Capital Markets, CIO Organisation and Corporate — each with its own finance team, P&amp;L and reporting rhythm.</p>
+          <p>In 2025 their reporting lived in a fragmented Power BI landscape: dashboards spread across locations, teams losing time hunting for the right report, the same views served to everyone regardless of need, and heavy dependence on FP&amp;A just to get access.</p>
+          <p><strong>The organisation needed a more intelligent solution</strong> — a way to translate those Power BI reports into agentic AI dashboards tailored to each market.</p>
+
+          <div class="p-slbl" style="margin-top:2rem">From opportunity to solution</div>
+          <div class="cs-transform">
+            <div class="cs-tf-head"><span class="cs-tf-head__l">Opportunity</span><span class="cs-tf-head__r">Solution</span></div>
+            <div class="cs-tf">
+              <div class="cs-tf__side cs-tf__from">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="4" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="4" y="14" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
+                <div class="cs-tf__txt">Fragmented reporting spread across many locations</div>
+              </div>
+              <div class="cs-tf__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="cs-tf__side cs-tf__to">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 3v18M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+                <div class="cs-tf__txt">Centralised into one enterprise hub</div>
+              </div>
+            </div>
+            <div class="cs-tf">
+              <div class="cs-tf__side cs-tf__from">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+                <div class="cs-tf__txt">Time-consuming search for the right report or KPI</div>
+              </div>
+              <div class="cs-tf__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="cs-tf__side cs-tf__to">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.6" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
+                <div class="cs-tf__txt">Clear visibility to the key financial KPIs</div>
+              </div>
+            </div>
+            <div class="cs-tf">
+              <div class="cs-tf__side cs-tf__from">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.6"/><path d="M5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></div>
+                <div class="cs-tf__txt">One view for everyone, regardless of need</div>
+              </div>
+              <div class="cs-tf__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="cs-tf__side cs-tf__to">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 6.6a3 3 0 0 1 0 5.8M17.5 19a5.5 5.5 0 0 0-2-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></div>
+                <div class="cs-tf__txt">Personas for secure, role-based access</div>
+              </div>
+            </div>
+            <div class="cs-tf">
+              <div class="cs-tf__side cs-tf__from">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M9 15l6-6M8.5 6.5l1-1a3.5 3.5 0 0 1 5 5l-1 1M15.5 17.5l-1 1a3.5 3.5 0 0 1-5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 20l2-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></div>
+                <div class="cs-tf__txt">Low self-service; heavy dependence on FP&amp;A</div>
+              </div>
+              <div class="cs-tf__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="cs-tf__side cs-tf__to">
+                <div class="cs-tf__top"><span class="cs-tf__ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 9.5l-3.2 6L9 12.8l5.5-3.3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span></div>
+                <div class="cs-tf__txt">A self-service navigator on Power BI + Fabric</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 · Impact -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">02</div>
+          <div class="cs-aside__ttl">Impact</div>
+        </div>
+        <div class="cs-body">
+          <p>The navigator centralised a fragmented reporting landscape into a single, persona-aware hub — with measurable business outcomes.</p>
+          <div class="cs-impact cs-impact--fis">
+            <div class="cs-impact__head">Business outcomes</div>
+            <div class="cs-impact__grid" style="grid-template-columns:repeat(5,1fr)">
+              <div><div class="cs-impact__num">01</div><div class="cs-impact__t">Experience</div><div class="cs-impact__d">One reporting hub for every Power BI dashboard, self-service.</div></div>
+              <div><div class="cs-impact__num">02</div><div class="cs-impact__t">Reduced time</div><div class="cs-impact__d">Faster report discovery — less time hunting for information.</div></div>
+              <div><div class="cs-impact__num">03</div><div class="cs-impact__t">Enhanced controls</div><div class="cs-impact__d">Reliable data quality; the whole process is automated.</div></div>
+              <div><div class="cs-impact__num">04</div><div class="cs-impact__t">Persona reporting</div><div class="cs-impact__d">Insights personalised to each user's role and access.</div></div>
+              <div><div class="cs-impact__num">05</div><div class="cs-impact__t">Productivity</div><div class="cs-impact__d">Faster decisions via KPI drill-downs and driver analysis.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · Who Uses It -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">03</div>
+          <div class="cs-aside__ttl">Who Uses It</div>
+        </div>
+        <div class="cs-body">
+          <p>Three people, three relationships with the same data. Each opens the same navigator but uses it differently — different depth, frequency and questions.</p>
+          <div class="cs-personas3">
+
+          <div class="cs-persona">
+            <div class="cs-persona__head">
+              <span class="cs-persona__av"><img src="assets/personas/persona-2.png" alt="Executive / CFO"></span>
+              <div>
+                <div class="cs-persona__name">Executive / CFO</div>
+              </div>
+            </div>
+            <div class="cs-persona__body">
+              <div class="cs-ba">
+                <div class="cs-ba__col cs-ba__col--b"><div class="cs-ba__lbl">Before</div><div class="cs-ba__txt">Waited for a 40-slide deck the night before a board call — and got stuck the moment someone asked a question it didn't cover.</div></div>
+                <div class="cs-ba__col cs-ba__col--a"><div class="cs-ba__lbl">After</div><div class="cs-ba__txt">Opens the dashboard, reads the top two things that changed, and asks one plain-English question. Answer in seconds.</div></div>
+              </div>
+              <div class="cs-flow"><span>Dashboard</span><b>→</b><span>KPI cards</span><b>→</b><span>Top anomaly</span><b>→</b><span>AI chat</span><b>→</b><span>Answer</span></div>
+            </div>
+          </div>
+
+          <div class="cs-persona">
+            <div class="cs-persona__head">
+              <span class="cs-persona__av"><img src="assets/personas/persona-1.png" alt="Finance Business Partner"></span>
+              <div>
+                <div class="cs-persona__name">Finance Business Partner</div>
+              </div>
+            </div>
+            <div class="cs-persona__body">
+              <div class="cs-ba">
+                <div class="cs-ba__col cs-ba__col--b"><div class="cs-ba__lbl">Before</div><div class="cs-ba__txt">Spent the first 90 minutes every morning copying numbers into Excel before the real work could even start.</div></div>
+                <div class="cs-ba__col cs-ba__col--a"><div class="cs-ba__lbl">After</div><div class="cs-ba__txt">Opens to a briefing that's already done — the tool shows what changed and why, so she starts with thinking, not prep.</div></div>
+              </div>
+              <div class="cs-flow"><span>Dashboard</span><b>→</b><span>Anomaly</span><b>→</b><span>Report</span><b>→</b><span>Big Sheets</span><b>→</b><span>AI chat</span><b>→</b><span>Monthly close</span></div>
+            </div>
+          </div>
+
+          <div class="cs-persona">
+            <div class="cs-persona__head">
+              <span class="cs-persona__av"><img src="assets/personas/persona-3.png" alt="Business Unit Finance Lead"></span>
+              <div>
+                <div class="cs-persona__name">Business Unit Finance Lead</div>
+              </div>
+            </div>
+            <div class="cs-persona__body">
+              <div class="cs-ba">
+                <div class="cs-ba__col cs-ba__col--b"><div class="cs-ba__lbl">Before</div><div class="cs-ba__txt">Had to email finance and wait for a report he couldn't dig into himself.</div></div>
+                <div class="cs-ba__col cs-ba__col--a"><div class="cs-ba__lbl">After</div><div class="cs-ba__txt">Checks his own numbers in under two minutes — no waiting, no middleman.</div></div>
+              </div>
+              <div class="cs-flow"><span>Dashboard</span><b>→</b><span>Report</span><b>→</b><span>Agent card</span><b>→</b><span>Done</span></div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 · The Agents -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">04</div>
+          <div class="cs-aside__ttl">The Agents</div>
+        </div>
+        <div class="cs-body">
+          <p>The architectural shift: the AI runs on a <strong>schedule, not on demand</strong>. Four agents run every night after the ERP batch closes, so by 9am the analysis is already done. That's the difference between a dashboard with a chatbot and an agentic product — a chatbot waits to be asked; these agents do the work first.</p>
+
+          <div class="cs-agents">
+            <div class="cs-agent">
+              <div class="cs-agent__av"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3.5l9 16H3l9-16Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 10v4.5M12 17.5v.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+              <div class="cs-agent__name">Anomaly agent</div>
+              <div class="cs-agent__cadence">Runs nightly · 3am</div>
+              <div class="cs-agent__desc">Checks every number against plan and forecast overnight, and flags only what actually moved.</div>
+            </div>
+            <div class="cs-agent">
+              <div class="cs-agent__av"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+              <div class="cs-agent__name">Variance agent</div>
+              <div class="cs-agent__cadence">When you ask</div>
+              <div class="cs-agent__desc">Explains what drove any gap — a region, a product or a team.</div>
+            </div>
+            <div class="cs-agent">
+              <div class="cs-agent__av"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 11a8 8 0 1 0-1.6 4.9M20 5.5V11h-5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="cs-agent__name">Freshness agent</div>
+              <div class="cs-agent__cadence">Always on</div>
+              <div class="cs-agent__desc">Watches <a class="cs-src" href="https://www.netsuite.com" target="_blank" rel="noopener">NetSuite</a>, <a class="cs-src" href="https://www.workday.com" target="_blank" rel="noopener">Workday</a> and <a class="cs-src" href="https://www.salesforce.com" target="_blank" rel="noopener">Salesforce</a>, and warns when a number is stale.</div>
+            </div>
+            <div class="cs-agent">
+              <div class="cs-agent__av"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 4.5l4.5 4.5L9 19.5H4.5V15L15 4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 6.5l4.5 4.5" stroke="currentColor" stroke-width="1.6"/></svg></div>
+              <div class="cs-agent__name">Commentary agent</div>
+              <div class="cs-agent__cadence">At month-end</div>
+              <div class="cs-agent__desc">Drafts the month-end commentary for you to edit and sign off.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 · The Screens -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">05</div>
+          <div class="cs-aside__ttl">The Screens</div>
+        </div>
+        <div class="cs-body">
+          <p>A walkthrough of the product — from launch, into the morning dashboard, and down into a persona's drill-down.</p>
+
+          <div class="p-slbl" style="margin-top:1.75rem">Product overview</div>
+          <div class="scr-media">
+            <video id="ovVideo" src="assets/vantage/overview.mp4" loop playsinline preload="auto" aria-label="Vantage 360 Navigator — end-to-end walkthrough"></video>
+            <button class="scr-sound is-on" id="ovSound" type="button" onclick="toggleOverviewSound()" aria-label="Mute video">
+              <svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 9.5l4 5M21 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 0 1 0 7M19.7 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <span class="scr-sound__txt">Sound on</span>
+            </button>
+            <div class="scr-progress" id="ovProgress" role="progressbar" aria-label="Video progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="scr-progress__fill" id="ovProgressFill"></div></div>
+          </div>
+
+          <div class="scr-usp">One finance command centre — <em>real-time metrics, AI-surfaced anomalies and forecasting</em> in a single 360° view, so the morning's analysis is done before you sit down.</div>
+
+          <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/dashboard.png" alt="Vantage dashboard — Good morning, James" loading="lazy"></div>
+          <div class="scr-cap"><b>The morning dashboard.</b> Five live KPIs, a ranked "needs attention" feed and a data-freshness check — the whole morning read in one glance, with Ask-Vantage on top for plain-English questions.</div>
+
+          <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/cio-drilldown.gif" alt="Vantage — persona drill-down with agent root cause" loading="lazy"></div>
+          <div class="scr-cap"><b>Persona drill-down with agent root-cause.</b> Open any metric for actual-vs-plan, segment and regional variance — shown here as the CIO's cost-centre lens — with the agent's root cause, confidence and source alongside.</div>
+
+          <div class="ua-cards" style="grid-template-columns:1fr 1fr;margin-top:3.5rem">
+            <div class="ua-card"><div class="ua-card__title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px"><path d="M4 19V5M4 19h16M8 14l3-4 3 2 4-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Metric reports</div><div class="ua-card__body">Revenue, OpEx, CapEx, Headcount, EBITDA — one screen each. Actual-vs-plan, an agent insight card (root cause + evidence + one action), and the forecast tab lives here.</div></div>
+            <div class="ua-card"><div class="ua-card__title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px"><path d="M5 21V11M12 21V5M19 21v-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Big Sheets</div><div class="ua-card__body">Dense hierarchical variance table. Agent flags on material rows, a cell-hover panel that explains any number, and a chat bound to the active filters.</div></div>
+            <div class="ua-card"><div class="ua-card__title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px"><path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Forecasting</div><div class="ua-card__body">A model-health screen, not a forecast viewer — accuracy, directional bias in plain English, macro driver weights, and a what-if panel that reruns the model.</div></div>
+            <div class="ua-card"><div class="ua-card__title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px"><rect x="3" y="4" width="18" height="12" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M9 20h6M12 16v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>CIO screen</div><div class="ua-card__body">Tailored to a cost-centre with no Revenue or EBITDA — CapEx, OpEx and Headcount, with platform variance by infra, cloud, and engineering.</div></div>
+            <div class="ua-card"><div class="ua-card__title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px"><path d="M3 10.5L12 3l9 7.5V21H3V10.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Landing dashboard</div><div class="ua-card__body">Five KPIs, the ranked anomaly feed, a data-freshness panel, and chat with context already loaded — the whole morning read in one place.</div></div>
+            <div class="ua-card"><div class="ua-card__title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="vertical-align:-2px;margin-right:6px"><path d="M15 4.5l4.5 4.5L9 19.5H4.5V15L15 4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Monthly close <span style="color:var(--dim);font-weight:400">· in progress</span></div><div class="ua-card__body">The commentary editor — agent's overnight draft on the left, the analyst's editable version on the right. Submit locks it.</div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 06 · Feedback -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">06</div>
+          <div class="cs-aside__ttl">Feedback</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-feedbacks">
+            <div class="cs-feedback">
+              <div class="cs-feedback__q">"The navigator is a game changer, and your contributions are pivotal in showcasing UX innovation at its finest form. There are no two doubts about this."</div>
+              <div class="cs-feedback__a"><span class="cs-feedback__av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>Senior Manager · Accenture Operations</span></div>
+            </div>
+            <div class="cs-feedback">
+              <div class="cs-feedback__q">"Very good work done, and the kind of attention to detail is what I like about Anoushka. She has a very good understanding of the ask and goes out of the way to look at things comprehensively. Very diligent in her work and able to delight the customers with the ask. Was able to seamlessly adjust to the pressure and deliver high quality. A wonderful asset to have in the team!"</div>
+              <div class="cs-feedback__a"><span class="cs-feedback__av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>Transformation Leadership · Accenture Operations</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 · Reflections -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">07</div>
+          <div class="cs-aside__ttl">Reflections</div>
+        </div>
+        <div class="cs-body">
+          <div class="ns-head" style="margin-top:0">TAKEAWAYS</div>
+          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M15 9l-2 5-4 2 2-5 4-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div><div class="ns-t">Where to actually add the AI</div><div class="ns-d">The first build had a separate "AI Agents" tab that no one used — by the time you got there you'd left the data you wanted to ask about. The AI belongs inside the table, the chart and the chat: a layer on everything, not a place to visit.</div></div></div>
+          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 12v9M4 7.5l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div><div class="ns-t">Understanding the context comes first</div><div class="ns-d">This business segment was new to me and genuinely hard to understand. The time spent learning how each finance team actually worked shaped every design decision that followed.</div></div></div>
+          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">Don't take anything at face value</div><div class="ns-d">Assumptions about what users "obviously" needed rarely survived contact with them. Every number, request and requirement was worth questioning before designing around it.</div></div></div>
+        </div>
+      </div>
+
+      <div class="p-cta">
+        <p>If you want to know the details of this project or my availability – get in touch!</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <div class="p-cta-btns">
+          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CARMA · AGTUALL ── -->
+  <div data-view="carma">
+    <div class="p-hero">
+      <div class="p-hero-ph" style="background:linear-gradient(160deg,#07211c 0%,#0a1512 55%,#050a09 100%)"></div>
+    </div>
+    <div class="p-wrap">
+      <h1 class="p-title">Carma</h1>
+      <p class="p-tag" style="max-width:60%">A shipped B2B SaaS climate-risk platform — the insurer's toolkit for scalable agricultural insurance that de-risks smallholder farmers. Designed end-to-end as the MVP at Studio Carbon for Dutch agri-fintech Agtuall, in partnership with the Syngenta Foundation.</p>
+
+      <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
+        <div>
+          <div class="p-meta-lbl">Role</div>
+          <div class="p-meta-val">Product Designer</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Type</div>
+          <div class="p-meta-val">B2B SaaS · shipped</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Year</div>
+          <div class="p-meta-val">2024</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Client</div>
+          <div class="p-meta-val">Agtuall</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Partner</div>
+          <div class="p-meta-val">Syngenta Foundation</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Studio</div>
+          <div class="p-meta-val">Studio Carbon</div>
+        </div>
+      </div>
+
+      <p class="p-git">Shipped &amp; live — <a href="https://agtuall.com/carma" target="_blank" rel="noopener">agtuall.com/carma</a>.</p>
+
+      <!-- 01 · The Hook -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">01</div>
+          <div class="cs-aside__ttl">The Hook</div>
+        </div>
+        <div class="cs-body">
+          <p>The final experience brought together the core workflows for exploring climate data, analysing datasets, and monitoring insurance products. <strong>The product was designed, tested, refined, and ultimately shipped.</strong></p>
+
+          <div class="vplay" style="--vp-btn:#1F3F32;--vp-bar:#6D9D8F;margin-top:1.4rem">
+            <video src="assets/agtuall/walkthrough.mp4" loop playsinline preload="auto" aria-label="Agtuall — product walkthrough"></video>
+            <button class="vplay__sound is-on" type="button" aria-label="Mute video">
+              <svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 9.5l4 5M21 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 0 1 0 7M19.7 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <span class="vplay__txt">Sound on</span>
+            </button>
+            <div class="vplay__progress"><div class="vplay__fill"></div></div>
+          </div>
+
+          <div class="cs-dq" style="margin-top:2.75rem">"Climate has been a guessing game for us all — but for farmers, it's like playing <em style="color:#2dd4bf">roulette</em> with their livelihood."</div>
+
+          <div class="vplay" style="--vp-btn:#1F3F32;--vp-bar:#6D9D8F;margin-top:1.4rem">
+            <video src="assets/agtuall/context.mp4" loop playsinline preload="auto" aria-label="Agtuall — project context"></video>
+            <button class="vplay__sound is-on" type="button" aria-label="Mute video">
+              <svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 9.5l4 5M21 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 0 1 0 7M19.7 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <span class="vplay__txt">Sound on</span>
+            </button>
+            <div class="vplay__progress"><div class="vplay__fill"></div></div>
+          </div>
+
+          <p style="margin-top:2rem">Earth's temperature has risen roughly <strong>0.06&deg;C per decade since 1850</strong> (NOAA). For smallholder farmers across East Africa and Bangladesh, a bad season isn't a data point — it's the line between getting by and going under.</p>
+          <p>Insurance should be that safety net. But pricing crop risk at this scale has been slow, manual, and starved of trustworthy data — so the farmers who need cover most are the hardest to insure.</p>
+        </div>
+      </div>
+
+      <!-- 02 · How Agtuall Solves It -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">02</div>
+          <div class="cs-aside__ttl">The Solution Layer</div>
+        </div>
+        <div class="cs-body">
+          <p>Agtuall's vision is refreshingly human: <strong>de-risk smallholder farmers.</strong> It does that by giving insurers the data and tooling to build parametric insurance products profitably — even for farmers once considered uninsurable.</p>
+          <p>Carma is the platform underneath. It unifies weather, earth-observation and climate datasets into a single repository with analytics on top, so an insurer can move from raw climate data to a priced, monitored product without months of manual wrangling.</p>
+          <div class="ua-cards" style="grid-template-columns:repeat(4,1fr);margin-top:1.75rem">
+            <div class="ua-card"><div class="ua-card__num">01</div><div class="ua-card__title">Explore</div><div class="ua-card__body">Search climate datasets by geography and visualise trends on a map.</div></div>
+            <div class="ua-card"><div class="ua-card__num">02</div><div class="ua-card__title">Analyse</div><div class="ua-card__body">Assess dataset quality and compare indices to shortlist the right data.</div></div>
+            <div class="ua-card"><div class="ua-card__num">03</div><div class="ua-card__title">Price</div><div class="ua-card__body">Design the insurance product on the data an actuary trusts.</div></div>
+            <div class="ua-card"><div class="ua-card__num">04</div><div class="ua-card__title">Monitor</div><div class="ua-card__body">Track live product &amp; policy performance and re-check triggers.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · Product Architecture -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">03</div>
+          <div class="cs-aside__ttl">Product Architecture</div>
+        </div>
+        <div class="cs-body">
+          <p>My biggest contribution was shaping the platform's backbone. We defined a <strong>five-level product architecture</strong> — Products &rarr; Modules &rarr; Sub-modules &rarr; Features &rarr; Flows — for what the team called the "Agtuall Engine."</p>
+          <p>The MVP centred on the <strong>Climate Data Library</strong> (Explore, Analytics, Inspect) plus <strong>Monitoring</strong>, with Pricing scoped for a later phase. Because Agtuall was a nascent startup still discovering its own product, architecting this took about two weeks and 5&ndash;6 rounds of close collaboration — design team and client figuring it out together.</p>
+          <div class="cs-gif__ph" style="aspect-ratio:16/9;margin-top:1.5rem;border-radius:12px">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <span>Agtuall Engine — 5-level architecture map</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 · User Stories & Epics -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">04</div>
+          <div class="cs-aside__ttl">User Stories &amp; Epics</div>
+        </div>
+        <div class="cs-body">
+          <p>The Agtuall team handed over epics and user stories; turning them into a coherent information architecture was the design job. Read closely, they told us <strong>why</strong> we were building, <strong>what</strong>, and the value each feature created.</p>
+          <p>Every story carried acceptance criteria that fed the product and information architecture directly — an actuary selecting a geography and up to four datasets to visualise trends, or evaluating dataset quality and consistency before committing to a product. Initiatives broke into epics, epics into stories, stories into the modules users actually navigate.</p>
+          <div class="cs-gif__ph" style="aspect-ratio:16/9;margin-top:1.5rem;border-radius:12px">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M7 8h10M7 12h10M7 16h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <span>Initiative &rarr; Epic &rarr; Story mapping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 · Usability Testing -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">05</div>
+          <div class="cs-aside__ttl">Usability Testing</div>
+        </div>
+        <div class="cs-body">
+          <p>Before handoff, we ran <strong>moderated, think-aloud testing</strong> on the Climate Data Library with <strong>five actuaries</strong> — seasoned users the client connected us with, plus beginners — observing behaviour across real tasks like exploring rainfall data and comparing datasets.</p>
+          <p>Three findings shaped the redesign:</p>
+          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">Information scent was thin</div><div class="ns-d">Users wanted clearer cues about what each module did before diving in — addressed with a clearer navigation rail and tab menu.</div></div></div>
+          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 21V11M12 21V5M19 21v-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">Comparing datasets was painful</div><div class="ns-d">Comparing the first and last dataset down a long scroll broke the task — the comparison pattern was reworked so datasets sit side by side.</div></div></div>
+          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 15l6-6M10 6l1-1a4 4 0 0 1 6 6l-1 1M14 18l-1 1a4 4 0 0 1-6-6l1-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">"Interrelation" wasn't understood</div><div class="ns-d">The tab's mental model didn't land; its labelling and flow were revised so correlating two variables reads naturally.</div></div></div>
+        </div>
+      </div>
+
+      <!-- 06 · Who Was Involved -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">06</div>
+          <div class="cs-aside__ttl">Who Was Involved</div>
+        </div>
+        <div class="cs-body">
+          <p>A genuinely multi-party project — a startup, a foundation, a design studio, and the actuaries who'd live in the product every day.</p>
+          <div class="ua-cards" style="margin-top:1.5rem">
+            <div class="ua-card"><div class="ua-card__title">Agtuall</div><div class="ua-card__body">Dutch agri-fintech (client) on a mission to de-risk smallholder farmers.</div></div>
+            <div class="ua-card"><div class="ua-card__title">Syngenta Foundation</div><div class="ua-card__body">Partner co-investing in the platform's development and reach.</div></div>
+            <div class="ua-card"><div class="ua-card__title">Studio Carbon</div><div class="ua-card__body">The design studio where I led product design on the MVP.</div></div>
+          </div>
+          <p style="margin-top:1.1rem"><strong>The users:</strong> financial institutions and their actuaries, data scientists and sales teams — the people pricing and selling insurance to farmers.</p>
+        </div>
+      </div>
+
+      <div class="p-cta">
+        <p>Curious about the full thesis, the architecture work, or the shipped product?</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <div class="p-cta-btns">
+          <a class="p-btn" href="https://agtuall.com/carma" target="_blank" rel="noopener">↗ View Carma live</a>
+          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── UX AUDIT ── -->
+  <div data-view="uxaudit">
+    <div class="p-hero">
+      <img src="assets/uxaudit/thumb-wide.png" alt="Unilever UX Audit" onerror="this.closest('.p-hero').style.minHeight='380px'">
+    </div>
+    <div class="p-wrap">
+      <h1 class="p-title">Unilever App · UX Audit</h1>
+      <p class="p-tag" style="max-width:50%">End-to-end UX audit of a retail FMCG mobile app in Vietnam's fast-growing e-commerce market — benchmarked against three regional competitors to surface experience gaps and give stakeholders a clear, prioritised path to improve the product.</p>
+
+      <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
+        <div>
+          <div class="p-meta-lbl">Scope</div>
+          <div class="p-meta-val">UX Audit for a B2B app</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Role</div>
+          <div class="p-meta-val">Lead Designer</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Owner</div>
+          <div class="p-meta-val">Accenture Song</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Client</div>
+          <div class="p-meta-val">Unilever</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Year</div>
+          <div class="p-meta-val">2025</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Industry</div>
+          <div class="p-meta-val">FMCG retail</div>
+        </div>
+      </div>
+
+      <p class="p-git">If you'd like to learn more, <a href="mailto:aggarwalanoushka02@gmail.com">please get in touch</a>.</p>
+
+      <!-- 01 · The Brief -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">01</div>
+          <div class="cs-aside__ttl">The Brief</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-dq">"How might we help Unilever compete with regional apps by removing the <em>friction</em> that stops retailers and sales reps from finding, buying, and reordering quickly?"</div>
+          <p>Unilever was scaling their app in Vietnam — a market with strong local competitors and established e-commerce habits. Before committing to a redesign, they needed an honest picture of where the app stood.</p>
+          <p>I was part of the team brought in to find what wasn't working and make sure every finding was backed by <strong>evidence, not opinion.</strong></p>
+        </div>
+      </div>
+
+      <!-- 02 · Approach -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">02</div>
+          <div class="cs-aside__ttl">Approach</div>
+        </div>
+        <div class="cs-body">
+          <p>Built an audit framework across <strong>eight UX foundations</strong> — from information architecture to business alignment — giving every finding a clear business rationale, not just a design opinion.</p>
+          <p>Then benchmarked DDT across <strong>six core screens</strong> against three market competitors, covering over 100 screens across two user journeys.</p>
+
+          <p style="margin-top:1.25rem"><span class="ua-drawer-link" onclick="openAudit()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAudit();}">View the full audit framework<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
+
+          <div class="ua-cards" style="grid-template-columns:repeat(4,1fr);margin-top:1.75rem">
+            <div class="ua-card">
+              <div class="ua-card__num">01</div>
+              <div class="ua-card__title">Set the framework</div>
+              <div class="ua-card__body">4 lenses: usability, visual, experience, interaction</div>
+            </div>
+            <div class="ua-card">
+              <div class="ua-card__num">02</div>
+              <div class="ua-card__title">Pick benchmarks</div>
+              <div class="ua-card__body">BEES, Makropro &amp; Big C as comparators</div>
+            </div>
+            <div class="ua-card">
+              <div class="ua-card__num">03</div>
+              <div class="ua-card__title">Audit screen by screen</div>
+              <div class="ua-card__body">6 types, 2 personas, 100+ screens</div>
+            </div>
+            <div class="ua-card">
+              <div class="ua-card__num">04</div>
+              <div class="ua-card__title">Align the team</div>
+              <div class="ua-card__body">Shared criteria, consistent findings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 · What I Built -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">03</div>
+          <div class="cs-aside__ttl">What I Built</div>
+        </div>
+        <div class="cs-body">
+          <p>A screen-by-screen audit mapping every problem to a competitive benchmark and a concrete recommendation — six core screens across both user journeys.</p>
+
+          <div class="cs-factors">
+
+            <div class="cs-factor">
+              <div class="cs-factor__text">
+                <div class="cs-factor__screen">Homepage</div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <div class="cs-factor__txt">Promotions dominate the first fold, burying product discovery.</div>
+                </div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="cs-factor__txt rec">Add category listings above the fold to reduce clicks to purchase.</div>
+                </div>
+              </div>
+              <div class="cs-factor__media">
+                <img src="assets/uxaudit/finding-1-discovery.png" alt="Homepage — promotions dominate the first fold" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-gif__ph&quot;&gt;&lt;span&gt;GIF coming&lt;/span&gt;&lt;/div&gt;'">
+              </div>
+            </div>
+
+            <div class="cs-factor">
+              <div class="cs-factor__text">
+                <div class="cs-factor__screen">Search</div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <div class="cs-factor__txt">SKU-driven, with no room for exploration or brand discovery.</div>
+                </div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="cs-factor__txt rec">Introduce predictive search with trending brands and popular categories.</div>
+                </div>
+              </div>
+              <div class="cs-factor__media">
+                <img src="assets/uxaudit/finding-2-search.png" alt="Search — SKU-driven, no exploration" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-gif__ph&quot;&gt;&lt;span&gt;GIF coming&lt;/span&gt;&lt;/div&gt;'">
+              </div>
+            </div>
+
+            <div class="cs-factor">
+              <div class="cs-factor__text">
+                <div class="cs-factor__screen">Categories</div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <div class="cs-factor__txt">Generic icons, no subcategories — browsing feels flat.</div>
+                </div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="cs-factor__txt rec">Replace with real product thumbnails and add subcategory depth.</div>
+                </div>
+              </div>
+              <div class="cs-factor__media">
+                <div class="cs-gif__ph">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+                  <span>GIF coming</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-factor">
+              <div class="cs-factor__text">
+                <div class="cs-factor__screen">PLP</div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <div class="cs-factor__txt">Cramped layout, touch targets too small for mobile.</div>
+                </div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="cs-factor__txt rec">2-column grid, prominent filters, sorting options surfaced upfront.</div>
+                </div>
+              </div>
+              <div class="cs-factor__media">
+                <img src="assets/uxaudit/finding-3-browsing.png" alt="PLP — cramped layout, small touch targets" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-gif__ph&quot;&gt;&lt;span&gt;GIF coming&lt;/span&gt;&lt;/div&gt;'">
+              </div>
+            </div>
+
+            <div class="cs-factor">
+              <div class="cs-factor__text">
+                <div class="cs-factor__screen">PDP</div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <div class="cs-factor__txt">Critical purchase info buried below the fold.</div>
+                </div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="cs-factor__txt rec">Surface final price, order limits, and promotions above the fold.</div>
+                </div>
+              </div>
+              <div class="cs-factor__media">
+                <div class="cs-gif__ph">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+                  <span>GIF coming</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-factor">
+              <div class="cs-factor__text">
+                <div class="cs-factor__screen">Cart</div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                  <div class="cs-factor__txt">Promotions not tied visually to the final amount.</div>
+                </div>
+                <div class="cs-factor__block">
+                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <div class="cs-factor__txt rec">Connect savings directly to the total to make value visible.</div>
+                </div>
+              </div>
+              <div class="cs-factor__media">
+                <div class="cs-gif__ph">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+                  <span>GIF coming</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 · Impact -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">04</div>
+          <div class="cs-aside__ttl">Impact</div>
+        </div>
+        <div class="cs-body">
+          <p><strong>All six recommendations were accepted and implemented by the client.</strong> Because every finding traced back to competitive evidence and the audit framework's business-impact rationale, there was nothing to argue against.</p>
+
+          <div class="cs-impact">
+            <div class="cs-impact__eyebrow">Impact</div>
+            <div class="cs-impact__head">How stakeholders responded</div>
+            <div class="cs-impact__grid">
+              <div>
+                <div class="cs-impact__num">01</div>
+                <div class="cs-impact__t">All 6 screens on the roadmap</div>
+                <div class="cs-impact__d">Every screen type had recommendations picked up and prioritised for development.</div>
+              </div>
+              <div>
+                <div class="cs-impact__num">02</div>
+                <div class="cs-impact__t">Evidence beat opinion</div>
+                <div class="cs-impact__d">Benchmarking against 3 competitors turned our findings into something stakeholders trusted and acted on.</div>
+              </div>
+              <div>
+                <div class="cs-impact__num">03</div>
+                <div class="cs-impact__t">Audit framework POC</div>
+                <div class="cs-impact__d">The audit methodology I built became a repeatable process used beyond this project.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 · What I'd Change -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">05</div>
+          <div class="cs-aside__ttl">What I'd Change</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-note">Content coming — reflections on what I'd do differently next time.</div>
+        </div>
+      </div>
+
+      <!-- 06 · Feedback -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__num">06</div>
+          <div class="cs-aside__ttl">Feedback</div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-feedback">
+            <div class="cs-feedback__q">"Hey Anoushka, it was a pleasure collaborating together; you brought a thoughtful and structured approach to strategy, and your evaluation and articulation helped anchor many of the conversations in a clear direction. I especially appreciated your attention to detail — it showed in the way you reviewed experiences, captured nuances, and ensured the work stayed thorough and consistent. You were receptive to feedback, stayed proactive in discussions, and maintained a steady focus on moving the project forward, which made the collaboration smooth and dependable."</div>
+            <div class="cs-feedback__a">Project Team Member · Accenture Song</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-cta">
+        <p>If you want to know the details of this project or my availability – get in touch!</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <div class="p-cta-btns">
+          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- UX Audit framework side drawer -->
+<div class="drawer-scrim" id="auditScrim" onclick="closeAudit()"></div>
+<aside class="drawer" id="auditDrawer" role="dialog" aria-modal="true" aria-label="UX Audit attribute framework">
+  <div class="drawer__head">
+    <div>
+      <div class="drawer__eyebrow">UX Audit · Attribute framework</div>
+      <div class="drawer__title">Audit attributes</div>
+      <div class="drawer__sub">Eight UX foundations — five core plus three optional — each with its parameters, what to check, the designer's prompt, and why it matters.</div>
+    </div>
+    <button class="drawer__close" onclick="closeAudit()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="drawer__tabs" id="auditTabs"></div>
+  <div class="drawer__body" id="auditBody"></div>
+</aside>
+
+<script>
+  /* ── UX Audit attribute framework (source: audit attributes for folio) ── */
+  const AUDIT_RAW = [
+    { n:'01', name:'Information Architecture', cat:'Core Experience', opt:'', rows:`
+Navigation Consistency||Are navigational elements consistent across screens? Is it intuitive and persistent?||Does this behave like similar areas across the app?||Inconsistent navigation increases cognitive load and disorientation.
+Information Hierarchy & Structure||Are screens, pages, and sections structured logically?||Is the menu structure easy to navigate?||Impacts how quickly users find what they need.
+Feature Grouping||Are related features / menus categorised meaningfully and compactly?||Are similar features / menus located nearby?||Reduces scanning time and supports intuition.
+Wayfinding & Orientation||Are breadcrumbs, headers, and cues helping users know where they are?||Can I tell where I am in the flow?||Prevents users from feeling "lost" in the interface.
+Discoverability||Are relevant items interlinked for natural exploration?||Can the user intuitively discover related actions or information without hunting for it?||Increases engagement and retention.` },
+    { n:'02', name:'Usability & Interaction', cat:'Core Experience', opt:'', rows:`
+Task Flow Efficiency||Are steps minimal and logically sequenced?||How many steps / taps does it take to reach the important action — and is it fewer than expected?||Affects time-on-task and completion rate.
+Error Prevention & Recovery||Are error states handled gracefully with guidance?||Would a user accidentally lose data or make an error here?||Reduces frustration and drop-offs during form or flow interactions.
+Recognition vs Recall||Are options visible without memorising?||Can users see all available actions without remembering codes or commands?||Reduces cognitive load by letting users recognise options instead of remembering them.
+Mental Models||Does the flow match user expectations?||Does the process align with how users naturally think about this task?||When the app works the way people expect, it feels natural — which stops users getting frustrated and quitting, increasing retention.
+Affordance||Do interactive elements look clickable / tappable?||Do interactive elements feel responsive and predictable?||Avoids hidden functionality and reduces confusion.
+Progressive Disclosure||Are advanced options hidden until needed?||Are extra settings hidden until they're relevant?||Improves task focus and reduces overwhelm by showing complexity only when necessary.
+Visibility of System Status||Does the system give immediate, clear feedback for every action and state change?||Does the system tell me what just happened?||Users trust responsive systems and understand state changes better.
+Form Design||Are input fields optimised for context, mobile, and affordance?||Are form fields labelled clearly with feedback on errors?||Better task completion rates and reduced friction.
+Search Experience||Is the search tool functional, accurate, and helpful?||Does search provide relevant results, handle typos, and offer helpful 'no results' states?||Boosts findability and conversion by preventing dead-ends and driving long-term retention.` },
+    { n:'03', name:'Visual & Interface Design', cat:'Core Experience', opt:'', rows:`
+Visual Hierarchy||Is key information visually prioritised using size, colour, and contrast?||Is the visual weight of elements guiding attention to the most important information first?||Drives attention and aids scannability.
+Typography||Is the correct type scale used for the right context, with font styles aligned to the design system?||Is the hierarchy clear at a glance, and are all text styles pulled from the defined type system?||Clear hierarchy improves comprehension; consistent type usage strengthens usability and system trust.
+Colour Usage||Are colour choices purposeful and aligned with brand guidelines?||Are colours used functionally and consistently?||Supports accessibility and visual clarity.
+Layout & Grid||Are grids, spacing, and alignments uniform across screens?||Are margins, padding, and component positioning identical across similar screens in this flow?||Consistency builds trust and usability.
+Iconography & Imagery||Are icons clear, consistent, and aligned to brand guidelines?||Are all icons and images serving a clear purpose and maintaining a consistent style?||Reinforces comprehension and emotional tone.
+Visual Cues||Do whitespace, headings, and dividers give enough 'breathing room' and structure?||Are visual cues guiding attention to what matters?||Guides user interpretation of status, action, and hierarchy.
+Scanning||Is the screen easy to skim and comprehend?||Can users grasp the page's meaning at a glance?||Reduces cognitive load, speeds task completion, and boosts conversion by minimising friction.
+Design System Adherence & Presentation||Is there consistency with the design system and overall visual professionalism?||Does this screen look industry-standard, cohesive, and consistent with the brand's design system?||Ensures brand coherence, development efficiency, and a high-quality experience.` },
+    { n:'04', name:'Content & Communication', cat:'Core Experience', opt:'', rows:`
+Clarity & Terminology||Is the content simple, goal-oriented, and written in "human" words instead of technical jargon?||Would a first-time user understand these labels and instructions immediately?||If users don't understand the words, they won't know what to do next. Clear language builds trust and stops people giving up.
+Tone||Is tone aligned to brand personality and audience?||Does the tone feel right for the product's audience?||Reinforces trust and brand perception.
+Error Messages||Can the user understand the issue and resolve it without external help?||Is the error message written in simple, human language without jargon or codes?||Users understand issues faster, especially non-technical users; removes cognitive anxiety.
+Microcopy & Helper Text||Does the user get the right amount of help at the exact moment they feel confused or hesitant?||Is help available where needed?||Builds trust and confidence, especially for non-technical users or those handling complex data.
+Localization & Cultural Sensitivity||Is content globally and contextually appropriate?||Would this make sense for the target markets?||Affects brand perception in diverse markets.
+Effective Labeling||Can the user accurately predict the outcome before clicking an element?||Are all fields, buttons, and controls labelled clearly so users know exactly what they do?||Drives conversion and decision clarity.` },
+    { n:'05', name:'Accessibility & Inclusivity', cat:'Core Experience', opt:'', rows:`
+Colour Contrast Compliance||Do all text, icons, and interactive states meet WCAG 2.1 AA (4.5:1 / 3:1)?||Using a contrast checker, have you verified both normal and hover / active states for all functional elements?||Supports visibility for users with low vision.
+Text & Legibility||Is text readable with adequate size, line height, and contrast, and does it scale without breaking layout?||Is the text easy to read, accessible at 200% zoom, and compliant with contrast guidelines?||Ensures readability for users with low vision and supports inclusive access.
+Keyboard & Screen Reader Support *||Can the interface be fully understood and operated without a mouse or seeing the screen?||Can you finish the task using only keys and audio cues?||Ensures the product is usable for people with motor or visual impairments and meets legal standards. (* not applicable for mobile)
+Alt Text & Descriptive Elements||Are images and icons described meaningfully?||Are all meaningful images and non-text elements accompanied by accurate, concise alt text?||Ensures information parity for all users.
+Responsiveness & Scalability||Does the layout hold and remain readable when text size increases or when zoomed?||Does zooming, resizing, or increased text size affect layout integrity or readability?||Improves readability and adaptability across devices and user preferences.
+Inclusive Language & Content||Does it avoid bias, stereotypes, or exclusionary phrasing?||Is all language neutral, respectful, and free from assumptions that might exclude diverse groups?||Promotes belonging and trust.
+Tap Target Size||Are touch targets sufficiently large and spaced out?||Are buttons easy to tap without misclicks?||Improves usability for all, especially on mobile and for accessibility users.
+Motion & Animation Sensitivity||Are animations subtle and adjustable for reduced-motion preferences?||Does the experience avoid excessive motion and respect reduced-motion settings?||Prevents discomfort and ensures accessibility for motion-sensitive users.` },
+    { n:'06', name:'Performance & Feedback', cat:'Experience Quality', opt:'MVP stage', rows:`
+Load Time||Are load times acceptable?||Does each page / load respond within 3 seconds, appear promptly, and mask the wait with skeleton UI or progressive content?||Impacts bounce rate and perceived quality.
+Transition Design||Do screens move smoothly and in the right direction (e.g. back navigation reflects reverse movement)?||When I perform an action, does the screen move in a way that feels natural and clear?||Reduces confusion and makes navigation feel smooth and intuitive.
+Offline / Error Resilience||Does the page behave gracefully on a weak network?||Does the experience still work — or fail gracefully — during poor connectivity?||Maintains usability under poor internet conditions.` },
+    { n:'07', name:'Delight & Trust', cat:'Experience Quality', opt:'Low UX maturity', rows:`
+Personalization||Does the content feel tailored to the user's specific context?||Does the product adjust based on user context, history, or preferences?||Increases relevance and emotional connection.
+Emotional Design||Do the visuals and copy create a positive emotional connection?||Do visuals and micro-interactions create a positive emotional response?||Drives memorability and positive association.
+Social Proof||Are trust indicators such as reviews and testimonials present at critical decision points?||Are trust-building elements like ratings or stats visible where decisions happen?||Reinforces credibility and persuasion.
+Surprise & Delight Moments||Are there subtle, positive micro-interactions?||Are there subtle moments of delight that elevate the experience?||Boosts user satisfaction and retention.` },
+    { n:'08', name:'Business Alignment', cat:'Strategic Alignment', opt:'High UX maturity', rows:`
+Conversion Flow||Does the journey lead users to the intended outcome without friction?||Is the primary business action clear, easy, and frictionless?||Directly impacts revenue or engagement goals.
+Data Capture & Consent||Is data collection transparent, ethical, and easy to understand?||Is data collection clearly explained, optional, and trust-building?||Builds trust and ensures compliance.
+Retention Hooks||Are there meaningful nudges that encourage users to return?||Are notifications, reminders, or rewards timed and relevant?||Enhances customer lifetime value and reduces churn.
+Monetization Experience||Is pricing transparent and are upsell paths non-intrusive?||Are pricing details transparent and upsells non-intrusive?||Prevents drop-offs during purchase.
+KPI Mapping||Does every key flow support a measurable business goal?||Does each flow support a clear KPI (conversion, engagement, retention)?||Demonstrates ROI and design accountability.` },
+  ];
+
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  let _auditBuilt = false;
+  function buildAudit(){
+    const tabs = document.getElementById('auditTabs');
+    tabs.innerHTML = '';
+    AUDIT_RAW.forEach((p, i) => {
+      const b = document.createElement('button');
+      b.className = 'drawer__tab' + (i === 0 ? ' on' : '');
+      b.type = 'button';
+      b.innerHTML = esc(p.name) + (p.opt ? '<span class="drawer__tab-opt">Optional</span>' : '');
+      b.onclick = () => showAuditTab(i);
+      tabs.appendChild(b);
+    });
+    showAuditTab(0);
+  }
+  function showAuditTab(i){
+    const p = AUDIT_RAW[i];
+    document.querySelectorAll('#auditTabs .drawer__tab').forEach((t, idx) => t.classList.toggle('on', idx === i));
+    const rows = p.rows.trim().split('\n').filter(Boolean).map(r => r.split('||'));
+    let h = '<div class="drawer__panel-head"><div class="drawer__panel-cat">' + p.n + ' · ' + esc(p.cat) + (p.opt ? ' · Optional (' + esc(p.opt) + ')' : '') + '</div><div class="drawer__panel-title">' + esc(p.name) + '</div></div>';
+    h += '<table class="audit-table"><thead><tr><th>Parameter</th><th>What to check</th><th>Audit prompt</th><th>Why it matters</th></tr></thead><tbody>';
+    rows.forEach(r => {
+      h += '<tr>' +
+        '<td class="audit-param" data-lbl="Parameter">' + esc(r[0]) + '</td>' +
+        '<td data-lbl="What to check">' + esc(r[1]) + '</td>' +
+        '<td class="audit-prompt" data-lbl="Audit prompt">' + esc(r[2]) + '</td>' +
+        '<td data-lbl="Why it matters">' + esc(r[3]) + '</td></tr>';
+    });
+    h += '</tbody></table>';
+    const body = document.getElementById('auditBody');
+    body.innerHTML = h;
+    body.scrollTop = 0;
+  }
+  function openAudit(){
+    if (!_auditBuilt) { buildAudit(); _auditBuilt = true; }
+    document.getElementById('auditScrim').classList.add('open');
+    document.getElementById('auditDrawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAudit(){
+    document.getElementById('auditScrim').classList.remove('open');
+    document.getElementById('auditDrawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAudit(); });
+
+  /* overview video — plays with the voiceover on by default; button toggles sound */
+  function syncSoundBtn(){
+    const v = document.getElementById('ovVideo');
+    const b = document.getElementById('ovSound');
+    if (!v || !b) return;
+    b.classList.toggle('is-on', !v.muted);
+    b.querySelector('.scr-sound__txt').textContent = v.muted ? 'Tap for sound' : 'Sound on';
+    b.setAttribute('aria-label', v.muted ? 'Unmute video' : 'Mute video');
+  }
+  function playOverview(){
+    const v = document.getElementById('ovVideo');
+    if (!v) return;
+    v.volume = 1;
+    const p = v.play();
+    // if the browser blocks play-with-sound, fall back to muted so it still plays
+    if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); syncSoundBtn(); });
+    setTimeout(syncSoundBtn, 250);
+  }
+  function setupOverviewProgress(){
+    const v = document.getElementById('ovVideo');
+    const bar = document.getElementById('ovProgress');
+    const fill = document.getElementById('ovProgressFill');
+    if (!v || !bar || !fill || v.dataset.progSet) return;
+    v.dataset.progSet = '1';
+    v.addEventListener('timeupdate', () => {
+      if (!v.duration) return;
+      const pct = v.currentTime / v.duration * 100;
+      fill.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', Math.round(pct));
+    });
+    bar.addEventListener('click', (e) => {
+      if (!v.duration) return;
+      const r = bar.getBoundingClientRect();
+      v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * v.duration;
+    });
+  }
+  function initOverviewVideo(){
+    const v = document.getElementById('ovVideo');
+    if (!v) return;
+    setupOverviewProgress();
+    // no viewport (preview) or no observer support — just play so it's never stuck
+    if (!('IntersectionObserver' in window) || !window.innerHeight) { playOverview(); return; }
+    if (v.dataset.obsSet) return;
+    v.dataset.obsSet = '1';
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) playOverview();
+        else if (!v.paused) v.pause();
+      });
+    }, { threshold: 0.4 });
+    io.observe(v);
+  }
+  function toggleOverviewSound(){
+    const v = document.getElementById('ovVideo');
+    if (!v) return;
+    v.muted = !v.muted;
+    if (!v.muted) { v.volume = 1; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+    syncSoundBtn();
+  }
+
+  /* ── reusable scroll-to-play video players (.vplay) ── */
+  function setupVPlayer(el){
+    if (el.dataset.vpSet) return;
+    const v = el.querySelector('video');
+    if (!v) return;
+    el.dataset.vpSet = '1';
+    const btn = el.querySelector('.vplay__sound');
+    const fill = el.querySelector('.vplay__fill');
+    const bar = el.querySelector('.vplay__progress');
+    const sync = () => {
+      if (!btn) return;
+      btn.classList.toggle('is-on', !v.muted);
+      const t = btn.querySelector('.vplay__txt'); if (t) t.textContent = v.muted ? 'Tap for sound' : 'Sound on';
+      btn.setAttribute('aria-label', v.muted ? 'Unmute video' : 'Mute video');
+    };
+    const play = () => {
+      // only one voiceover at a time — pause any other playing .vplay video
+      document.querySelectorAll('.vplay video').forEach(o => { if (o !== v && !o.paused) o.pause(); });
+      v.volume = 1;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); sync(); });
+      setTimeout(sync, 250);
+    };
+    if (btn) btn.addEventListener('click', () => {
+      v.muted = !v.muted;
+      if (!v.muted) { v.volume = 1; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      sync();
+    });
+    if (fill) v.addEventListener('timeupdate', () => { if (v.duration) fill.style.width = (v.currentTime / v.duration * 100) + '%'; });
+    if (bar) bar.addEventListener('click', (e) => {
+      if (!v.duration) return;
+      const r = bar.getBoundingClientRect();
+      v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * v.duration;
+    });
+    // play only when scrolled into view; pause when scrolled past
+    if (!('IntersectionObserver' in window) || !window.innerHeight) { play(); return; }
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(e => { if (e.isIntersecting) play(); else if (!v.paused) v.pause(); });
+    }, { threshold: 0.4 });
+    io.observe(v);
+  }
+  function initVPlayers(){ document.querySelectorAll('.vplay').forEach(setupVPlayer); }
+
+  const PAGES = {
+    home:  { label: 'Home',         icon: '' },
+    about: { label: 'About',           icon: '' },
+    tiaa:  { label: 'TIAA',            icon: '' },
+    nav:   { label: 'Navigator',       icon: '' },
+    carma: { label: 'Carma',           icon: '' },
+    uxaudit: { label: 'UX Audit',       icon: '' },
+  };
+
+  function go(id) {
+    document.querySelectorAll('[data-view]').forEach(v => {
+      v.classList.toggle('on', v.dataset.view === id);
+    });
+    document.querySelectorAll('[data-nav]').forEach(a => {
+      a.classList.toggle('on', a.dataset.nav === id);
+    });
+
+    const trail = document.getElementById('bc-trail');
+    if (id === 'home') {
+      trail.innerHTML = `<span style="color:var(--muted)">Home</span>`;
+    } else {
+      const p = PAGES[id] || { label: id, icon: '' };
+      trail.innerHTML =
+        `<a onclick="go('home')">Home</a>` +
+        `<span class="bc__sep">/</span>` +
+        `<span class="bc__cur">${p.icon}${p.label}</span>`;
+    }
+
+    window.scrollTo(0, 0);
+    closeNav();
+    if (CASE_VIEWS.includes(id)) { initRevealFor(id); initFlowAnim(id); }
+    if (id === 'nav') { setTimeout(initOverviewVideo, 60); }
+    if (id === 'carma') { setTimeout(initVPlayers, 60); }
+  }
+
+  /* flow-badge 'appear' animation — badges cascade in when scrolled into view */
+  const _flowDone = new Set();
+  function initFlowAnim(id) {
+    if (_flowDone.has(id)) return;
+    if (!('IntersectionObserver' in window) || !window.innerHeight) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const view = document.querySelector('[data-view="' + id + '"]');
+    if (!view) return;
+    const targets = view.querySelectorAll('.cs-flow, .cs-transform, .cs-agents');
+    if (!targets.length) return;
+    _flowDone.add(id);
+    targets.forEach(f => f.classList.add('anim'));
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    targets.forEach(f => io.observe(f));
+  }
+
+  /* mobile off-canvas nav */
+  function toggleNav() { document.body.classList.toggle('nav-open'); }
+  function closeNav()  { document.body.classList.remove('nav-open'); }
+
+  /* live local time (Mumbai / IST) in the home meta row */
+  function updateLocalTime() {
+    const el = document.getElementById('local-time');
+    if (!el) return;
+    el.textContent = new Date().toLocaleTimeString('en-US', {
+      timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit'
+    });
+  }
+  updateLocalTime();
+  setInterval(updateLocalTime, 20000);
+
+  /* subtle scroll-reveal for case studies (see memory: feedback-case-study-scroll-reveal) */
+  const CASE_VIEWS = ['tiaa', 'nav', 'uxaudit', 'carma'];
+  const _revealed = new Set();
+  function initRevealFor(id) {
+    if (_revealed.has(id)) return;
+    // Skip (show content normally, no animation) when animation can't run or
+    // the viewport reports no height (some preview/headless contexts) — never
+    // leave content stuck hidden.
+    if (!('IntersectionObserver' in window)) return;
+    if (!window.innerHeight) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const view = document.querySelector('[data-view="' + id + '"]');
+    if (!view) return;
+    _revealed.add(id);
+    const sel = '.p-title, .p-tag, .p-meta, .p-git, .p-body, .p-slbl, .p-shead, ' +
+                '.p-img, .p-img-cap, .ns-head, .ns-item, .p-cta, .cs-row';
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -6% 0px' });
+    // observe every block: IO fires immediately for in-view ones (reveal on open)
+    // and on scroll for the rest — works even when the tab isn't focused.
+    view.querySelectorAll(sel).forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  }
+
+  /* URL param view switching — for screenshots */
+  const _pv = new URLSearchParams(location.search).get('v');
+  if (_pv) {
+    go(_pv);
+    const _ps = parseInt(new URLSearchParams(location.search).get('s') || '0');
+    if (_ps) {
+      const _el = document.querySelector('[data-view="' + _pv + '"]');
+      if (_el) _el.style.marginTop = (-_ps) + 'px';
+    }
+  }
+  if (new URLSearchParams(location.search).get('audit') === '1') { openAudit(); }
+
+  function copyLink() {
+    const btn = document.getElementById('bc-copy');
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy link', 1500);
+    }).catch(() => {
+      btn.textContent = 'Copy link';
+    });
+  }
+</script>
+</body>
+</html>
