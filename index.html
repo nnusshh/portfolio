@@ -473,6 +473,125 @@
 
   .p-wrap { padding: 2.5rem 2.5rem 6rem; }
 
+  /* ── "The Work Between" — article layout (centred, wide side gutters) ── */
+  .tw-wrap { padding: 4rem 300px 7rem; }
+  @media (max-width: 1400px) { .tw-wrap { padding-left: 200px; padding-right: 200px; } }
+  @media (max-width: 1100px) { .tw-wrap { padding-left: 96px; padding-right: 96px; } }
+  @media (max-width: 768px)  { .tw-wrap { padding: 1.75rem 1.25rem 4rem; } }
+  .tw-kicker { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #4ade80; margin-bottom: 1rem; }
+  .tw-title { font-size: clamp(30px, 3.4vw, 44px); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; color: var(--text); margin-bottom: 1.1rem; }
+  .tw-meta { font-size: 13px; color: var(--dim); padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+  .tw-body { font-size: 18px; line-height: 1.78; color: var(--muted); }
+  .tw-body p { margin-bottom: 1.45rem; }
+  .tw-body strong { color: var(--text); font-weight: 600; }
+  .tw-lead { font-size: 22px; line-height: 1.5; color: var(--text); font-weight: 500; letter-spacing: -0.01em; margin: 2.25rem 0; }
+  .tw-list { list-style: none; margin: 0 0 1.7rem; padding: 0; }
+  .tw-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+  .tw-list li::before { content: ''; position: absolute; left: 0; top: 0.72em; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
+  .tw-aside { border-left: 2px solid var(--faint); padding-left: 1.6rem; margin: 2.25rem 0; display: flex; flex-direction: column; gap: 1rem; }
+  .tw-aside__row { display: flex; gap: 1.1rem; }
+  .tw-aside__lbl { flex-shrink: 0; width: 72px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); padding-top: 0.35em; }
+  .tw-aside__row span:last-child { color: var(--text); }
+  .tw-close { margin-top: 2.75rem; padding-top: 2.75rem; border-top: 1px solid var(--border); }
+  .tw-close p:last-child { color: var(--text); font-weight: 500; margin-bottom: 0; }
+
+  /* article atmospheric background — "The Work Between" articles only */
+  .tw-bg {
+    position: fixed; top: 0; left: var(--sw); right: 0; bottom: 0; z-index: 0; pointer-events: none;
+  }
+  .tw-bg::after {
+    content: ''; position: absolute; inset: 0; opacity: 0.09; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* warm sunset gradient (TIAA) */
+  .tw-bg--warm {
+    background:
+      linear-gradient(180deg, rgba(14,14,13,0.55) 0%, rgba(14,14,13,0.60) 45%, rgba(14,14,13,0.72) 76%, rgba(14,14,13,0.84) 100%),
+      linear-gradient(180deg,
+        #223840 0%, #2f4b54 22%, #9c8b6e 42%, #6c6555 55%,
+        #43392a 66%, #9a4519 80%, #bd5c24 92%, #c96e30 100%);
+  }
+  /* green wall + soft diagonal frond shadows (Articulating Design Decisions) */
+  .tw-bg--green {
+    background:
+      linear-gradient(180deg, rgba(11,15,10,0.60) 0%, rgba(11,15,10,0.66) 55%, rgba(11,15,10,0.74) 100%),
+      repeating-linear-gradient(118deg, rgba(20,32,16,0) 0px, rgba(20,32,16,0) 48px, rgba(18,30,14,0.34) 98px, rgba(20,32,16,0) 160px),
+      radial-gradient(130% 100% at 28% 16%, #9db479 0%, #839e5d 46%, #5f7a43 100%);
+  }
+  /* article content sits above the background, with legible text over the image */
+  .tw-wrap { position: relative; z-index: 1; }
+  .tw-body { color: #d3d3d0; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+  .tw-title { text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+  .tw-meta { color: #bdbdb8; border-bottom-color: rgba(255,255,255,0.18); }
+  .tw-close { border-top-color: rgba(255,255,255,0.18); }
+  .tw-aside { border-left-color: rgba(255,255,255,0.28); }
+
+  /* thumbnail slot at the top of the article */
+  .tw-thumb {
+    width: 100%; min-height: 210px; border-radius: 16px; margin-bottom: 2.75rem;
+    border: 1px dashed rgba(255,255,255,0.32);
+    background: rgba(255,255,255,0.06); backdrop-filter: blur(3px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.55rem;
+    color: rgba(255,255,255,0.62); font-size: 13px; text-align: center;
+  }
+  .tw-thumb svg { opacity: 0.7; }
+
+  /* Carma — placeholders sized by aspect-ratio (not stretched to the grid cell) */
+  [data-view="carma"] .cs-gif__ph { height: auto; }
+  [data-view="carma"] .cs-feedback__q { font-size: 15px; }
+  /* core-experience horizontal scroll (horizontal only), interaction grid, live banner */
+  .cs-hscroll { display: flex; gap: 1rem; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; margin-top: 1.25rem; padding-bottom: 0.6rem; }
+  .cs-hscroll::-webkit-scrollbar { height: 6px; }
+  .cs-hscroll::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 3px; }
+  .cs-hcard { flex: 0 0 80%; scroll-snap-align: start; min-width: 0; }
+  @media (min-width: 900px) { .cs-hcard { flex-basis: 60%; } }
+  .cs-hcard__n { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 0.85rem; }
+  .cs-hcard__d { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 0.35rem; }
+  .cs-shot { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #0e130f; line-height: 0; }
+  .cs-shot img { width: 100%; height: auto; display: block; }
+  .cs-int { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.25rem; }
+  .cs-int > div { min-width: 0; }
+  .cs-int .cs-shot { aspect-ratio: 16 / 10; }
+  .cs-int .cs-shot img { height: 100%; object-fit: cover; object-position: center; }
+  .cs-int__d { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 0.6rem; }
+  @media (max-width: 768px) { .cs-int { grid-template-columns: 1fr; } }
+  /* key-interaction grid — cards fade in one after another (~1s apart) with their captions */
+  @keyframes intIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .cs-int.anim > div { opacity: 0; }
+  .cs-int.anim.in > div { animation: intIn 0.6s ease-out forwards; }
+  .cs-int.anim.in > div:nth-child(1) { animation-delay: 0s; }
+  .cs-int.anim.in > div:nth-child(2) { animation-delay: 1s; }
+  .cs-int.anim.in > div:nth-child(3) { animation-delay: 2s; }
+  .cs-int.anim.in > div:nth-child(4) { animation-delay: 3s; }
+  @media (prefers-reduced-motion: reduce) { .cs-int.anim > div { opacity: 1; animation: none; } }
+
+  /* liquid-glass external-link button — moving orange tint */
+  .lg-ext {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 10px; margin-left: 0.55rem; vertical-align: -9px;
+    color: #fff; position: relative; overflow: hidden; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.28);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    background: linear-gradient(115deg, rgba(255,93,0,0.9) 0%, rgba(255,160,70,0.5) 30%, rgba(255,93,0,0.9) 62%, rgba(255,175,85,0.6) 100%);
+    background-size: 230% 230%;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.42), 0 4px 16px rgba(255,93,0,0.35);
+    animation: lgTint 4.2s ease-in-out infinite;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .lg-ext:hover { transform: translateY(-1px) scale(1.06); box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 6px 22px rgba(255,93,0,0.5); }
+  .lg-ext svg { position: relative; z-index: 1; }
+  @keyframes lgTint { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+  @media (prefers-reduced-motion: reduce) { .lg-ext { animation: none; } }
+
+  .cs-live {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    background: #ff5d00; color: #fff; text-decoration: none;
+    padding: 1.15rem 1.6rem; border-radius: 12px; margin: 2.75rem 0;
+    font-weight: 600; font-size: 15px; transition: filter 0.2s;
+  }
+  .cs-live:hover { filter: brightness(1.07); }
+  .cs-live__url { font-weight: 500; opacity: 0.92; }
+
   .p-title {
     font-size: 26px;
     font-weight: 600;
@@ -1067,6 +1186,7 @@
     .bc { left: 0; padding: 0 0.9rem; }
     .bc__ham { display: inline-flex; }
     .main { margin-left: 0; }
+    .tw-bg { left: 0; }
 
     .h-wrap, .ab-wrap, .p-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
     .p-wrap { padding-top: 1.75rem; }
@@ -1152,31 +1272,45 @@
   }
 
   /* ── reusable scroll-to-play video player (button + progress bar) ── */
+  /* ── liquid-glass video player (click to play, full controls) ── */
   .vplay {
-    position: relative; border-radius: 12px; overflow: hidden;
-    border: 1px solid var(--border); background: #0b1210; line-height: 0; margin-top: 1.1rem;
+    position: relative; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border); background: #000; line-height: 0; margin-top: 1.1rem;
+    --vp-bar: #6D9D8F;
   }
-  .vplay video { width: 100%; height: auto; display: block; }
-  .vplay__sound {
-    position: absolute; bottom: 16px; right: 16px; z-index: 2;
-    display: inline-flex; align-items: center; gap: 0.5rem; line-height: 1;
-    padding: 0.65rem 1rem; border-radius: 999px; cursor: pointer;
-    background: var(--vp-btn, #1F3F32); border: 1.5px solid var(--vp-bar, #6D9D8F); color: #fff;
-    font-size: 13px; font-weight: 600; font-family: inherit;
-    box-shadow: 0 0 0 4px rgba(109,157,143,0.14), 0 8px 22px rgba(0,0,0,0.45);
-    transition: filter 0.2s, box-shadow 0.2s, transform 0.15s;
+  .vplay video { width: 100%; height: auto; display: block; cursor: pointer; }
+  .vplay__big, .vplay__gbtn, .vplay__ctrls {
+    background: rgba(28,30,28,0.30);
+    -webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6);
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow: 0 6px 26px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.30);
+    color: #fff;
   }
-  .vplay__sound:hover { filter: brightness(1.18); box-shadow: 0 0 0 5px rgba(109,157,143,0.22), 0 8px 22px rgba(0,0,0,0.5); transform: translateY(-1px); }
-  .vplay__sound svg { color: var(--vp-bar, #6D9D8F); }
-  .vplay__sound .ic-on { display: none; }
-  .vplay__sound.is-on .ic-off { display: none; }
-  .vplay__sound.is-on .ic-on { display: inline-flex; }
-  .vplay__progress {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-    height: 5px; background: rgba(255,255,255,0.14); cursor: pointer; transition: height 0.15s;
+  .vplay__big {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 3;
+    width: 76px; height: 76px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.22s, transform 0.22s;
   }
-  .vplay__progress:hover { height: 9px; }
-  .vplay__fill { height: 100%; width: 0%; background: var(--vp-bar, #6D9D8F); box-shadow: 0 0 8px rgba(109,157,143,0.55); }
+  .vplay__big:hover { transform: translate(-50%,-50%) scale(1.06); }
+  .vplay__big svg { margin-left: 3px; }
+  .vplay.is-playing .vplay__big { opacity: 0; pointer-events: none; transform: translate(-50%,-50%) scale(0.85); }
+  .vplay__top { position: absolute; top: 14px; right: 14px; z-index: 3; display: flex; gap: 0.5rem; opacity: 0; transition: opacity 0.25s; }
+  .vplay:hover .vplay__top, .vplay:not(.is-playing) .vplay__top { opacity: 1; }
+  .vplay__gbtn { width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: filter 0.15s; }
+  .vplay__gbtn:hover { filter: brightness(1.3); }
+  .vplay__ctrls {
+    position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 3;
+    display: flex; align-items: center; gap: 0.55rem; padding: 0.5rem 0.85rem; border-radius: 999px; line-height: 1;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .vplay:hover .vplay__ctrls, .vplay:not(.is-playing) .vplay__ctrls { opacity: 1; }
+  .vplay__ctrls button { background: none; border: none; color: #fff; cursor: pointer; padding: 0; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; }
+  .vplay__ctrls button:hover { background: rgba(255,255,255,0.18); }
+  .vplay__t, .vplay__d { font-size: 12px; font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.92); flex-shrink: 0; min-width: 34px; text-align: center; }
+  .vplay__seek { flex: 1; -webkit-appearance: none; appearance: none; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.28); cursor: pointer; margin: 0 0.15rem; }
+  .vplay__seek::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.5); cursor: pointer; }
+  .vplay__seek::-moz-range-thumb { width: 14px; height: 14px; border: none; border-radius: 50%; background: #fff; box-shadow: 0 1px 5px rgba(0,0,0,0.5); cursor: pointer; }
   .scr-usp {
     font-size: 21px; line-height: 1.5; font-weight: 500; letter-spacing: -0.01em;
     color: var(--text); max-width: 34ch; margin: 3.25rem 0 0.4rem;
@@ -1292,12 +1426,6 @@
       <div class="n-label">Projects</div>
       <ul class="n-list">
         <li>
-          <a onclick="go('tiaa')" data-nav="tiaa">
-            <span class="n-icon" style="background:#e9e7de"><img src="assets/tiaa/thumb-square.png" alt="" onerror="var p=this.parentElement;p.style.background='#0e2618';p.style.color='#4ade80';p.textContent='T'"></span>
-            TIAA
-          </a>
-        </li>
-        <li>
           <a onclick="go('nav')" data-nav="nav">
             <span class="n-icon" style="background:#00566A"><img src="assets/vantage/thumb-square.png" alt="" onerror="var p=this.parentElement;p.style.background='#00566A';p.style.color='#4BCD3E';p.textContent='N'"></span>
             Navigator
@@ -1313,6 +1441,24 @@
           <a onclick="go('uxaudit')" data-nav="uxaudit">
             <span class="n-icon"><img src="assets/uxaudit/thumb-square.png" alt=""></span>
             UX Audit
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="n-sect">
+      <div class="n-label">The Work Between</div>
+      <ul class="n-list">
+        <li>
+          <a onclick="go('tiaa')" data-nav="tiaa">
+            <span class="n-icon" style="background:#e9e7de"><img src="assets/tiaa/thumb-square.png" alt="" onerror="var p=this.parentElement;p.style.background='#0e2618';p.style.color='#4ade80';p.textContent='T'"></span>
+            TIAA
+          </a>
+        </li>
+        <li>
+          <a onclick="go('articulating')" data-nav="articulating">
+            <span class="n-icon" style="background:#3a5a2e;color:#a3c17d;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 5h16M4 10h16M4 15h11M4 20h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+            Articulating Design Decisions
           </a>
         </li>
       </ul>
@@ -1599,91 +1745,75 @@
 
   <!-- ── TIAA ── -->
   <div data-view="tiaa">
-    <div class="p-hero">
-      <img src="assets/tiaa/thumb-wide.png" alt="TIAA" style="background:#e7e7dd" onerror="this.closest('.p-hero').innerHTML='&lt;div class=&quot;p-hero-ph&quot; style=&quot;background:#2d5a27&quot;&gt;&lt;/div&gt;'">
+    <div class="tw-bg tw-bg--warm" aria-hidden="true"></div>
+    <div class="tw-wrap">
+      <div class="tw-thumb" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M4 17l4.5-4.5L13 17M13 17l3-3 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Thumbnail — add your image here</span>
+      </div>
+      <div class="tw-kicker">The Work Between · TIAA</div>
+      <h1 class="tw-title">What happens after the Figma file?</h1>
+      <div class="tw-meta">Build Design · Accenture Song · 2024</div>
+
+      <div class="tw-body">
+        <p>Most of my earlier design work had a fairly clear endpoint. You design the experience, align with the team and hand it over.</p>
+        <p>On TIAA, I was sitting on the other side of that handoff — working closely with developers and watching what actually happened when a design met a real product, real logic and a large delivery team.</p>
+        <p>Very quickly, I realised that matching Figma was only one part of the work.</p>
+        <ul class="tw-list">
+          <li>A screen could look right and still behave incorrectly.</li>
+          <li>An error state could exist but communicate the wrong thing.</li>
+          <li>A developer's "small question" could actually point to a decision that had never been made.</li>
+        </ul>
+        <p class="tw-lead">The screen showed me where the problem was. Understanding the product helped me understand what the problem actually was.</p>
+
+        <p>Over time, I built my own way of evaluating built experiences.</p>
+        <div class="tw-aside">
+          <div class="tw-aside__row"><span class="tw-aside__lbl">Not just</span><span>Does it match the design?</span></div>
+          <div class="tw-aside__row"><span class="tw-aside__lbl">But also</span><span>Does it behave as intended?<br>Does it make sense in context?<br>What happens when things go wrong?</span></div>
+        </div>
+
+        <p>This eventually became more structured. A checklist, a way to document issues, a way to track fixes and a clearer point at which a screen was ready to move forward.</p>
+        <p class="tw-lead">What looked like a checking process was actually becoming a shared language between design and engineering.</p>
+
+        <p>Over four releases, I also learned how to read the questions coming from developers. Sometimes the answer was already in the design system. Sometimes the product logic made the decision clearer. And sometimes, the right thing to do was to escalate with enough context that the conversation could move quickly.</p>
+        <p>I became more comfortable making that distinction.</p>
+
+        <p>Then the role changed again. More designers joined the team, and the process I had gradually built could no longer live only in my head.</p>
+        <p>My work shifted towards onboarding and calibration. Walking designers through the product, the environment and what to look for. Reviewing their findings. Helping them understand not just what was an issue, but why.</p>
+        <p>The goal was not for everyone to check screens exactly like I did. It was to build a shared understanding of what good evaluation looked like.</p>
+        <p>I started by finding issues myself. Eventually, I was helping others develop the judgement to find them too.</p>
+
+        <div class="tw-close">
+          <p>This is probably what I learned most from working in Build Design.</p>
+          <p>Some of the most important design work happens after the handoff. It is where design intent meets product logic, implementation and reality.</p>
+          <p>And it is also where I learned that a good process is not just something you follow. At some point, it should become something other people can use without you.</p>
+        </div>
+      </div>
     </div>
-    <div class="p-wrap">
-      <h1 class="p-title">TIAA, Interaction Design</h1>
-      <p class="p-tag">Building a UX testing process from nothing on a platinum financial client — three releases, 80+ screens, zero prior process.</p>
+  </div>
 
-      <div class="p-meta">
-        <div>
-          <div class="p-meta-lbl">Timeline</div>
-          <div class="p-meta-val">2024<br>Accenture Song</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Role / Context</div>
-          <div class="p-meta-val">Interaction Designer<br>UX Testing Lead</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Leveraged Skills</div>
-          <div class="p-meta-val">Process design, defect taxonomy, stakeholder management</div>
-        </div>
+  <!-- ── ARTICULATING DESIGN DECISIONS (article) ── -->
+  <div data-view="articulating">
+    <div class="tw-bg tw-bg--green" aria-hidden="true"></div>
+    <div class="tw-wrap">
+      <div class="tw-thumb" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M4 17l4.5-4.5L13 17M13 17l3-3 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Thumbnail — add your image here</span>
       </div>
+      <div class="tw-kicker">The Work Between · Writing</div>
+      <h1 class="tw-title">Articulating Design Decisions in the Age of AI</h1>
+      <div class="tw-meta">Essay · Published Mar 2026 · <a href="https://www.linkedin.com/pulse/articulating-design-decisions-age-ai-anoushka-aggarwal-g3rmf/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Originally on LinkedIn ↗</a></div>
 
-      <p class="p-git">If you'd like to learn more, <a href="mailto:aggarwalanoushka02@gmail.com">please get in touch</a>.</p>
-
-      <div class="p-body">
-        <p>At TIAA, I sat offshore on a platinum Accenture Song engagement — closer to the build than the onshore design team, catching defects the day they were created. I became the de facto point of contact for developers, PMs, and product owners on all design quality questions.</p>
-        <p>The problem was structural: <strong>no UXT process existed.</strong> Design quality between handoff and deployment was everyone's responsibility — which meant it was no one's.</p>
-      </div>
-
-      <div class="p-slbl">Problem</div>
-      <div class="p-shead">Design quality was everyone's responsibility.<br>Which meant it was no one's.</div>
-
-      <div class="p-body">
-        <p>I diagnosed five root causes across R1 and R2: no defined scope at kickoff, unclear stakeholder ownership, no shared defect language, no canonical Figma source of truth, and one person doing five jobs simultaneously.</p>
-        <p>Each cause had a concrete effect. Each effect had a fix I designed, documented, and got adopted.</p>
-      </div>
-
-      <div class="p-slbl">What I Built</div>
-      <div class="p-shead">A six-phase UXT process — two full phases before a single screen is touched.</div>
-
-      <div class="p-body">
-        <p>Phase 1: <strong>UXT Kickoff</strong> — lock scope, timelines, and source of truth. Phase 2: <strong>Align with POCs</strong> — map all 36 capabilities releasing in R3 to named owners, take knowledge transfer. Only then: screen analysis, defect logging, Jira tickets, QA-ready sign-off.</p>
-        <p>I also authored a <strong>five-category defect taxonomy</strong> — design fidelity, design system compliance, UX copy, accessibility, responsive behavior. It gave the scrum master a shared language to triage and route every ticket without debate.</p>
-      </div>
-
-      <div class="p-slbl">Across Three Releases</div>
-      <div class="p-shead">Discovery → Consequence → Maturity</div>
-
-      <div class="p-body">
-        <p><strong>R1 (Discovery):</strong> Built the checklist from scratch. Logged 22 defects, none shipped. Ran the retro that surfaced the five gaps.</p>
-        <p><strong>R2 (Consequence):</strong> Scope confusion meant wrong modules got tested. Built the kickoff doc mid-release in response. Introduced the defect taxonomy.</p>
-        <p><strong>R3 (Maturity):</strong> Kickoff doc became standard practice. Ticket creation delegated. The process now outlasts any one person.</p>
-      </div>
-
-      <div class="p-slbl">The Tradeoff</div>
-      <div class="p-shead">Making the cost of not fixing visible — not just the defect itself.</div>
-
-      <div class="p-body">
-        <p>When a PM said "we don't have time," the taxonomy let me answer: <strong>this isn't a design preference, it's a product-quality standard.</strong> Functionality always ships first, so visual defects are structural, not incidental — which is exactly why the role exists.</p>
-      </div>
-
-      <div class="p-slbl" style="margin-top:3rem">If I had more time on the project —</div>
-      <div class="ns-head">NEXT STEPS ↘</div>
-
-      <div class="ns-item">
-        <div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 6.6a3 3 0 0 1 0 5.8M17.5 19a5.5 5.5 0 0 0-2-4.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <div>
-          <div class="ns-t">Expand the taxonomy documentation</div>
-          <div class="ns-d">Package the five-category system as a transferable artifact that teams can adopt without needing me to explain it from scratch each release</div>
-        </div>
-      </div>
-      <div class="ns-item">
-        <div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 21V11M12 21V5M19 21v-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <div>
-          <div class="ns-t">Track defect patterns over time</div>
-          <div class="ns-d">Build a lightweight dashboard showing which categories recur most — turning individual releases into a learning system for the whole team</div>
-        </div>
-      </div>
-
-      <div class="p-cta">
-        <p>If you want to know the details of this project or my availability – get in touch!</p>
-        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
-        <div class="p-cta-btns">
-          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
-          <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
+      <div class="tw-body">
+        <p>Design used to build its own narrative. Ideas led to decisions, decisions carried trade-offs, and those trade-offs sparked the conversations that moved the reasoning forward.</p>
+        <p>AI has compressed that journey. We reach outcomes faster than ever — but the reasoning now lags behind the delivery.</p>
+        <p class="tw-lead">Selection needs judgment. Judgment needs articulation.</p>
+        <p>When a result appears in seconds, the thinking behind it isn't automatically visible. Stakeholders don't just evaluate the output; they evaluate the confidence behind it — and that confidence comes from how clearly the reasoning is communicated, not from the screen alone.</p>
+        <p>Which is why articulation has quietly become one of the most valuable design skills. Explaining <strong>why</strong> a design exists now matters as much as the design itself.</p>
+        <p>Good design was never only about making the right decision. It is about helping the team understand it.</p>
+        <div class="tw-close">
+          <p>As AI takes on more of the execution, the differentiator shifts.</p>
+          <p>It is no longer pixel-perfection or technical detail — it is the ability to think strategically, align stakeholders, and articulate the judgment behind the work.</p>
         </div>
       </div>
     </div>
@@ -1901,14 +2031,8 @@
           <p>A walkthrough of the product — from launch, into the morning dashboard, and down into a persona's drill-down.</p>
 
           <div class="p-slbl" style="margin-top:1.75rem">Product overview</div>
-          <div class="scr-media">
-            <video id="ovVideo" src="assets/vantage/overview.mp4" loop playsinline preload="auto" aria-label="Vantage 360 Navigator — end-to-end walkthrough"></video>
-            <button class="scr-sound is-on" id="ovSound" type="button" onclick="toggleOverviewSound()" aria-label="Mute video">
-              <svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 9.5l4 5M21 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-              <svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 0 1 0 7M19.7 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-              <span class="scr-sound__txt">Sound on</span>
-            </button>
-            <div class="scr-progress" id="ovProgress" role="progressbar" aria-label="Video progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="scr-progress__fill" id="ovProgressFill"></div></div>
+          <div class="vplay" style="--vp-bar:#4BCD3E">
+            <video src="assets/vantage/overview.mp4" playsinline preload="metadata" aria-label="Vantage 360 Navigator — end-to-end walkthrough"></video>
           </div>
 
           <div class="scr-usp">One finance command centre — <em>real-time metrics, AI-surfaced anomalies and forecasting</em> in a single 360° view, so the morning's analysis is done before you sit down.</div>
@@ -1982,49 +2106,43 @@
       <div class="p-hero-ph" style="background:linear-gradient(160deg,#07211c 0%,#0a1512 55%,#050a09 100%)"></div>
     </div>
     <div class="p-wrap">
-      <h1 class="p-title">Carma</h1>
-      <p class="p-tag" style="max-width:60%">A shipped B2B SaaS climate-risk platform — the insurer's toolkit for scalable agricultural insurance that de-risks smallholder farmers. Designed end-to-end as the MVP at Studio Carbon for Dutch agri-fintech Agtuall, in partnership with the Syngenta Foundation.</p>
+      <h1 class="p-title" style="font-size:24px">Carma</h1>
+      <p class="p-tag" style="max-width:78%;font-size:32px;line-height:1.3;color:var(--text);font-weight:500;margin-top:0.6rem">Turning climate uncertainty into financial resilience for smallholder farmers.</p>
 
-      <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
-        <div>
-          <div class="p-meta-lbl">Role</div>
-          <div class="p-meta-val">Product Designer</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Type</div>
-          <div class="p-meta-val">B2B SaaS · shipped</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Year</div>
-          <div class="p-meta-val">2024</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Client</div>
-          <div class="p-meta-val">Agtuall</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Partner</div>
-          <div class="p-meta-val">Syngenta Foundation</div>
-        </div>
-        <div>
-          <div class="p-meta-lbl">Studio</div>
-          <div class="p-meta-val">Studio Carbon</div>
+      <div class="p-meta" style="grid-template-columns:repeat(5,1fr)">
+        <div><div class="p-meta-lbl">Role</div><div class="p-meta-val">Product Designer</div></div>
+        <div><div class="p-meta-lbl">Type</div><div class="p-meta-val">B2B SaaS · shipped</div></div>
+        <div><div class="p-meta-lbl">Year</div><div class="p-meta-val">2024</div></div>
+        <div><div class="p-meta-lbl">Client</div><div class="p-meta-val">Agtuall</div></div>
+        <div><div class="p-meta-lbl">Studio</div><div class="p-meta-val">Studio Carbon</div></div>
+      </div>
+
+      <p class="p-git">Shipped &amp; live — <a href="https://agtuall.com/carma" target="_blank" rel="noopener">agtuall.com/carma</a><a class="lg-ext" href="https://agtuall.com/carma" target="_blank" rel="noopener" aria-label="Open Carma live"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-8.5 8.5M19 13.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+
+      <!-- 01 · The Problem -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">01</div><div class="cs-aside__ttl">The Problem</div></div>
+        <div class="cs-body">
+          <div class="p-slbl" style="margin-top:0">Agtuall's goal</div>
+          <p>Design an MVP that helps financial institutions use climate data to create and manage parametric insurance for smallholder farmers.</p>
+          <div class="p-slbl" style="margin-top:1.75rem">The user's problem</div>
+          <p>Actuaries and data managers lacked a streamlined way to design insurance products, explore data and assess risk.</p>
+          <div class="p-slbl" style="margin-top:1.75rem">Constraints</div>
+          <div class="ua-cards" style="grid-template-columns:repeat(3,1fr);margin-top:1rem">
+            <div class="ua-card"><div class="ua-card__body">The product architecture was still evolving alongside a nascent startup.</div></div>
+            <div class="ua-card"><div class="ua-card__body">As an MVP, we had to prioritise the most critical workflows.</div></div>
+            <div class="ua-card"><div class="ua-card__body">The design needed to support white-labelling and future customisation.</div></div>
+          </div>
         </div>
       </div>
 
-      <p class="p-git">Shipped &amp; live — <a href="https://agtuall.com/carma" target="_blank" rel="noopener">agtuall.com/carma</a>.</p>
-
-      <!-- 01 · The Hook -->
+      <!-- 02 · Demo -->
       <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">01</div>
-          <div class="cs-aside__ttl">The Hook</div>
-        </div>
+        <div class="cs-aside"><div class="cs-aside__num">02</div><div class="cs-aside__ttl">Demo</div></div>
         <div class="cs-body">
-          <p>The final experience brought together the core workflows for exploring climate data, analysing datasets, and monitoring insurance products. <strong>The product was designed, tested, refined, and ultimately shipped.</strong></p>
-
-          <div class="vplay" style="--vp-btn:#1F3F32;--vp-bar:#6D9D8F;margin-top:1.4rem">
-            <video src="assets/agtuall/walkthrough.mp4" loop playsinline preload="auto" aria-label="Agtuall — product walkthrough"></video>
+          <p>The main product walkthrough — exploring climate data, designing insurance products, and monitoring them end to end.</p>
+          <div class="vplay" style="--vp-btn:#1F3F32;--vp-bar:#6D9D8F;margin-top:1.3rem">
+            <video src="assets/agtuall/walkthrough.mp4" loop playsinline preload="auto" aria-label="Carma — main product demo"></video>
             <button class="vplay__sound is-on" type="button" aria-label="Mute video">
               <svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 9.5l4 5M21 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
               <svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 0 1 0 7M19.7 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
@@ -2032,11 +2150,110 @@
             </button>
             <div class="vplay__progress"><div class="vplay__fill"></div></div>
           </div>
+        </div>
+      </div>
 
-          <div class="cs-dq" style="margin-top:2.75rem">"Climate has been a guessing game for us all — but for farmers, it's like playing <em style="color:#2dd4bf">roulette</em> with their livelihood."</div>
+      <!-- 03 · What surprised me · what was difficult -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">03</div><div class="cs-aside__ttl">What Surprised Me · What Was Difficult</div></div>
+        <div class="cs-body">
+          <p>I initially saw this as a data-heavy SaaS problem, but research revealed that the bigger challenge was defining the product architecture and creating a clear workflow across data exploration, insurance design, monitoring and inspection. Aligning this structure took two weeks and 5&ndash;6 rounds of discussion, as both the startup and design team were shaping the product together.</p>
+          <div class="cs-shot" style="margin-top:1.5rem"><img src="assets/agtuall/architecture.png" alt="Agtuall — five-level product architecture, from Level 0 Products up to Level 4 User Flows" loading="lazy"></div>
+        </div>
+      </div>
 
-          <div class="vplay" style="--vp-btn:#1F3F32;--vp-bar:#6D9D8F;margin-top:1.4rem">
-            <video src="assets/agtuall/context.mp4" loop playsinline preload="auto" aria-label="Agtuall — project context"></video>
+      <!-- 04 · Trade-offs -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">04</div><div class="cs-aside__ttl">Trade-offs</div></div>
+        <div class="cs-body">
+          <p>I prioritised the workflows that were most critical for the MVP — data exploration, product monitoring and inspection — while identifying capabilities like AI-powered analysis, onboarding and accessibility as future opportunities.</p>
+        </div>
+      </div>
+
+      <!-- 05 · What I built -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">05</div><div class="cs-aside__ttl">What I Built</div></div>
+        <div class="cs-body">
+          <div class="p-shead">I designed the core experience across three connected areas.</div>
+          <div class="cs-hscroll" style="margin-top:1.25rem">
+            <div class="cs-hcard">
+              <div class="cs-shot"><img src="assets/agtuall/explore.jpg" alt="Climate Data Library — explore and visualise rainfall datasets on the map" loading="lazy"></div>
+              <div class="cs-hcard__n">01 · Explore &amp; analyse data</div>
+              <div class="cs-hcard__d">Users can search, filter, visualise and compare climate datasets to support insurance product decisions.</div>
+            </div>
+            <div class="cs-hcard">
+              <div class="cs-shot"><img src="assets/agtuall/monitor.jpg" alt="Monitoring dashboard — policies sold, premium collected and product distribution" loading="lazy"></div>
+              <div class="cs-hcard__n">02 · Monitor overall performance</div>
+              <div class="cs-hcard__d">Insurance manager can easily overview the analytical data for all insurance products in target.</div>
+            </div>
+            <div class="cs-hcard">
+              <div class="cs-shot"><img src="assets/agtuall/inspect.jpg" alt="Inspect underwritten dataset — comparing weather datasets for a policy" loading="lazy"></div>
+              <div class="cs-hcard__n">03 · Inspect underwritten dataset</div>
+              <div class="cs-hcard__d">Users can investigate a specific policy by comparing its underwritten weather dataset against similar datasets to better understand discrepancies.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 · Key interaction decisions -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">06</div><div class="cs-aside__ttl">Key Interaction Decisions</div></div>
+        <div class="cs-body">
+          <div class="cs-int">
+            <div><div class="cs-shot"><img src="assets/agtuall/ki-search.jpg" alt="Climate Data Library — search and filter datasets" loading="lazy"></div><div class="cs-int__d">Search and filtering to reduce the effort of navigating large datasets.</div></div>
+            <div><div class="cs-shot"><img src="assets/agtuall/ki-compare.jpg" alt="Interrelation — comparing weather-variable datasets on one chart" loading="lazy"></div><div class="cs-int__d">Dataset comparison through visibility controls and multiple visualisations.</div></div>
+            <div><div class="cs-shot"><img src="assets/agtuall/ki-drilldown.jpg" alt="Product to Insurance Unit drill-down with cover details" loading="lazy"></div><div class="cs-int__d">Drill-down navigation from Product &rarr; Insurance Unit &rarr; Policy.</div></div>
+            <div><div class="cs-shot"><img src="assets/agtuall/ki-download.jpg" alt="Bulk dataset download — districts, datasets and time periods" loading="lazy"></div><div class="cs-int__d">Bulk dataset download workflow, drilled to the exact multi-level location.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 · Did it work -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">07</div><div class="cs-aside__ttl">Did It Work?</div></div>
+        <div class="cs-body">
+          <div class="p-shead">The MVP was successfully released and is currently being used by actuaries and insurance orgs.</div>
+          <p style="margin-top:1rem">We tested the prototype with <strong>5 participants</strong> — 2 experienced actuaries and 3 beginner users. The sessions used task-based, moderated usability testing with a think-aloud approach.</p>
+          <div class="p-slbl" style="margin-top:1.75rem">Impact vs Effort matrix · PSSUQ usability score</div>
+          <div class="cs-gifs" style="grid-template-columns:1fr 1fr;margin-top:1rem">
+            <div class="cs-shot"><img src="assets/agtuall/impact-matrix.png" alt="Impact vs Effort matrix — Quick Wins, Big Bets, Fill-Ins and Money Pit" loading="lazy"></div>
+            <div class="cs-shot"><img src="assets/agtuall/pssuq.png" alt="PSSUQ usability score 1.99 — good usability across system, interface and information quality" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 · Key lesson -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">08</div><div class="cs-aside__ttl">Key Lesson</div></div>
+        <div class="cs-body">
+          <div class="cs-dq" style="max-width:none">For complex expert tools, visualising information is only <em style="color:#2dd4bf">half the job</em>.</div>
+          <p>The bigger design challenge is making relationships, comparisons and system logic obvious enough that users don't have to decode how the product works.</p>
+        </div>
+      </div>
+
+      <!-- 09 · Words from my crew -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">09</div><div class="cs-aside__ttl">Words From My Crew</div></div>
+        <div class="cs-body">
+          <div class="cs-feedback">
+            <div class="cs-feedback__q">"I had the pleasure of working with Anoushka during her Post-Graduation Project Internship at Studio Carbon, and from the start, her enthusiasm and dedication stood out. She approached her brief with remarkable energy and quickly became a valuable member of our team. Anoushka's iterative approach and lateral thinking, combined with her keen eye for detail, were instrumental in breaking down complex product architectures. One of her standout contributions was refining a dashboard to make it more intuitive and efficient by analysing and testing suggested workflows — a true testament to her skills as a product designer."</div>
+            <div class="cs-feedback__a"><span class="cs-feedback__av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>Mallika Lahiry · Digital Product Designer, Studio Carbon</span></div>
+          </div>
+        </div>
+      </div>
+
+      <a class="cs-live" href="https://agtuall.com/carma" target="_blank" rel="noopener">
+        <span>Check it out live</span>
+        <span class="cs-live__url">agtuall.com/carma ↗</span>
+      </a>
+
+      <!-- 10 · Context -->
+      <div class="cs-row">
+        <div class="cs-aside"><div class="cs-aside__num">10</div><div class="cs-aside__ttl">Context</div></div>
+        <div class="cs-body">
+          <p>Here's a video if you're curious about how this positively impacts smallholder farmers — let's start with some context.</p>
+          <div class="vplay" style="--vp-btn:#1F3F32;--vp-bar:#6D9D8F;margin-top:1.3rem">
+            <video src="assets/agtuall/context.mp4" loop playsinline preload="auto" aria-label="Carma — project context"></video>
             <button class="vplay__sound is-on" type="button" aria-label="Mute video">
               <svg class="ic-off" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 9.5l4 5M21 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
               <svg class="ic-on" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M17 8.5a5 5 0 0 1 0 7M19.7 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
@@ -2044,96 +2261,11 @@
             </button>
             <div class="vplay__progress"><div class="vplay__fill"></div></div>
           </div>
-
-          <p style="margin-top:2rem">Earth's temperature has risen roughly <strong>0.06&deg;C per decade since 1850</strong> (NOAA). For smallholder farmers across East Africa and Bangladesh, a bad season isn't a data point — it's the line between getting by and going under.</p>
-          <p>Insurance should be that safety net. But pricing crop risk at this scale has been slow, manual, and starved of trustworthy data — so the farmers who need cover most are the hardest to insure.</p>
-        </div>
-      </div>
-
-      <!-- 02 · How Agtuall Solves It -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">02</div>
-          <div class="cs-aside__ttl">The Solution Layer</div>
-        </div>
-        <div class="cs-body">
-          <p>Agtuall's vision is refreshingly human: <strong>de-risk smallholder farmers.</strong> It does that by giving insurers the data and tooling to build parametric insurance products profitably — even for farmers once considered uninsurable.</p>
-          <p>Carma is the platform underneath. It unifies weather, earth-observation and climate datasets into a single repository with analytics on top, so an insurer can move from raw climate data to a priced, monitored product without months of manual wrangling.</p>
-          <div class="ua-cards" style="grid-template-columns:repeat(4,1fr);margin-top:1.75rem">
-            <div class="ua-card"><div class="ua-card__num">01</div><div class="ua-card__title">Explore</div><div class="ua-card__body">Search climate datasets by geography and visualise trends on a map.</div></div>
-            <div class="ua-card"><div class="ua-card__num">02</div><div class="ua-card__title">Analyse</div><div class="ua-card__body">Assess dataset quality and compare indices to shortlist the right data.</div></div>
-            <div class="ua-card"><div class="ua-card__num">03</div><div class="ua-card__title">Price</div><div class="ua-card__body">Design the insurance product on the data an actuary trusts.</div></div>
-            <div class="ua-card"><div class="ua-card__num">04</div><div class="ua-card__title">Monitor</div><div class="ua-card__body">Track live product &amp; policy performance and re-check triggers.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03 · Product Architecture -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">03</div>
-          <div class="cs-aside__ttl">Product Architecture</div>
-        </div>
-        <div class="cs-body">
-          <p>My biggest contribution was shaping the platform's backbone. We defined a <strong>five-level product architecture</strong> — Products &rarr; Modules &rarr; Sub-modules &rarr; Features &rarr; Flows — for what the team called the "Agtuall Engine."</p>
-          <p>The MVP centred on the <strong>Climate Data Library</strong> (Explore, Analytics, Inspect) plus <strong>Monitoring</strong>, with Pricing scoped for a later phase. Because Agtuall was a nascent startup still discovering its own product, architecting this took about two weeks and 5&ndash;6 rounds of close collaboration — design team and client figuring it out together.</p>
-          <div class="cs-gif__ph" style="aspect-ratio:16/9;margin-top:1.5rem;border-radius:12px">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            <span>Agtuall Engine — 5-level architecture map</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 04 · User Stories & Epics -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">04</div>
-          <div class="cs-aside__ttl">User Stories &amp; Epics</div>
-        </div>
-        <div class="cs-body">
-          <p>The Agtuall team handed over epics and user stories; turning them into a coherent information architecture was the design job. Read closely, they told us <strong>why</strong> we were building, <strong>what</strong>, and the value each feature created.</p>
-          <p>Every story carried acceptance criteria that fed the product and information architecture directly — an actuary selecting a geography and up to four datasets to visualise trends, or evaluating dataset quality and consistency before committing to a product. Initiatives broke into epics, epics into stories, stories into the modules users actually navigate.</p>
-          <div class="cs-gif__ph" style="aspect-ratio:16/9;margin-top:1.5rem;border-radius:12px">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M7 8h10M7 12h10M7 16h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            <span>Initiative &rarr; Epic &rarr; Story mapping</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05 · Usability Testing -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">05</div>
-          <div class="cs-aside__ttl">Usability Testing</div>
-        </div>
-        <div class="cs-body">
-          <p>Before handoff, we ran <strong>moderated, think-aloud testing</strong> on the Climate Data Library with <strong>five actuaries</strong> — seasoned users the client connected us with, plus beginners — observing behaviour across real tasks like exploring rainfall data and comparing datasets.</p>
-          <p>Three findings shaped the redesign:</p>
-          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-3.6-3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">Information scent was thin</div><div class="ns-d">Users wanted clearer cues about what each module did before diving in — addressed with a clearer navigation rail and tab menu.</div></div></div>
-          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 21V11M12 21V5M19 21v-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">Comparing datasets was painful</div><div class="ns-d">Comparing the first and last dataset down a long scroll broke the task — the comparison pattern was reworked so datasets sit side by side.</div></div></div>
-          <div class="ns-item"><div class="ns-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 15l6-6M10 6l1-1a4 4 0 0 1 6 6l-1 1M14 18l-1 1a4 4 0 0 1-6-6l1-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="ns-t">"Interrelation" wasn't understood</div><div class="ns-d">The tab's mental model didn't land; its labelling and flow were revised so correlating two variables reads naturally.</div></div></div>
-        </div>
-      </div>
-
-      <!-- 06 · Who Was Involved -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">06</div>
-          <div class="cs-aside__ttl">Who Was Involved</div>
-        </div>
-        <div class="cs-body">
-          <p>A genuinely multi-party project — a startup, a foundation, a design studio, and the actuaries who'd live in the product every day.</p>
-          <div class="ua-cards" style="margin-top:1.5rem">
-            <div class="ua-card"><div class="ua-card__title">Agtuall</div><div class="ua-card__body">Dutch agri-fintech (client) on a mission to de-risk smallholder farmers.</div></div>
-            <div class="ua-card"><div class="ua-card__title">Syngenta Foundation</div><div class="ua-card__body">Partner co-investing in the platform's development and reach.</div></div>
-            <div class="ua-card"><div class="ua-card__title">Studio Carbon</div><div class="ua-card__body">The design studio where I led product design on the MVP.</div></div>
-          </div>
-          <p style="margin-top:1.1rem"><strong>The users:</strong> financial institutions and their actuaries, data scientists and sales teams — the people pricing and selling insurance to farmers.</p>
         </div>
       </div>
 
       <div class="p-cta">
-        <p>Curious about the full thesis, the architecture work, or the shipped product?</p>
+        <p>Curious about the architecture work, the research, or the shipped product?</p>
         <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
         <div class="p-cta-btns">
           <a class="p-btn" href="https://agtuall.com/carma" target="_blank" rel="noopener">↗ View Carma live</a>
@@ -2613,53 +2745,101 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     syncSoundBtn();
   }
 
-  /* ── reusable scroll-to-play video players (.vplay) ── */
+  /* ── liquid-glass video players (.vplay) — click to play, full controls ── */
+  const VP_ICON = {
+    play:    '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>',
+    bigplay: '<svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>',
+    pause:   '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>',
+    back:    '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M11 5a7 7 0 1 0 6.9 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M11 5 8 2.5M11 5 8 7.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><text x="12.4" y="15.6" font-size="7.5" fill="currentColor" text-anchor="middle" font-weight="700" font-family="Manrope,sans-serif">15</text></svg>',
+    fwd:     '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M13 5a7 7 0 1 1-6.9 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 5l3-2.5M13 5l3 2.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><text x="11.6" y="15.6" font-size="7.5" fill="currentColor" text-anchor="middle" font-weight="700" font-family="Manrope,sans-serif">15</text></svg>',
+    soundOn: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/><path d="M17 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    soundOff:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none"><path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/><path d="M16 9.5l4 5M20 9.5l-4 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    fs:      '<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M4 9V5a1 1 0 0 1 1-1h4M20 9V5a1 1 0 0 0-1-1h-4M4 15v4a1 1 0 0 0 1 1h4M20 15v4a1 1 0 0 1-1 1h-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'
+  };
   function setupVPlayer(el){
-    if (el.dataset.vpSet) return;
+    if (el.dataset.vpSet) return; el.dataset.vpSet = '1';
     const v = el.querySelector('video');
     if (!v) return;
-    el.dataset.vpSet = '1';
-    const btn = el.querySelector('.vplay__sound');
-    const fill = el.querySelector('.vplay__fill');
-    const bar = el.querySelector('.vplay__progress');
-    const sync = () => {
-      if (!btn) return;
-      btn.classList.toggle('is-on', !v.muted);
-      const t = btn.querySelector('.vplay__txt'); if (t) t.textContent = v.muted ? 'Tap for sound' : 'Sound on';
-      btn.setAttribute('aria-label', v.muted ? 'Unmute video' : 'Mute video');
+    el.querySelectorAll('.vplay__sound, .vplay__progress').forEach(n => n.remove());
+    v.removeAttribute('autoplay'); v.loop = false; v.preload = 'metadata'; v.playsInline = true;
+    el.insertAdjacentHTML('beforeend',
+      '<button class="vplay__big" type="button" aria-label="Play">' + VP_ICON.bigplay + '</button>' +
+      '<div class="vplay__top">' +
+        '<button class="vplay__gbtn vp-mute" type="button" aria-label="Mute">' + VP_ICON.soundOn + '</button>' +
+        '<button class="vplay__gbtn vp-fs" type="button" aria-label="Fullscreen">' + VP_ICON.fs + '</button>' +
+      '</div>' +
+      '<div class="vplay__ctrls">' +
+        '<button class="vp-pp" type="button" aria-label="Play">' + VP_ICON.play + '</button>' +
+        '<button class="vp-b15" type="button" aria-label="Back 15 seconds">' + VP_ICON.back + '</button>' +
+        '<button class="vp-f15" type="button" aria-label="Forward 15 seconds">' + VP_ICON.fwd + '</button>' +
+        '<span class="vplay__t">0:00</span>' +
+        '<input class="vplay__seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">' +
+        '<span class="vplay__d">0:00</span>' +
+      '</div>');
+    const big = el.querySelector('.vplay__big'), pp = el.querySelector('.vp-pp');
+    const b15 = el.querySelector('.vp-b15'), f15 = el.querySelector('.vp-f15');
+    const seek = el.querySelector('.vplay__seek');
+    const tCur = el.querySelector('.vplay__t'), tDur = el.querySelector('.vplay__d');
+    const muteBtn = el.querySelector('.vp-mute'), fsBtn = el.querySelector('.vp-fs');
+    const fmt = s => { s = Math.max(0, s || 0); const m = Math.floor(s / 60), ss = Math.floor(s % 60); return m + ':' + String(ss).padStart(2, '0'); };
+    const paint = () => {
+      const p = v.duration ? (v.currentTime / v.duration) : 0;
+      seek.value = Math.round(p * 1000);
+      seek.style.background = 'linear-gradient(90deg, var(--vp-bar) ' + (p * 100) + '%, rgba(255,255,255,0.28) ' + (p * 100) + '%)';
+      tCur.textContent = fmt(v.currentTime);
     };
-    const play = () => {
-      // only one voiceover at a time — pause any other playing .vplay video
-      document.querySelectorAll('.vplay video').forEach(o => { if (o !== v && !o.paused) o.pause(); });
-      v.volume = 1;
-      const p = v.play();
-      if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); sync(); });
-      setTimeout(sync, 250);
+    const syncPP = () => { const playing = !v.paused && !v.ended; el.classList.toggle('is-playing', playing); pp.innerHTML = playing ? VP_ICON.pause : VP_ICON.play; };
+    const toggle = () => {
+      if (v.paused) { document.querySelectorAll('.vplay video').forEach(o => { if (o !== v && !o.paused) o.pause(); }); v.volume = 1; v.play().catch(() => {}); }
+      else v.pause();
     };
-    if (btn) btn.addEventListener('click', () => {
-      v.muted = !v.muted;
-      if (!v.muted) { v.volume = 1; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
-      sync();
-    });
-    if (fill) v.addEventListener('timeupdate', () => { if (v.duration) fill.style.width = (v.currentTime / v.duration * 100) + '%'; });
-    if (bar) bar.addEventListener('click', (e) => {
-      if (!v.duration) return;
-      const r = bar.getBoundingClientRect();
-      v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * v.duration;
-    });
-    // play only when scrolled into view; pause when scrolled past
-    if (!('IntersectionObserver' in window) || !window.innerHeight) { play(); return; }
-    const io = new IntersectionObserver((ents) => {
-      ents.forEach(e => { if (e.isIntersecting) play(); else if (!v.paused) v.pause(); });
-    }, { threshold: 0.4 });
-    io.observe(v);
+    big.addEventListener('click', toggle);
+    pp.addEventListener('click', toggle);
+    v.addEventListener('click', toggle);
+    v.addEventListener('play', syncPP);
+    v.addEventListener('pause', syncPP);
+    v.addEventListener('ended', syncPP);
+    v.addEventListener('loadedmetadata', () => { tDur.textContent = fmt(v.duration); paint(); });
+    v.addEventListener('timeupdate', paint);
+    seek.addEventListener('input', () => { if (v.duration) { v.currentTime = (seek.value / 1000) * v.duration; paint(); } });
+    b15.addEventListener('click', () => { v.currentTime = Math.max(0, v.currentTime - 15); });
+    f15.addEventListener('click', () => { v.currentTime = Math.min(v.duration || 0, v.currentTime + 15); });
+    muteBtn.addEventListener('click', () => { v.muted = !v.muted; muteBtn.innerHTML = v.muted ? VP_ICON.soundOff : VP_ICON.soundOn; });
+    fsBtn.addEventListener('click', () => { if (document.fullscreenElement) document.exitFullscreen(); else if (el.requestFullscreen) el.requestFullscreen(); });
+    v.addEventListener('loadeddata', () => { if (v.currentTime === 0) { try { v.currentTime = 0.05; } catch (e) {} } });
+    // never auto-play; just pause if scrolled fully out of view
+    if ('IntersectionObserver' in window && window.innerHeight) {
+      const io = new IntersectionObserver((ents) => { ents.forEach(e => { if (!e.isIntersecting && !v.paused) v.pause(); }); }, { threshold: 0.15 });
+      io.observe(v);
+    }
+    syncPP();
   }
   function initVPlayers(){ document.querySelectorAll('.vplay').forEach(setupVPlayer); }
+
+  /* auto horizontal-scroll for core-experience rows (.cs-hscroll) — starts 2.5s after in view */
+  function initHScroll(){
+    document.querySelectorAll('.cs-hscroll').forEach(hs => {
+      if (hs.dataset.hsSet) return; hs.dataset.hsSet = '1';
+      const cards = [...hs.children];
+      if (cards.length < 2) return;
+      let idx = 0, timer = null, paused = false;
+      const to = i => hs.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+      const advance = () => { if (paused) return; idx = (idx + 1) % cards.length; to(idx); };
+      const stop = () => { paused = true; if (timer) { clearInterval(timer); timer = null; } };
+      ['pointerdown', 'wheel', 'touchstart'].forEach(ev => hs.addEventListener(ev, stop, { passive: true }));
+      const start = () => { if (timer || paused) return; setTimeout(() => { if (!paused) timer = setInterval(advance, 3000); }, 2500); };
+      if (!('IntersectionObserver' in window) || !window.innerHeight) return; // no auto-scroll without a viewport
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) start(); }); }, { threshold: 0.35 });
+      io.observe(hs);
+    });
+  }
 
   const PAGES = {
     home:  { label: 'Home',         icon: '' },
     about: { label: 'About',           icon: '' },
     tiaa:  { label: 'TIAA',            icon: '' },
+    articulating: { label: 'Articulating Design Decisions', icon: '' },
     nav:   { label: 'Navigator',       icon: '' },
     carma: { label: 'Carma',           icon: '' },
     uxaudit: { label: 'UX Audit',       icon: '' },
@@ -2687,8 +2867,8 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     window.scrollTo(0, 0);
     closeNav();
     if (CASE_VIEWS.includes(id)) { initRevealFor(id); initFlowAnim(id); }
-    if (id === 'nav') { setTimeout(initOverviewVideo, 60); }
-    if (id === 'carma') { setTimeout(initVPlayers, 60); }
+    setTimeout(initVPlayers, 60);
+    if (id === 'carma') { setTimeout(initHScroll, 60); }
   }
 
   /* flow-badge 'appear' animation — badges cascade in when scrolled into view */
@@ -2699,7 +2879,7 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const view = document.querySelector('[data-view="' + id + '"]');
     if (!view) return;
-    const targets = view.querySelectorAll('.cs-flow, .cs-transform, .cs-agents');
+    const targets = view.querySelectorAll('.cs-flow, .cs-transform, .cs-agents, .cs-int');
     if (!targets.length) return;
     _flowDone.add(id);
     targets.forEach(f => f.classList.add('anim'));
@@ -2725,7 +2905,7 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
   setInterval(updateLocalTime, 20000);
 
   /* subtle scroll-reveal for case studies (see memory: feedback-case-study-scroll-reveal) */
-  const CASE_VIEWS = ['tiaa', 'nav', 'uxaudit', 'carma'];
+  const CASE_VIEWS = ['tiaa', 'articulating', 'nav', 'uxaudit', 'carma'];
   const _revealed = new Set();
   function initRevealFor(id) {
     if (_revealed.has(id)) return;
@@ -2739,7 +2919,8 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     if (!view) return;
     _revealed.add(id);
     const sel = '.p-title, .p-tag, .p-meta, .p-git, .p-body, .p-slbl, .p-shead, ' +
-                '.p-img, .p-img-cap, .ns-head, .ns-item, .p-cta, .cs-row';
+                '.p-img, .p-img-cap, .ns-head, .ns-item, .p-cta, .cs-row, ' +
+                '.tw-kicker, .tw-title, .tw-meta, .tw-body > *';
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
