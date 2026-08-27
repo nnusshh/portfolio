@@ -78,6 +78,7 @@
     overflow: hidden;
   }
   .sb__av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+  .sb__logo { flex-shrink: 0; display: block; }
 
   .n-sect { margin-top: 1.7rem; }
 
@@ -123,8 +124,9 @@
     border: 1px solid var(--border);
     display: inline-flex; align-items: center; justify-content: center;
     font-size: 8px; font-weight: 600; color: #666;
-    flex-shrink: 0;
+    flex-shrink: 0; overflow: hidden;
   }
+  .n-av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
   .n-xt { margin-left: auto; opacity: 0.3; font-size: 11px; }
 
   .sb__foot {
@@ -174,6 +176,8 @@
     transition: background 0.1s, color 0.1s;
   }
   .bc__copy:hover { background: var(--hover); color: var(--text); }
+  .bc__right { display: flex; align-items: center; gap: 0.5rem; }
+  .bc__copy.bc__resume { text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; }
 
   /* mobile nav trigger + scrim (hidden on desktop) */
   .bc__left { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
@@ -1408,16 +1412,16 @@
 <!-- ═══ SIDEBAR ═══ -->
 <aside class="sb">
   <a class="sb__name" onclick="go('home')">
-    <span class="sb__av"><img src="assets/profile.jpg" alt="Anoushka Aggarwal" onerror="this.parentElement.textContent='AA'"></span>
-    Anoushka Aggarwal
+    <svg class="sb__logo" width="22" height="21" viewBox="0 0 65 61" fill="none" aria-hidden="true"><path d="M29.3708 0.0504303C29.88 -0.0120956 31.71 0.0536459 32.4148 0.0323605C37.1381 -0.122956 42.1384 0.208185 46.352 2.64259C55.5909 7.98024 54.8876 20.9566 55.8778 30.2003C56.0025 31.3649 55.7626 33.9971 55.9828 34.8436C56.1778 34.7851 57.9584 32.5365 59.7953 32.0823C60.8477 31.8111 61.9649 31.9742 62.8958 32.535C63.6173 32.9788 64.1847 33.5291 64.4755 34.4776C65.079 36.4467 63.1309 39.4667 60.9522 38.2153C60.2042 37.7856 59.9784 36.6332 59.8178 35.7719C58.1736 37.1154 55.9875 39.6052 55.7524 41.7822C55.2792 46.1648 54.1993 50.6458 51.2512 54.0677C46.5954 59.4723 40.374 59.893 33.8157 60.4047C29.4632 60.4996 22.695 59.8807 18.7341 58.0206C14.4264 55.9974 12.0313 52.8756 10.424 48.4913C6.25722 51.1774 0.490319 49.3187 0.00796118 43.8311C-0.172078 41.7833 2.74169 38.5017 4.67434 40.8493C5.62498 42.0042 5.10959 43.3404 5.13287 44.6803C5.19373 47.0722 9.15858 43.7899 9.11057 43.3178C8.18499 34.2196 8.17768 25.1992 9.62774 16.1648C11.4733 4.66714 18.3681 0.544429 29.3708 0.0504303ZM11.982 40.6269C12.5553 39.6386 13.4661 38.6107 14.1945 37.7153C17.3971 33.7786 20.328 29.6294 23.5997 25.7463C23.8811 25.4124 24.1825 24.8861 24.3278 24.4812C24.0336 23.5173 22.4591 23.7956 21.6723 23.8098C19.1985 23.8546 16.3605 26.0639 15.2588 22.6085C15.2065 22.4425 15.1587 22.2749 15.1156 22.1062C15.4068 20.8171 15.8424 19.3622 17.0477 18.6821C20.2925 16.8515 24.8716 19.2453 27.4529 20.9625C29.346 18.9685 30.9991 16.6771 32.7063 14.8921C34.4819 12.8387 39.7729 6.10291 42.9373 8.77567C43.9109 9.59793 44.0531 11.5585 44.0958 12.8054L44.7968 29.0342C44.9219 31.9816 45.0035 34.9467 45.3046 37.8868C45.4653 39.4546 45.489 42.9785 46.703 44.0831C46.9845 44.3417 47.3591 44.4747 47.7407 44.4513C48.9492 44.3849 50.2344 43.0369 50.9803 42.1902C51.4401 41.6682 52.8517 39.8862 52.9346 39.264C53.5008 35.011 53.3224 28.245 53.0147 24.0237C52.6094 18.4617 51.1775 10.8081 46.8439 7.16751C43.2332 4.13435 38.839 3.07983 34.2149 3.22861C33.8024 3.24191 30.6255 3.31508 30.4065 3.27406C26.023 3.68081 20.0035 4.63699 17.0716 8.24886C14.1106 11.8966 13.4129 17.6356 12.8053 22.1874C12.0481 27.8595 11.5192 33.6619 11.7909 39.3948C11.8078 39.7549 11.9143 40.2631 11.982 40.6269ZM13.1437 46.7723C13.7466 47.8433 14.1926 48.9607 14.8136 50.0197C19.3101 57.686 29.4957 57.335 37.2151 56.8698C37.73 56.8388 38.2095 56.826 38.7283 56.8456C39.9052 56.5618 41.053 56.4082 42.2358 56.0741C47.3425 54.6314 49.8658 51.4863 51.6587 46.7222C43.2912 57.3596 38.3461 40.1614 34.915 34.7779C33.8071 33.0394 30.2606 27.53 28.3608 27.1201C22.8872 33.9682 20.3067 40.6464 13.1437 46.7723ZM35.9073 29.6436C36.4905 30.4661 38.3482 33.4249 39.0105 33.7633C39.3979 33.5858 39.6841 33.0633 39.8384 32.6672C40.2807 31.5313 40.6508 13.5871 40.2745 12.6916C40.2418 12.6139 40.2018 12.5641 40.1372 12.5115C38.489 14.0209 31.346 22.1188 31.2021 23.8597C31.466 24.5966 34.3068 27.2855 34.8241 28.211C34.924 28.3897 35.7382 29.4676 35.9073 29.6436Z" fill="currentColor"/></svg>
+    Anoushka
   </a>
 
   <nav>
     <ul class="n-list" style="margin-top:.3rem">
       <li>
         <a onclick="go('about')" data-nav="about">
-          <span class="n-av">AA</span>
-          <span>About</span>
+          <span class="n-av"><img src="assets/profile.jpg" alt="" onerror="this.parentElement.textContent='AA'"></span>
+          <span>About me</span>
         </a>
       </li>
     </ul>
@@ -1494,7 +1498,10 @@
       <span style="color:var(--muted)">Home</span>
     </div>
   </div>
-  <button class="bc__copy" id="bc-copy" onclick="copyLink()">Copy link</button>
+  <div class="bc__right">
+    <a class="bc__copy bc__resume" href="assets/resume.pdf" target="_blank" rel="noopener" aria-label="Open resume (PDF)">Resume <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-8.5 8.5M19 13.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <button class="bc__copy" id="bc-copy" onclick="copyLink()">Copy link</button>
+  </div>
 </div>
 
 <!-- mobile nav scrim -->
@@ -1507,16 +1514,11 @@
   <div data-view="home" class="on">
     <div class="h-wrap">
       <div class="h-av"><img src="assets/profile.jpg" alt="Anoushka Aggarwal" onerror="this.parentElement.textContent='AA'"></div>
-      <h1 class="h-hl">A digital Product Designer from Himachal, India weaving mindful designs for human connections.</h1>
-      <p class="h-sub" style="margin-top:.1rem">Prev. <strong>Accenture Song</strong></p>
+      <h1 class="h-hl">I am a Digital Product Designer from Himachal, India, designing thoughtful digital products that bring clarity to complex systems and experiences across enterprise and AI.</h1>
       <div class="h-meta">
         <span class="h-meta__item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
           Pune, India
-        </span>
-        <span class="h-meta__item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span id="local-time">—</span>
         </span>
         <span class="h-meta__item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
@@ -1532,7 +1534,7 @@
               <span class="co-ic" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
             </td>
             <td>
-              <span class="co-n">Accenture Song</span><span class="co-sep">/</span><span class="co-r">Interaction Designer</span>
+              <span class="co-n">Accenture Song</span><span class="co-sep">/</span><span class="co-r">Digital Product Designer</span>
             </td>
             <td class="yr">Present</td>
           </tr>
@@ -1549,17 +1551,8 @@
       </div>
 
       <div class="s-div">
-        <div class="s-lbl">Selected Work</div>
+        <div class="s-lbl">Projects</div>
         <div class="pw">
-
-          <div class="pw-item" onclick="go('tiaa')">
-            <div class="pw-hero" style="background:#e7e7dd;padding:0"><img src="assets/tiaa/thumb-wide.png" alt="TIAA"></div>
-            <div class="pw-info">
-              <div class="pw-name">TIAA</div>
-              <div class="pw-cat">Interaction Design</div>
-              <div class="pw-desc">Building a UX testing process from nothing on a platinum financial client — 80+ screens, three releases.</div>
-            </div>
-          </div>
 
           <div class="pw-item" onclick="go('nav')">
             <div class="pw-hero" style="background:#00566A;padding:0">
@@ -1623,7 +1616,7 @@
           <div class="ab-entry">
             <span class="ab-logo" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
             <div>
-              <div class="ab-row__main">Interaction Designer</div>
+              <div class="ab-row__main">Digital Product Designer</div>
               <div class="ab-row__sub">Accenture Song · FP&amp;A, TIAA, Unilever</div>
               <div class="ab-entry__meta">Pune, IN · 2024–Present</div>
             </div>
