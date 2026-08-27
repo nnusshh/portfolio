@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anoushka Aggarwal</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -56,14 +58,14 @@
   .sb__name {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     padding: 0.3rem 0.45rem;
     border-radius: 5px;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
     transition: background 0.1s;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.45rem;
   }
   .sb__name:hover { background: var(--hover); }
 
@@ -80,31 +82,31 @@
   .sb__av img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
   .sb__logo { flex-shrink: 0; display: block; }
 
-  .n-sect { margin-top: 1.7rem; }
+  .n-sect { margin-top: 2.3rem; }
 
   .n-label {
     font-size: 12px;
     letter-spacing: 0;
     color: var(--dim);
     padding: 0 0.45rem;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.6rem;
   }
 
   .n-list { list-style: none; }
   .n-list li a {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.65rem;
     padding: 0.5rem 0.55rem;
     border-radius: 6px;
     font-size: 14px;
-    color: #999;
+    color: #8f8f8c;
     cursor: pointer;
     transition: background 0.1s, color 0.1s;
     line-height: 1.4;
     user-select: none;
   }
-  .n-list li + li { margin-top: 0.1rem; }
+  .n-list li + li { margin-top: 0.28rem; }
   .n-list li a:hover { background: var(--hover); color: var(--text); }
   .n-list li a.on  { background: var(--active); color: var(--text); }
 
@@ -251,9 +253,7 @@
   .h-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); }
 
   .s-div {
-    margin-top: 2.5rem;
-    padding-top: 1.8rem;
-    border-top: 1px solid var(--border);
+    margin-top: 3.2rem;
   }
   .s-lbl {
     font-size: 12px;
@@ -267,7 +267,7 @@
     border-bottom: 1px solid var(--border);
     transition: background 0.1s;
   }
-  .exp-t tr:first-child { border-top: 1px solid var(--border); }
+  .exp-t tr:last-child { border-bottom: none; }
   .exp-t tr:hover { background: var(--hover); }
   .exp-t td { padding: 0.75rem 0.4rem; vertical-align: middle; }
   .exp-t td.ic { width: 36px; padding-left: 0; }
@@ -367,6 +367,19 @@
     max-width: 62ch;
     margin-bottom: 0.9rem;
   }
+
+  /* about intro — bio left, square video right */
+  .ab-intro {
+    display: grid; grid-template-columns: 1fr 420px; gap: 3rem;
+    align-items: center; margin-bottom: 3.25rem;
+  }
+  .ab-intro__text .ab-p:last-child { margin-bottom: 0; }
+  .ab-intro__media {
+    width: 100%; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border); background: #0e130f; line-height: 0;
+  }
+  .ab-intro__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 820px) { .ab-intro { grid-template-columns: 1fr; gap: 2rem; } .ab-intro__media { max-width: 420px; } }
 
   /* about — structured facts */
   .ab-sec {
@@ -543,6 +556,70 @@
   /* Carma — placeholders sized by aspect-ratio (not stretched to the grid cell) */
   [data-view="carma"] .cs-gif__ph { height: auto; }
   [data-view="carma"] .cs-feedback__q { font-size: 15px; }
+
+  /* ── TIAA — scrolling illustrated flow ("What happens after the Figma file handoff?") ── */
+  /* full-bleed hero uses shared .p-hero; banner blue fills the band to match the
+     height of the other case-study heroes without cropping the wide artwork */
+  [data-view="tiaa"] .p-hero { background: #315af3; min-height: 520px; }
+  [data-view="tiaa"] .p-hero img { max-height: none; }
+  .tia-wrap { padding-top: 3.25rem; }
+  /* reuse tw-kicker/title/meta; recolor kicker to TIAA blue-violet */
+  .tia-wrap .tw-kicker { color: #8ea2ff; }
+  .tia-wrap .tw-title { text-shadow: none; }
+  .tia-wrap .tw-meta { color: var(--dim); border-bottom-color: var(--border); }
+
+  .tia-flow { position: relative; margin-top: 3.5rem; }
+  /* the dotted "journey" thread running down the centre between the two columns */
+  .tia-flow::before {
+    content: ''; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 0;
+    border-left: 2px dashed rgba(255,255,255,0.16); transform: translateX(-1px);
+  }
+  .tia-step {
+    position: relative; display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem 5rem; align-items: center; margin-bottom: 5rem;
+  }
+  .tia-step:last-child { margin-bottom: 1rem; }
+  /* node dot where each step meets the thread */
+  .tia-step::before {
+    content: ''; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px;
+    border-radius: 50%; background: #8ea2ff; transform: translate(-50%,-50%);
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  /* right = text left / art right (default DOM order). left = swap columns */
+  .tia-step--right .tia-step__txt { grid-column: 1; }
+  .tia-step--right .tia-step__art { grid-column: 2; }
+  .tia-step--left  .tia-step__txt { grid-column: 2; }
+  .tia-step--left  .tia-step__art { grid-column: 1; grid-row: 1; }
+
+  .tia-step__art { display: flex; justify-content: center; }
+  .tia-step__art img { width: 100%; max-width: 290px; height: auto; display: block; }
+  .tia-step--right .tia-step__art { justify-content: flex-start; }
+  .tia-step--left  .tia-step__art { justify-content: flex-end; }
+
+  .tia-head { font-size: 23px; line-height: 1.32; font-weight: 650; letter-spacing: -0.01em; color: var(--text); margin: 0 0 1rem; }
+  .tia-p { font-size: 16px; line-height: 1.72; color: var(--muted); margin: 0 0 1rem; }
+  .tia-p:last-child { margin-bottom: 0; }
+  .tia-p--em { color: var(--text); font-weight: 500; }
+  .tia-lead { font-size: 20px; line-height: 1.45; font-weight: 550; letter-spacing: -0.01em; color: var(--text); margin: 0; }
+  .tia-checks + .tia-lead, .tia-qs + .tia-lead { margin-top: 1.5rem; }
+  .tia-close { font-size: 19px; line-height: 1.5; font-weight: 600; letter-spacing: -0.01em; color: var(--text); margin: 1.25rem 0 0; }
+
+  .tia-qs, .tia-checks { list-style: none; margin: 1.35rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.85rem; }
+  .tia-qs li, .tia-checks li { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 15.5px; line-height: 1.5; color: var(--text); }
+  .tia-qs__ic, .tia-checks__ic { flex-shrink: 0; margin-top: 1px; display: block; }
+  .tia-qs__ic { color: #e58aa2; }      /* TIAA pink — open questions */
+  .tia-checks__ic { color: #4ade80; }  /* green — resolved actions */
+
+  @media (max-width: 820px) {
+    .tia-flow::before { left: 19px; }
+    .tia-step { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3.25rem; padding-left: 48px; }
+    .tia-step::before { left: 19px; top: 6px; }
+    .tia-step--right .tia-step__txt, .tia-step--left .tia-step__txt { grid-column: 1; }
+    .tia-step--right .tia-step__art, .tia-step--left .tia-step__art { grid-column: 1; grid-row: 2; justify-content: flex-start; }
+    .tia-step__art img { max-width: 220px; }
+    .tia-head { font-size: 20px; }
+    .tia-lead { font-size: 18px; }
+  }
   /* core-experience horizontal scroll (horizontal only), interaction grid, live banner */
   .cs-hscroll { display: flex; gap: 1rem; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; margin-top: 1.25rem; padding-bottom: 0.6rem; }
   .cs-hscroll::-webkit-scrollbar { height: 6px; }
@@ -1417,7 +1494,7 @@
   </a>
 
   <nav>
-    <ul class="n-list" style="margin-top:.3rem">
+    <ul class="n-list" style="margin-top:.55rem">
       <li>
         <a onclick="go('about')" data-nav="about">
           <span class="n-av"><img src="assets/profile.jpg" alt="" onerror="this.parentElement.textContent='AA'"></span>
@@ -1477,7 +1554,7 @@
           </a>
         </li>
         <li>
-          <a href="https://linkedin.com" target="_blank" rel="noopener">
+          <a href="https://www.linkedin.com/in/anoushkaa/" target="_blank" rel="noopener">
             LinkedIn <span class="n-xt">↗</span>
           </a>
         </li>
@@ -1592,9 +1669,9 @@
 
       <div class="p-cta">
         <p>If you want to know the details of any project or my availability – get in touch!</p>
-        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
         <div class="p-cta-btns">
-          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">↗ LinkedIn</a>
           <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
         </div>
       </div>
@@ -1603,11 +1680,15 @@
 
   <!-- ── ABOUT ── -->
   <div data-view="about">
-    <div class="ab-hero"><video src="assets/about-cover.mp4" autoplay loop muted playsinline preload="auto" aria-label="About cover"></video></div>
     <div class="ab-wrap">
-      <h2 class="ab-ht">Background</h2>
-      <p class="ab-p">I'm a product &amp; interaction designer focused on early product thinking in complex, data-rich enterprise and financial systems. I design AI-integrated and agentic product experiences — crafting secure, accessible, scalable interfaces while keeping human judgment in the loop where it matters.</p>
-      <p class="ab-p">Fluent in design articulation and systematic in execution — and always collecting odd little design-psychology facts about why people behave the way they do.</p>
+      <div class="ab-intro">
+        <div class="ab-intro__text">
+          <h2 class="ab-ht" style="margin-top:0">Background</h2>
+          <p class="ab-p">I'm a product &amp; interaction designer focused on early product thinking in complex, data-rich enterprise and financial systems. I design AI-integrated and agentic product experiences — crafting secure, accessible, scalable interfaces while keeping human judgment in the loop where it matters.</p>
+          <p class="ab-p">Fluent in design articulation and systematic in execution — and always collecting odd little design-psychology facts about why people behave the way they do.</p>
+        </div>
+        <div class="ab-intro__media"><video src="assets/about-video.mp4" autoplay loop muted playsinline preload="auto" aria-label="Memory lane"></video></div>
+      </div>
 
       <!-- Experience | Education -->
       <div class="ab-cols">
@@ -1668,7 +1749,7 @@
           <div class="ab-links">
             <a class="ab-link" href="assets/resume.pdf" target="_blank" rel="noopener">Resume <span>↗</span></a>
             <a class="ab-link" href="mailto:aggarwalanoushka02@gmail.com">Email <span>↗</span></a>
-            <a class="ab-link" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
+            <a class="ab-link" href="https://www.linkedin.com/in/anoushkaa/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
           </div>
 
           <div class="ab-sec">My Core Values</div>
@@ -1727,9 +1808,9 @@
 
       <div class="p-cta">
         <p>If you want to know the details of any project or my availability – get in touch!</p>
-        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
         <div class="p-cta-btns">
-          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">↗ LinkedIn</a>
           <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
         </div>
       </div>
@@ -1738,48 +1819,85 @@
 
   <!-- ── TIAA ── -->
   <div data-view="tiaa">
-    <div class="tw-bg tw-bg--warm" aria-hidden="true"></div>
-    <div class="tw-wrap">
-      <div class="tw-thumb" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M4 17l4.5-4.5L13 17M13 17l3-3 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Thumbnail — add your image here</span>
-      </div>
+    <div class="p-hero">
+      <img src="assets/tiaa/banner.png" alt="What happens after the Figma file handoff?" style="background:#3f57e0" decoding="async" onerror="this.closest('.p-hero').style.minHeight='380px'">
+    </div>
+    <div class="tw-wrap tia-wrap">
       <div class="tw-kicker">The Work Between · TIAA</div>
-      <h1 class="tw-title">What happens after the Figma file?</h1>
+      <h1 class="tw-title">What happens after the Figma file handoff?</h1>
       <div class="tw-meta">Build Design · Accenture Song · 2024</div>
 
-      <div class="tw-body">
-        <p>Most of my earlier design work had a fairly clear endpoint. You design the experience, align with the team and hand it over.</p>
-        <p>On TIAA, I was sitting on the other side of that handoff — working closely with developers and watching what actually happened when a design met a real product, real logic and a large delivery team.</p>
-        <p>Very quickly, I realised that matching Figma was only one part of the work.</p>
-        <ul class="tw-list">
-          <li>A screen could look right and still behave incorrectly.</li>
-          <li>An error state could exist but communicate the wrong thing.</li>
-          <li>A developer's "small question" could actually point to a decision that had never been made.</li>
-        </ul>
-        <p class="tw-lead">The screen showed me where the problem was. Understanding the product helped me understand what the problem actually was.</p>
-
-        <p>Over time, I built my own way of evaluating built experiences.</p>
-        <div class="tw-aside">
-          <div class="tw-aside__row"><span class="tw-aside__lbl">Not just</span><span>Does it match the design?</span></div>
-          <div class="tw-aside__row"><span class="tw-aside__lbl">But also</span><span>Does it behave as intended?<br>Does it make sense in context?<br>What happens when things go wrong?</span></div>
+      <div class="tia-flow">
+        <!-- 1 · halo -->
+        <div class="tia-step tia-step--right">
+          <div class="tia-step__txt">
+            <p class="tia-lead">Most design work has a clean ending. You align, you hand off, you move on. I thought that was the job.</p>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-halo.svg" alt="" aria-hidden="true"></div>
         </div>
 
-        <p>This eventually became more structured. A checklist, a way to document issues, a way to track fixes and a clearer point at which a screen was ready to move forward.</p>
-        <p class="tw-lead">What looked like a checking process was actually becoming a shared language between design and engineering.</p>
+        <!-- 2 · magnifying glass -->
+        <div class="tia-step tia-step--left">
+          <div class="tia-step__txt">
+            <h2 class="tia-head">On TIAA, I sat on the other side of that handoff.</h2>
+            <p class="tia-p">And I started looking more carefully. A screen could match the design exactly and still behave wrong. An error state could exist and say the wrong thing. A developer's "small question" could point to a decision that had never actually been made.</p>
+            <p class="tia-p tia-p--em">Matching Figma was only one part of the work.</p>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-magnify.svg" alt="" aria-hidden="true"></div>
+        </div>
 
-        <p>Over four releases, I also learned how to read the questions coming from developers. Sometimes the answer was already in the design system. Sometimes the product logic made the decision clearer. And sometimes, the right thing to do was to escalate with enough context that the conversation could move quickly.</p>
-        <p>I became more comfortable making that distinction.</p>
+        <!-- 3 · checklist -->
+        <div class="tia-step tia-step--right">
+          <div class="tia-step__txt">
+            <h2 class="tia-head">So I built a way to evaluate built experiences. Not just: does it match?</h2>
+            <p class="tia-p">A checklist. A way to document issues. A clear threshold for when a screen was ready to move forward.</p>
+            <ul class="tia-qs">
+              <li><span class="tia-qs__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>But: does it behave as intended? Does it make sense in context?</span></li>
+              <li><span class="tia-qs__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>What happens when things go wrong?</span></li>
+            </ul>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-checklist.svg" alt="" aria-hidden="true"></div>
+        </div>
 
-        <p>Then the role changed again. More designers joined the team, and the process I had gradually built could no longer live only in my head.</p>
-        <p>My work shifted towards onboarding and calibration. Walking designers through the product, the environment and what to look for. Reviewing their findings. Helping them understand not just what was an issue, but why.</p>
-        <p>The goal was not for everyone to check screens exactly like I did. It was to build a shared understanding of what good evaluation looked like.</p>
-        <p>I started by finding issues myself. Eventually, I was helping others develop the judgement to find them too.</p>
+        <!-- 4 · developer conversation -->
+        <div class="tia-step tia-step--left">
+          <div class="tia-step__txt">
+            <h2 class="tia-head">What looked like a checking process became a shared language between design and engineering.</h2>
+            <p class="tia-p">I learned to read the questions developers were asking — and to tell the difference between what the design system already answered, what product logic made obvious, and what needed to be escalated with enough context to move fast.</p>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-dev.svg" alt="" aria-hidden="true"></div>
+        </div>
 
-        <div class="tw-close">
-          <p>This is probably what I learned most from working in Build Design.</p>
-          <p>Some of the most important design work happens after the handoff. It is where design intent meets product logic, implementation and reality.</p>
-          <p>And it is also where I learned that a good process is not just something you follow. At some point, it should become something other people can use without you.</p>
+        <!-- 5 · lightbulb -->
+        <div class="tia-step tia-step--right">
+          <div class="tia-step__txt">
+            <h2 class="tia-head">Over four releases, I got better at making that distinction.</h2>
+            <p class="tia-p">The screen showed me where the problem was. Understanding the product helped me understand what the problem actually was.</p>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-lightbulb.svg" alt="" aria-hidden="true"></div>
+        </div>
+
+        <!-- 6 · presenting to a team -->
+        <div class="tia-step tia-step--left">
+          <div class="tia-step__txt">
+            <p class="tia-p">Then more designers joined. The process I'd built could no longer live only in my head. My work shifted — my role became about building shared judgment across the team.</p>
+            <ul class="tia-checks">
+              <li><span class="tia-checks__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Walking designers through the product</span></li>
+              <li><span class="tia-checks__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Reviewing their findings</span></li>
+              <li><span class="tia-checks__ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Helping them understand not just what was an issue, but why</span></li>
+            </ul>
+            <p class="tia-lead">The goal wasn't for everyone to check screens exactly like I did. It was to build shared judgment.</p>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-present.svg" alt="" aria-hidden="true"></div>
+        </div>
+
+        <!-- 7 · thumbs up -->
+        <div class="tia-step tia-step--right">
+          <div class="tia-step__txt">
+            <p class="tia-p">I started by finding issues myself. Eventually, I was helping others develop the eye to find them too.</p>
+            <p class="tia-close">A good process isn't just something you follow. At some point, it should become something other people can use without you.</p>
+          </div>
+          <div class="tia-step__art"><img src="assets/tiaa/art-thumbsup.svg" alt="" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -2030,7 +2148,7 @@
 
           <div class="scr-usp">One finance command centre — <em>real-time metrics, AI-surfaced anomalies and forecasting</em> in a single 360° view, so the morning's analysis is done before you sit down.</div>
 
-          <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/dashboard.png" alt="Vantage dashboard — Good morning, James" loading="lazy"></div>
+          <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/dashboard.png" alt="Vantage dashboard — Good morning, James" decoding="async"></div>
           <div class="scr-cap"><b>The morning dashboard.</b> Five live KPIs, a ranked "needs attention" feed and a data-freshness check — the whole morning read in one glance, with Ask-Vantage on top for plain-English questions.</div>
 
           <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/cio-drilldown.gif" alt="Vantage — persona drill-down with agent root cause" loading="lazy"></div>
@@ -2084,9 +2202,9 @@
 
       <div class="p-cta">
         <p>If you want to know the details of this project or my availability – get in touch!</p>
-        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
         <div class="p-cta-btns">
-          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">↗ LinkedIn</a>
           <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
         </div>
       </div>
@@ -2259,10 +2377,10 @@
 
       <div class="p-cta">
         <p>Curious about the architecture work, the research, or the shipped product?</p>
-        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
         <div class="p-cta-btns">
           <a class="p-btn" href="https://agtuall.com/carma" target="_blank" rel="noopener">↗ View Carma live</a>
-          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">↗ LinkedIn</a>
           <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
         </div>
       </div>
@@ -2543,9 +2661,9 @@
 
       <div class="p-cta">
         <p>If you want to know the details of this project or my availability – get in touch!</p>
-        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://linkedin.com" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
+        <p>I can be easily reached at your convenience via <a style="text-decoration:underline;text-underline-offset:2px" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">LinkedIn</a> or <a style="text-decoration:underline;text-underline-offset:2px" href="mailto:aggarwalanoushka02@gmail.com">email</a>.</p>
         <div class="p-cta-btns">
-          <a class="p-btn" href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+          <a class="p-btn" href="https://www.linkedin.com/in/anoushkaa/" target="_blank">↗ LinkedIn</a>
           <a class="p-btn" href="mailto:aggarwalanoushka02@gmail.com">Email</a>
         </div>
       </div>
@@ -2913,7 +3031,8 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     _revealed.add(id);
     const sel = '.p-title, .p-tag, .p-meta, .p-git, .p-body, .p-slbl, .p-shead, ' +
                 '.p-img, .p-img-cap, .ns-head, .ns-item, .p-cta, .cs-row, ' +
-                '.tw-kicker, .tw-title, .tw-meta, .tw-body > *';
+                '.tw-kicker, .tw-title, .tw-meta, .tw-body > *, ' +
+                '.tia-step';
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
