@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -251,6 +252,34 @@
   .h-meta__item { display: inline-flex; align-items: center; gap: 0.35rem; }
   .h-meta__item svg { opacity: 0.85; }
   .h-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); }
+
+  /* ── Home bento ── */
+  .h-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .h-sig { width: 320px; max-width: 62%; height: auto; display: block; }
+  .h-bio { font-size: 20px; line-height: 1.5; color: var(--muted); max-width: 66ch; margin: 1.5rem 0 0; }
+  .h-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; margin-top: 2.5rem; }
+  .h-card { border-radius: 18px; overflow: hidden; min-width: 0; }
+  .h-card--img { line-height: 0; }
+  .h-card--img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .h-mid { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; }
+  .h-ship { border-radius: 18px; overflow: hidden; line-height: 0; }
+  .h-ship img { width: 100%; height: auto; display: block; }
+
+  /* testimonials — rotating */
+  .h-testi { flex: 1; border-radius: 18px; background: #5b6a52; padding: 1.4rem 1.6rem 1.5rem; display: flex; flex-direction: column; color: #eef1e6; overflow: hidden; }
+  .h-testi__label { font-size: 15px; font-weight: 500; color: #eef1e6; margin-bottom: 1.1rem; }
+  .h-testi__stage { display: grid; flex: 1; }
+  .h-testi__item { grid-area: 1 / 1; opacity: 0; transition: opacity 0.55s ease; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; gap: 1.1rem; }
+  .h-testi__item.on { opacity: 1; pointer-events: auto; }
+  .h-testi__q { font-size: 15px; line-height: 1.55; color: #e7ebdd; }
+  .h-testi__a { font-size: 14px; color: #cdd4be; }
+  @media (prefers-reduced-motion: reduce) { .h-testi__item { transition: none; } }
+
+  @media (max-width: 900px) {
+    .h-bento { grid-template-columns: 1fr; }
+    .h-sig { width: 260px; max-width: 78%; }
+    .h-bio { font-size: 17px; }
+  }
 
   .s-div {
     margin-top: 3.2rem;
@@ -558,6 +587,61 @@
     color: rgba(255,255,255,0.62); font-size: 13px; text-align: center;
   }
   .tw-thumb svg { opacity: 0.7; }
+
+  /* ── Articulating Design Decisions — rebuilt from Figma ── */
+  .ad { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  .ad-cur { font-family: "Caveat", cursive; }
+  .ad-em { color: #d8c766; }
+  .ad-banner { position: relative; border-radius: 16px; overflow: hidden; padding: 2rem 2rem 1.6rem; min-height: 210px; display: flex; flex-direction: column; justify-content: space-between;
+    background: linear-gradient(180deg,#b9c6d4 0%,#c9d4d8 26%,#a9bd7e 50%,#7f9550 68%,#5f7a3a 84%,#4c6630 100%); }
+  .ad-banner__q { font-size: 20px; font-weight: 600; line-height: 1.35; color: #2c3a1f; max-width: 60%; letter-spacing: -0.01em; }
+  .ad-banner__sig { align-self: flex-end; font-family: "Caveat", cursive; font-size: 30px; color: #eef1d8; transform: rotate(-4deg); }
+  .ad-kicker { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #9fb26a; margin: 2.4rem 0 0.4rem; }
+  .ad-seclabel { font-size: 12px; color: var(--dim); }
+
+  .ad-p { font-size: 15px; line-height: 1.7; color: var(--muted); margin: 0.9rem 0; max-width: 62ch; }
+  .ad-lead { font-family: "Caveat", cursive; font-size: 27px; line-height: 1.3; color: #e9eba9; margin: 2.4rem 0 0.4rem; }
+  .ad-step { font-size: 15px; color: var(--text); margin: 0.35rem 0; }
+  .ad-note { font-size: 14px; color: var(--muted); margin: 0.9rem 0; }
+  .ad-cur-c { font-family: "Caveat", cursive; text-align: center; color: #e9eba9; font-size: 26px; margin: 2rem 0; }
+  .ad-big { font-family: "Caveat", cursive; font-size: 40px; line-height: 1.15; color: #eef1d8; text-align: center; margin: 0.4rem 0 0; letter-spacing: -0.01em; }
+  .ad-h { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); margin: 0.5rem 0 0; }
+  .ad-h--sm { font-size: 22px; }
+
+  .ad-arrow { display: block; margin: 1.6rem auto; color: var(--dim); }
+  .ad-hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+  .ad-center { text-align: center; }
+  .ad-illus { display: block; width: 100%; height: auto; }
+
+  /* node diagram */
+  .ad-nodes { position: relative; display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; justify-content: center; align-items: center; margin: 2rem 0; }
+  .ad-node { font-size: 13px; color: #dfe2c4; background: rgba(233,235,169,0.06); border: 1px solid rgba(233,235,169,0.3); border-radius: 999px; padding: 0.4rem 0.9rem; }
+  .ad-node--y { background: rgba(216,199,102,0.14); border-color: rgba(216,199,102,0.5); color: #e9eba9; }
+  .ad-arrowline { color: var(--dim); font-size: 14px; }
+
+  /* AI "jump to outcome" scene */
+  .ad-scene { position: relative; border-radius: 14px; padding: 1.4rem 1.5rem; margin: 1.4rem 0; background: rgba(255,255,255,0.02); border: 1px solid var(--border); display: flex; align-items: center; gap: 1rem; }
+  .ad-bubble { font-size: 13px; color: #1c1c1a; background: #a9b578; border-radius: 12px 12px 12px 3px; padding: 0.5rem 0.85rem; font-weight: 600; }
+
+  /* the two-column "making decisions" block */
+  .ad-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin: 1.6rem 0; align-items: start; }
+  .ad-two__l { color: var(--muted); font-size: 14px; }
+  .ad-two__r .ad-cur { color: #e9eba9; font-size: 26px; }
+
+  /* green callout */
+  .ad-green { display: flex; align-items: center; gap: 1.1rem; background: #7f8c5f; color: #f4f6e6; border-radius: 14px; padding: 1.4rem 1.6rem; margin: 2.6rem 0; font-size: 15px; line-height: 1.55; }
+  .ad-green svg { flex-shrink: 0; color: #eef1d8; }
+
+  /* what helps me tags */
+  .ad-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.4rem; }
+  .ad-tag { font-size: 13px; color: #dfe2c4; background: rgba(233,235,169,0.06); border: 1px solid rgba(233,235,169,0.28); border-radius: 999px; padding: 0.45rem 0.95rem; }
+
+  @media (max-width: 720px) {
+    .ad-banner__q { max-width: 100%; font-size: 17px; }
+    .ad-two { grid-template-columns: 1fr; }
+    .ad-big { font-size: 32px; }
+    .ad-h { font-size: 24px; }
+  }
 
   /* Carma — placeholders sized by aspect-ratio (not stretched to the grid cell) */
   [data-view="carma"] .cs-gif__ph { height: auto; }
@@ -1019,7 +1103,11 @@
   /* wide 2.79:1 project banners show in full (native ratio) — matches home cards */
   [data-view="uxaudit"] .p-hero img,
   [data-view="nav"] .p-hero img,
-  [data-view="carma"] .p-hero img { max-height: none; }
+  [data-view="carma"] .p-hero img,
+  [data-view="articulating"] .p-hero img { max-height: none; }
+  [data-view="articulating"] .p-hero { background: #cdd6c6; }
+  [data-view="articulating"] .ad { padding-top: 3rem; }
+  @media (max-width: 768px) { [data-view="articulating"] .p-hero { min-height: auto; } }
   [data-view="nav"] .p-hero { background: #00404f; }
   [data-view="carma"] .p-hero { background: #ff5d00; }
   .ua-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.03em; color: #7ea2ff; margin-bottom: 0.85rem; }
@@ -1699,7 +1787,7 @@
         <li>
           <a onclick="go('articulating')" data-nav="articulating">
             <span class="n-icon" style="background:#3a5a2e;color:#a3c17d;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 5h16M4 10h16M4 15h11M4 20h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-            Articulating Design Decisions
+            Articulation
           </a>
         </li>
       </ul>
@@ -1750,41 +1838,26 @@
   <!-- ── HOME ── -->
   <div data-view="home" class="on">
     <div class="h-wrap">
-      <div class="h-av"><img src="assets/profile.jpg" alt="Anoushka Aggarwal" onerror="this.parentElement.textContent='AA'"></div>
-      <h1 class="h-hl">I am a Digital Product Designer from Himachal, India, designing thoughtful digital products that bring clarity to complex systems and experiences across enterprise and AI.</h1>
-      <div class="h-meta">
-        <span class="h-meta__item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
-          Pune, India
-        </span>
-        <span class="h-meta__item">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-          Shipped 7 products
-        </span>
+      <div class="h-top">
+        <img class="h-sig" src="assets/signature.svg" alt="Anoushka Aggarwal">
+        <a class="lg-btn lg-btn--glass" href="assets/resume.pdf" target="_blank" rel="noopener">Resume<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-8.5 8.5M19 13.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
+      <p class="h-bio">I am a Digital Product Designer from Himachal, India, designing thoughtful digital products that bring clarity to complex systems and experiences across enterprise and AI.</p>
 
-      <div class="s-div">
-        <div class="s-lbl">Experience</div>
-        <table class="exp-t">
-          <tr>
-            <td class="ic">
-              <span class="co-ic" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
-            </td>
-            <td>
-              <span class="co-n">Accenture Song</span><span class="co-sep">/</span><span class="co-r">Digital Product Designer</span>
-            </td>
-            <td class="yr">Present</td>
-          </tr>
-          <tr>
-            <td class="ic">
-              <span class="co-ic" style="background:#fff"><img src="assets/Logos/studio-carbon.png" alt=""></span>
-            </td>
-            <td>
-              <span class="co-n">Studio Carbon</span><span class="co-sep">/</span><span class="co-r">Product Design Intern</span>
-            </td>
-            <td class="yr">2024</td>
-          </tr>
-        </table>
+      <div class="h-bento">
+        <div class="h-card h-card--img"><img src="assets/home/experience.png" alt="Experience — Accenture Song, Digital Product Designer (2024–Present); Studio Carbon, Product Design Intern (2024)" decoding="async"></div>
+        <div class="h-mid">
+          <div class="h-ship"><img src="assets/home/shipped.png" alt="7+ Products Shipped — Mobile ×2, SaaS ×3, Website ×2" decoding="async"></div>
+          <div class="h-testi">
+            <div class="h-testi__label">Testimonials</div>
+            <div class="h-testi__stage" id="hTesti">
+              <blockquote class="h-testi__item on"><div class="h-testi__q">Anoushka has shown exceptional growth and leadership, bringing structure to UX Testing, strengthening design-dev collaboration, and enabling the team through thoughtful documentation, onboarding, and support.</div><div class="h-testi__a">Krista Taylor · Director, Product Design @TIAA</div></blockquote>
+              <blockquote class="h-testi__item"><div class="h-testi__q">Anoushka is a creative and dependable product designer with sharp thinking, a keen eye for detail, and a strong growth mindset. Her energy, curiosity, and ability to simplify complex problems make her a joy to collaborate with.</div><div class="h-testi__a">Mallika Lahiry · Product Designer @StudioCarbon</div></blockquote>
+              <blockquote class="h-testi__item"><div class="h-testi__q">She consistently demonstrates ownership, integrity, and diligence. Her calm approach, strong work ethic, and willingness to step up under pressure make her an exceptional collaborator and a trusted team player.</div><div class="h-testi__a">Prabhu Mathiah · Leadership @Accenture Song</div></blockquote>
+            </div>
+          </div>
+        </div>
+        <div class="h-card h-card--img"><img src="assets/home/portrait.png" alt="Anoushka Aggarwal" decoding="async"></div>
       </div>
 
       <div class="s-div">
@@ -2072,28 +2145,73 @@
 
   <!-- ── ARTICULATING DESIGN DECISIONS (article) ── -->
   <div data-view="articulating">
-    <div class="tw-bg tw-bg--green" aria-hidden="true"></div>
-    <div class="tw-wrap">
-      <div class="tw-thumb" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M4 17l4.5-4.5L13 17M13 17l3-3 4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Thumbnail — add your image here</span>
-      </div>
-      <div class="tw-kicker">The Work Between · Writing</div>
-      <h1 class="tw-title">Articulating Design Decisions in the Age of AI</h1>
-      <div class="tw-meta">Essay · Published Mar 2026 · <a href="https://www.linkedin.com/pulse/articulating-design-decisions-age-ai-anoushka-aggarwal-g3rmf/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Originally on LinkedIn ↗</a></div>
+    <div class="p-hero">
+      <img src="assets/articulating/banner.jpg" alt="Articulation isn't a soft skill anymore. It's your design signature. — Anoushka Aggarwal" style="background:#cdd6c6" onerror="this.closest('.p-hero').style.minHeight='300px'">
+    </div>
+    <div class="ad">
+      <div class="ad-kicker">The Work Between · Writing</div>
 
-      <div class="tw-body">
-        <p>Design used to build its own narrative. Ideas led to decisions, decisions carried trade-offs, and those trade-offs sparked the conversations that moved the reasoning forward.</p>
-        <p>AI has compressed that journey. We reach outcomes faster than ever — but the reasoning now lags behind the delivery.</p>
-        <p class="tw-lead">Selection needs judgment. Judgment needs articulation.</p>
-        <p>When a result appears in seconds, the thinking behind it isn't automatically visible. Stakeholders don't just evaluate the output; they evaluate the confidence behind it — and that confidence comes from how clearly the reasoning is communicated, not from the screen alone.</p>
-        <p>Which is why articulation has quietly become one of the most valuable design skills. Explaining <strong>why</strong> a design exists now matters as much as the design itself.</p>
-        <p>Good design was never only about making the right decision. It is about helping the team understand it.</p>
-        <div class="tw-close">
-          <p>As AI takes on more of the execution, the differentiator shifts.</p>
-          <p>It is no longer pixel-perfection or technical detail — it is the ability to think strategically, align stakeholders, and articulate the judgment behind the work.</p>
+      <p class="ad-lead">I've been thinking about this a lot lately.</p>
+      <p class="ad-step">Earlier, the design process naturally built a story.</p>
+      <p class="ad-step">Ideas led to decisions.</p>
+      <p class="ad-step">Decisions came with trade-offs. Trade-offs shaped conversations.</p>
+
+      <!-- reasoning chain -->
+      <img class="ad-illus" src="assets/articulating/nodes.svg" alt="Ideas, Decisions, Trade-offs, Conversations, People, Narratives — connected" style="max-width:500px;margin:2.2rem auto">
+
+
+      <p class="ad-cur-c">Each step carried reasoning forward.</p>
+
+      <svg class="ad-arrow" width="18" height="46" viewBox="0 0 18 46" fill="none"><path d="M9 0v40M2 33l7 8 7-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+      <img class="ad-illus" src="assets/articulating/outcome.svg" alt="Jumping straight to the outcome — 'Oh this looks good/cool!'" style="margin:1.2rem 0">
+      <p class="ad-note">But with AI, we are often jumping straight to the outcome.</p>
+
+      <svg class="ad-arrow" width="18" height="46" viewBox="0 0 18 46" fill="none"><path d="M9 0v40M2 33l7 8 7-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p class="ad-center ad-note">But then — when the outcome arrives faster than the reasoning…</p>
+
+      <!-- scattered shapes on a line -->
+      <img class="ad-illus" src="assets/articulating/shapes.svg" alt="Scattered shapes on a line" style="margin:0.8rem 0">
+      <p class="ad-big">We suddenly have to<br>reconstruct the story.</p>
+
+      <p class="ad-p" style="margin-top:2.4rem">When visible process disappears, <span class="ad-em">Articulation</span> becomes the only proof that <span class="ad-em">thinking</span> happened.</p>
+
+      <hr class="ad-hr">
+
+      <p class="ad-note" style="margin-bottom:0.2rem">AI is definitely good at helping us start — but…</p>
+      <h2 class="ad-h">With the advent of AI</h2>
+
+      <div class="ad-two" style="margin-top:2rem">
+        <div class="ad-two__l">
+          <img class="ad-illus" src="assets/articulating/runner.svg" alt="We are moving more towards">
+        </div>
+        <div class="ad-two__r">
+          <div class="ad-cur">Making decisions!</div>
+          <p class="ad-p">Choosing what's right? Choosing which direction survives?</p>
+          <p class="ad-p" style="margin-top:1.4rem">Rather than… spending time building the groundwork.</p>
         </div>
       </div>
+
+      <h2 class="ad-h ad-h--sm ad-center" style="margin-top:2.4rem">Selection Requires Judgment.</h2>
+      <svg class="ad-arrow" width="46" height="34" viewBox="0 0 46 34" fill="none" style="color:#d8c766"><path d="M6 4c14 2 24 12 30 24M36 28l0-9M36 28l9-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h2 class="ad-h ad-h--sm ad-center">Judgment Requires <span class="ad-em">Articulation.</span></h2>
+
+      <div class="ad-green">
+        <img src="assets/articulating/brains.svg" alt="" style="width:54px;height:auto;flex-shrink:0">
+        <span>It's not enough for a designer to make the right decision. The room also needs to understand the thinking behind it.</span>
+      </div>
+
+      <h2 class="ad-h ad-h--sm ad-center" style="margin-top:2.8rem">What helps me?</h2>
+      <div class="ad-tags">
+        <span class="ad-tag">Annotations</span>
+        <span class="ad-tag">Trusting my intuition</span>
+        <span class="ad-tag">DVF rule — clear your assumptions</span>
+        <span class="ad-tag">Logging decisions</span>
+        <span class="ad-tag">Prepare for your meeting</span>
+        <span class="ad-tag">Pivot your language — tone with audience</span>
+      </div>
+
+      <p class="ad-center" style="margin-top:2.6rem;font-size:13px;color:var(--dim)"><a href="https://www.linkedin.com/pulse/articulating-design-decisions-age-ai-anoushka-aggarwal-g3rmf/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Originally on LinkedIn ↗</a></p>
     </div>
   </div>
 
@@ -3162,7 +3280,7 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     home:  { label: 'Home',         icon: '' },
     about: { label: 'About',           icon: '' },
     tiaa:  { label: 'TIAA',            icon: '' },
-    articulating: { label: 'Articulating Design Decisions', icon: '' },
+    articulating: { label: 'Articulation', icon: '' },
     nav:   { label: 'Navigator',       icon: '' },
     carma: { label: 'Carma',           icon: '' },
     uxaudit: { label: 'UX Audit',       icon: '' },
@@ -3310,6 +3428,18 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
       btn.textContent = 'Copy link';
     });
   }
+
+  /* home bento — rotate testimonials every 1.5s */
+  (function initTestiRotator() {
+    const items = document.querySelectorAll('#hTesti .h-testi__item');
+    if (items.length < 2) return;
+    let i = 0;
+    setInterval(() => {
+      items[i].classList.remove('on');
+      i = (i + 1) % items.length;
+      items[i].classList.add('on');
+    }, 1500);
+  })();
 </script>
 </body>
 </html>
