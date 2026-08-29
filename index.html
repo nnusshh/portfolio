@@ -259,10 +259,12 @@
   .h-bio { font-size: 20px; line-height: 1.5; color: var(--muted); max-width: 66ch; margin: 1.5rem 0 0; }
   .h-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; margin-top: 2.5rem; }
   .h-card { border-radius: 18px; overflow: hidden; min-width: 0; }
-  .h-card--img { line-height: 0; }
-  .h-card--img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .h-card--exp { line-height: 0; }
+  .h-card--exp img { width: 100%; height: auto; display: block; }        /* natural — text never cropped, defines row height */
+  .h-card--photo { line-height: 0; }
+  .h-card--photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   .h-mid { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; }
-  .h-ship { border-radius: 18px; overflow: hidden; line-height: 0; }
+  .h-ship { border-radius: 18px; overflow: hidden; line-height: 0; flex-shrink: 0; }
   .h-ship img { width: 100%; height: auto; display: block; }
 
   /* testimonials — rotating */
