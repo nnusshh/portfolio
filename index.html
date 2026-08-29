@@ -209,7 +209,7 @@
   [data-view].on { display: block; }
 
   /* ── HOME ─────────────────────────────────────────── */
-  .h-wrap { padding: 2.5rem 2.5rem 5rem; }
+  .h-wrap { padding: 2.5rem 52px 5rem; }
 
   .h-av {
     width: 52px; height: 52px;
@@ -311,6 +311,9 @@
     height: 100%;
     object-fit: contain;
   }
+  /* banner thumbnails: same 2.79:1 crop as the project hero (identical ratio) */
+  .pw-hero--banner { height: auto; aspect-ratio: 5120 / 1838; }
+  .pw-hero--banner img { object-fit: cover; }
   .pw-hero-letter {
     font-size: 96px;
     font-weight: 700;
@@ -368,10 +371,13 @@
     margin-bottom: 0.9rem;
   }
 
-  /* about intro — bio left, square video right */
+  /* about intro — signature + bio left, media right */
+  .ab-sig { width: 300px; max-width: 78%; height: auto; display: block; margin: 0.25rem 0 1.7rem; }
+  .ab-resume { margin-top: 1.7rem; }
+  .ab-rows { margin-top: 0.15rem; }
   .ab-intro {
     display: grid; grid-template-columns: 1fr 420px; gap: 3rem;
-    align-items: center; margin-bottom: 3.25rem;
+    align-items: start; margin-bottom: 3.25rem;
   }
   .ab-intro__text .ab-p:last-child { margin-bottom: 0; }
   .ab-intro__media {
@@ -563,6 +569,9 @@
   [data-view="tiaa"] .p-hero { background: #315af3; min-height: 520px; }
   [data-view="tiaa"] .p-hero img { max-height: none; }
   .tia-wrap { padding-top: 3.25rem; }
+  .tia-meta { margin-top: 0.5rem; }
+  .tia-outcome { font-size: 17px; line-height: 1.55; color: var(--muted); margin: 0 0 0.5rem; }
+  .tia-outcome strong { color: #8ea2ff; font-weight: 650; }
   /* reuse tw-kicker/title/meta; recolor kicker to TIAA blue-violet */
   .tia-wrap .tw-kicker { color: #8ea2ff; }
   .tia-wrap .tw-title { text-shadow: none; }
@@ -611,6 +620,10 @@
   .tia-checks__ic { color: #4ade80; }  /* green — resolved actions */
 
   @media (max-width: 820px) {
+    /* the wide banner is short on narrow screens — let it sit at its natural
+       height (blue fills any gap) instead of the tall desktop 520px band */
+    [data-view="tiaa"] .p-hero { min-height: 180px; }
+    .tia-outcome { font-size: 15.5px; }
     .tia-flow::before { left: 19px; }
     .tia-step { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3.25rem; padding-left: 48px; }
     .tia-step::before { left: 19px; top: 6px; }
@@ -663,6 +676,38 @@
   .lg-ext svg { position: relative; z-index: 1; }
   @keyframes lgTint { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
   @media (prefers-reduced-motion: reduce) { .lg-ext { animation: none; } }
+
+  /* liquid-glass label + icon button (animated tint) */
+  .lg-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap;
+    padding: 0.6rem 1.05rem; border-radius: 999px;
+    font-size: 14px; font-weight: 600; text-decoration: none; color: #fff;
+    position: relative; overflow: hidden; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.28);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    background-size: 230% 230%;
+    animation: lgTint 4.2s ease-in-out infinite;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .lg-btn > * { position: relative; z-index: 1; }
+  .lg-btn svg { flex-shrink: 0; }
+  .lg-btn:hover { transform: translateY(-1px); }
+  .lg-btn--orange {
+    background: linear-gradient(115deg, rgba(255,93,0,0.92) 0%, rgba(255,160,70,0.55) 30%, rgba(255,93,0,0.92) 62%, rgba(255,175,85,0.65) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.42), 0 4px 16px rgba(255,93,0,0.35);
+  }
+  .lg-btn--orange:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 8px 24px rgba(255,93,0,0.5); }
+  .lg-btn--glass {
+    color: var(--text);
+    background: linear-gradient(115deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0.06) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 16px rgba(0,0,0,0.28);
+  }
+  .lg-btn--glass svg { color: var(--muted); }
+  .lg-btn--glass:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 8px 22px rgba(0,0,0,0.4); }
+  @media (prefers-reduced-motion: reduce) { .lg-btn { animation: none; } }
+
+  /* project header row — title left, action button right */
+  .p-head-row { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
 
   .cs-live {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
@@ -959,6 +1004,109 @@
   .ua-context__item { font-size: 13px; color: var(--muted); line-height: 1.8; }
 
   /* ── TWO-COLUMN CASE STUDY LAYOUT ───────────────── */
+  /* ── UX Audit (Unilever) — restructured sections ── */
+  /* hero is a wide illustration — show it in full (no vertical crop) */
+  [data-view="uxaudit"] .p-hero { background: #1d1178; }
+  /* wide 2.79:1 project banners show in full (native ratio) — matches home cards */
+  [data-view="uxaudit"] .p-hero img,
+  [data-view="nav"] .p-hero img,
+  [data-view="carma"] .p-hero img { max-height: none; }
+  [data-view="nav"] .p-hero { background: #00404f; }
+  [data-view="carma"] .p-hero { background: #ff5d00; }
+  .ua-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.03em; color: #7ea2ff; margin-bottom: 0.85rem; }
+
+  /* Constraints */
+  .ua-con-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2.5rem; margin-top: 1.5rem; }
+  .ua-con { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 15px; line-height: 1.5; color: var(--text); margin-bottom: 0.9rem; }
+  .ua-con__ic { flex-shrink: 0; margin-top: 1px; display: block; }
+  .ua-con--no .ua-con__ic  { color: #e5688a; }
+  .ua-con--yes .ua-con__ic { color: #35c46b; }
+
+  /* Users */
+  .ua-users { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.6rem; }
+  .ua-user { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); line-height: 0; }
+  .ua-user img { width: 100%; height: auto; display: block; }
+
+  /* hero typography (scoped): small project title, large tagline headline */
+  [data-view="uxaudit"] .p-title { font-size: 24px; letter-spacing: -0.01em; margin-bottom: 0.9rem; }
+  [data-view="uxaudit"] .p-tag { font-size: 32px; line-height: 1.28; font-weight: 600; letter-spacing: -0.015em; color: var(--text); }
+  /* 20px section intros (Users, Constraints) */
+  .ua-20 { font-size: 20px !important; line-height: 1.5; color: var(--text) !important; max-width: 44ch; margin-bottom: 1.3rem !important; }
+
+  /* UX Audit framework */
+  .ua-fwh { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0.75rem 0 1.5rem; flex-wrap: wrap; }
+  .ua-fwh__t { font-size: 21px; font-weight: 650; letter-spacing: -0.01em; color: var(--text); }
+  .ua-fw-btn { display: inline-flex; align-items: center; gap: 0.45rem; background: #ffd54a; color: #1a2a6b; border: none; border-radius: 999px; padding: 0.5rem 1.05rem; font-size: 13px; font-weight: 650; cursor: pointer; font-family: inherit; transition: transform .15s, box-shadow .15s; }
+  .ua-fw-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(255,213,74,0.28); }
+  .ua-fw-btn svg { transition: transform .2s; }
+  .ua-fw-btn:hover svg { transform: translateX(3px); }
+  .ua-fwg { max-width: 963px; }
+  .ua-fwg img { width: 100%; height: auto; display: block; }
+  .ua-fwg-m { display: none; }
+  .ua-fwg-m img { width: 100%; height: auto; display: block; border-radius: 8px; }
+
+  /* Experience analysis — subtle grouped container */
+  .ua-exp { background: rgba(255,255,255,0.028); border: 1px solid var(--border); border-radius: 20px; padding: 1.6rem 1.75rem 1.5rem; margin-top: 0.5rem; }
+
+  /* Experience analysis carousel — tabs centered */
+  .ua-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 0 0 1.4rem; }
+  .ua-tab { font-size: 13px; font-weight: 500; color: var(--muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; padding: 0.42rem 0.95rem; cursor: pointer; font-family: inherit; transition: color .15s, background .15s, border-color .15s; }
+  .ua-tab:hover { color: var(--text); border-color: var(--dim); }
+  .ua-tab.on { background: #2f4be0; border-color: #2f4be0; color: #fff; }
+  .ua-car { position: relative; display: flex; align-items: center; gap: 0.8rem; }
+  .ua-car__vp { flex: 1; min-width: 0; overflow: hidden; border-radius: 16px; }
+  .ua-car__track { display: flex; align-items: stretch; transition: transform .45s cubic-bezier(0.22,0.61,0.36,1); }
+  .ua-car__slide { min-width: 100%; display: flex; }
+  .ua-car__arrow { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--sb); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .15s, border-color .15s, color .15s; }
+  .ua-car__arrow:hover { background: #2f4be0; border-color: #2f4be0; color: #fff; }
+  .ua-car__dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.15rem; }
+  .ua-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); border: none; padding: 0; cursor: pointer; transition: background .15s, transform .15s; }
+  .ua-dot.on { background: #2f4be0; transform: scale(1.25); }
+
+  /* Experience analysis — code-built card (blue phone panel + pink analysis panel) */
+  .ua-xcard { flex: 1; display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px; overflow: hidden; }
+  .ua-xcard__shot { background: #2350e6; line-height: 0; }
+  .ua-xcard__shot img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+  .ua-xcard__panel { background: #f7edf1; padding: 2.1rem 2rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .ua-xcard__top { display: flex; flex-direction: column; }
+  .ua-xcard__ttl { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: #2350e6; margin: 0 0 1.05rem; line-height: 1.2; }
+  .ua-chip { display: inline-block; align-self: flex-start; border-radius: 999px; padding: 0.5rem 1rem; font-size: 14px; font-weight: 600; line-height: 1.25; }
+  .ua-chip--found { background: #fdf3b0; border: 1.5px solid #ecd44a; color: #2350e6; }
+  .ua-chip--crit  { background: transparent; border: 1.5px solid #7f93ec; color: #2f4be0; }
+  .ua-crit { display: flex; align-items: center; gap: 0.5rem; margin: 0.7rem 0 0 0.5rem; }
+  .ua-crit__el { color: #2350e6; flex-shrink: 0; }
+  .ua-xcard__obs { margin-top: 1.9rem; display: flex; flex-direction: column; gap: 1.15rem; flex-shrink: 0; }
+  .ua-ob { display: flex; gap: 0.65rem; align-items: flex-start; font-size: 16px; line-height: 1.42; }
+  .ua-ob__ic { flex-shrink: 0; margin-top: 1px; }
+  .ua-ob--problem { color: #e5326e; }
+  .ua-ob--rec { color: #14a05e; }
+
+  /* Learnings */
+  .ua-lead { font-size: 20px !important; font-weight: 550; color: var(--text) !important; letter-spacing: -0.01em; margin-bottom: 1rem !important; max-width: none !important; }
+
+  /* Feedback — no container; logo avatar + name + quote, with large quote mark */
+  .ua-fb { position: relative; }
+  .ua-fb__mark { position: absolute; top: -0.7rem; right: 0.3rem; font-family: Georgia, "Times New Roman", serif; font-size: 108px; line-height: 1; color: rgba(255,255,255,0.11); pointer-events: none; }
+  .ua-fb__head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .ua-fb__av { width: 34px; height: 34px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ua-fb__av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ua-fb__av--pad img { object-fit: contain; padding: 6px; }
+  .ua-fb__name { font-size: 15px; font-weight: 600; color: var(--text); }
+  .ua-fb__q { position: relative; z-index: 1; font-size: 15.5px; line-height: 1.78; color: var(--muted); max-width: 68ch; }
+
+  @media (max-width: 820px) {
+    .ua-fwg { display: none; }
+    .ua-fwg-m { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .ua-con-cols { grid-template-columns: 1fr; gap: 0.5rem; }
+    .ua-users { grid-template-columns: 1fr; }
+    .ua-exp { padding: 1.1rem 1rem 1.2rem; }
+    .ua-car { gap: 0.4rem; }
+    .ua-car__arrow { width: 34px; height: 34px; }
+    [data-view="uxaudit"] .p-tag { font-size: 26px; }
+    .ua-xcard { grid-template-columns: 1fr; }
+    .ua-xcard__panel { padding: 1.6rem 1.4rem; }
+  }
+
   .cs-row {
     display: grid;
     grid-template-columns: 170px 1fr;
@@ -967,6 +1115,8 @@
     border-top: 1px solid var(--border);
   }
   .cs-row:first-of-type { border-top: none; }
+  /* let grid columns shrink below intrinsic content width (carousel images) */
+  .cs-row > * { min-width: 0; }
   .cs-aside {
     position: sticky;
     top: calc(var(--bc) + 1.5rem);
@@ -1632,8 +1782,8 @@
         <div class="pw">
 
           <div class="pw-item" onclick="go('nav')">
-            <div class="pw-hero" style="background:#00566A;padding:0">
-              <img src="assets/vantage/thumb-wide.png" alt="FIS 360 Navigator">
+            <div class="pw-hero pw-hero--banner" style="background:#00404f;padding:0">
+              <img src="assets/vantage/hero.jpg" alt="Vantage 360 Navigator · FIS">
             </div>
             <div class="pw-info">
               <div class="pw-name">Vantage 360 Value Navigator for FIS</div>
@@ -1643,8 +1793,8 @@
           </div>
 
           <div class="pw-item" onclick="go('carma')">
-            <div class="pw-hero" style="background:#ff5d00;padding:0">
-              <img src="assets/agtuall/thumb-wide.png" alt="Carma · Agtuall">
+            <div class="pw-hero pw-hero--banner" style="background:#ff5d00;padding:0">
+              <img src="assets/agtuall/hero.jpg" alt="Carma · Agtuall">
             </div>
             <div class="pw-info">
               <div class="pw-name">Carma · Agtuall</div>
@@ -1654,8 +1804,8 @@
           </div>
 
           <div class="pw-item" onclick="go('uxaudit')">
-            <div class="pw-hero" style="background:#0b1782;padding:0">
-              <img src="assets/uxaudit/thumb-wide.png" alt="Unilever UX Audit">
+            <div class="pw-hero pw-hero--banner" style="background:#1d1178;padding:0">
+              <img src="assets/uxaudit/hero.jpg" alt="Unilever UX Audit">
             </div>
             <div class="pw-info">
               <div class="pw-name">UX Audit</div>
@@ -1683,82 +1833,80 @@
     <div class="ab-wrap">
       <div class="ab-intro">
         <div class="ab-intro__text">
-          <h2 class="ab-ht" style="margin-top:0">Background</h2>
+          <img class="ab-sig" src="assets/signature.svg" alt="Anoushka Aggarwal" width="397" height="132">
           <p class="ab-p">I'm a product &amp; interaction designer focused on early product thinking in complex, data-rich enterprise and financial systems. I design AI-integrated and agentic product experiences — crafting secure, accessible, scalable interfaces while keeping human judgment in the loop where it matters.</p>
           <p class="ab-p">Fluent in design articulation and systematic in execution — and always collecting odd little design-psychology facts about why people behave the way they do.</p>
+          <a class="lg-btn lg-btn--glass ab-resume" href="assets/resume.pdf" target="_blank" rel="noopener">Resume<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-8.5 8.5M19 13.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
         <div class="ab-intro__media"><video src="assets/about-video.mp4" autoplay loop muted playsinline preload="auto" aria-label="Memory lane"></video></div>
       </div>
 
-      <!-- Experience | Education -->
-      <div class="ab-cols">
-        <div class="ab-col">
-          <div class="ab-sec" style="margin-top:0">Experience</div>
-          <div class="ab-entry">
+      <!-- Experience -->
+      <div class="ab-sec">Experience</div>
+      <div class="ab-rows">
+        <div class="ab-row">
+          <div class="ab-row__l">
             <span class="ab-logo" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt=""></span>
             <div>
-              <div class="ab-row__main">Digital Product Designer</div>
-              <div class="ab-row__sub">Accenture Song · FP&amp;A, TIAA, Unilever</div>
-              <div class="ab-entry__meta">Pune, IN · 2024–Present</div>
+              <div class="ab-row__main">Interaction Designer</div>
+              <div class="ab-row__sub">Accenture Song</div>
             </div>
           </div>
-          <div class="ab-entry">
+          <div class="ab-row__meta">Pune, IN · 2024–Present</div>
+        </div>
+        <div class="ab-row">
+          <div class="ab-row__l">
             <span class="ab-logo"><img src="assets/Logos/studio-carbon.png" alt=""></span>
             <div>
               <div class="ab-row__main">Product Design Intern</div>
-              <div class="ab-row__sub">Studio Carbon · Agtuall / Carma</div>
-              <div class="ab-entry__meta">Gandhinagar, IN · 2024</div>
+              <div class="ab-row__sub">Studio Carbon</div>
             </div>
           </div>
+          <div class="ab-row__meta">Gandhinagar, IN · 2024</div>
         </div>
-        <div class="ab-col">
-          <div class="ab-sec" style="margin-top:0">Education</div>
-          <div class="ab-entry">
+      </div>
+
+      <!-- Education -->
+      <div class="ab-sec">Education</div>
+      <div class="ab-rows">
+        <div class="ab-row">
+          <div class="ab-row__l">
             <span class="ab-logo"><img src="assets/Logos/mitid.png" alt=""></span>
             <div>
               <div class="ab-row__main">M.Des, User Experience Design</div>
               <div class="ab-row__sub">MIT ADT University</div>
-              <div class="ab-entry__meta">Pune, IN · 2022–2024</div>
             </div>
           </div>
-          <div class="ab-entry">
+          <div class="ab-row__meta">Pune, IN · 2022–2024</div>
+        </div>
+        <div class="ab-row">
+          <div class="ab-row__l">
             <span class="ab-logo"><img src="assets/Logos/manipal.png" alt=""></span>
             <div>
               <div class="ab-row__main">B.Des, Interior Design</div>
               <div class="ab-row__sub">MAHE Manipal</div>
-              <div class="ab-entry__meta">Manipal, IN · 2018–2022</div>
             </div>
           </div>
+          <div class="ab-row__meta">Manipal, IN · 2018–2022</div>
         </div>
       </div>
 
-      <!-- On Loop | Find Me + Core Values -->
-      <div class="ab-cols">
-        <div class="ab-col">
-          <div class="ab-sec" style="margin-top:0">On Loop</div>
-          <div class="loop">
-            <a class="loop-item" href="https://open.spotify.com/search/The%20Rapture%20Pt%20III%20Black%20Coffee" target="_blank" rel="noopener"><span class="loop-art" style="background:#0ea5a4"></span><div class="loop-meta"><div class="loop-t">The Rapture, Pt. III</div><div class="loop-a">Black Coffee</div></div><span class="loop-go">Spotify ↗</span></a>
-            <a class="loop-item" href="https://open.spotify.com/search/Adore%20U%20Fred%20again" target="_blank" rel="noopener"><span class="loop-art" style="background:#6366f1"></span><div class="loop-meta"><div class="loop-t">Adore U</div><div class="loop-a">Fred again..</div></div><span class="loop-go">Spotify ↗</span></a>
-            <a class="loop-item" href="https://open.spotify.com/search/Good%20Morning%20Kanye%20West" target="_blank" rel="noopener"><span class="loop-art" style="background:#f59e0b"></span><div class="loop-meta"><div class="loop-t">Good Morning</div><div class="loop-a">Kanye West</div></div><span class="loop-go">Spotify ↗</span></a>
-            <a class="loop-item" href="https://open.spotify.com/search/Luther%20Kendrick%20Lamar%20SZA" target="_blank" rel="noopener"><span class="loop-art" style="background:#ec4899"></span><div class="loop-meta"><div class="loop-t">Luther</div><div class="loop-a">Kendrick Lamar &amp; SZA</div></div><span class="loop-go">Spotify ↗</span></a>
-            <a class="loop-item" href="https://open.spotify.com/search/Ice%20Palace%20Qrion" target="_blank" rel="noopener"><span class="loop-art" style="background:#38bdf8"></span><div class="loop-meta"><div class="loop-t">Ice Palace</div><div class="loop-a">Qrion</div></div><span class="loop-go">Spotify ↗</span></a>
-          </div>
-        </div>
-        <div class="ab-col">
-          <div class="ab-sec" style="margin-top:0">Find Me</div>
-          <div class="ab-links">
-            <a class="ab-link" href="assets/resume.pdf" target="_blank" rel="noopener">Resume <span>↗</span></a>
-            <a class="ab-link" href="mailto:aggarwalanoushka02@gmail.com">Email <span>↗</span></a>
-            <a class="ab-link" href="https://www.linkedin.com/in/anoushkaa/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
-          </div>
+      <!-- My Core Values -->
+      <div class="ab-sec">My Core Values</div>
+      <div class="values">
+        <div class="value-item"><div class="value-t">Staying humble</div><div class="value-d">Respect everyone around you.</div></div>
+        <div class="value-item"><div class="value-t">Think with your head, not your gut</div><div class="value-d">Logic over personal bias.</div></div>
+        <div class="value-item"><div class="value-t">Always look back to move forward</div><div class="value-d">Retros after every ship.</div></div>
+      </div>
 
-          <div class="ab-sec">My Core Values</div>
-          <div class="values">
-            <div class="value-item"><div class="value-t">Staying humble</div><div class="value-d">Respect everyone around you.</div></div>
-            <div class="value-item"><div class="value-t">Think with your head, not your gut</div><div class="value-d">Logic over personal bias.</div></div>
-            <div class="value-item"><div class="value-t">Always look back to move forward</div><div class="value-d">Retros after every ship.</div></div>
-          </div>
-        </div>
+      <!-- On Loop -->
+      <div class="ab-sec">On Loop</div>
+      <div class="loop">
+        <a class="loop-item" href="https://open.spotify.com/search/The%20Rapture%20Pt%20III%20Black%20Coffee" target="_blank" rel="noopener"><span class="loop-art" style="background:#0ea5a4"></span><div class="loop-meta"><div class="loop-t">The Rapture, Pt. III</div><div class="loop-a">Black Coffee</div></div><span class="loop-go">Spotify ↗</span></a>
+        <a class="loop-item" href="https://open.spotify.com/search/Adore%20U%20Fred%20again" target="_blank" rel="noopener"><span class="loop-art" style="background:#6366f1"></span><div class="loop-meta"><div class="loop-t">Adore U</div><div class="loop-a">Fred again..</div></div><span class="loop-go">Spotify ↗</span></a>
+        <a class="loop-item" href="https://open.spotify.com/search/Good%20Morning%20Kanye%20West" target="_blank" rel="noopener"><span class="loop-art" style="background:#f59e0b"></span><div class="loop-meta"><div class="loop-t">Good Morning</div><div class="loop-a">Kanye West</div></div><span class="loop-go">Spotify ↗</span></a>
+        <a class="loop-item" href="https://open.spotify.com/search/Luther%20Kendrick%20Lamar%20SZA" target="_blank" rel="noopener"><span class="loop-art" style="background:#ec4899"></span><div class="loop-meta"><div class="loop-t">Luther</div><div class="loop-a">Kendrick Lamar &amp; SZA</div></div><span class="loop-go">Spotify ↗</span></a>
+        <a class="loop-item" href="https://open.spotify.com/search/Ice%20Palace%20Qrion" target="_blank" rel="noopener"><span class="loop-art" style="background:#38bdf8"></span><div class="loop-meta"><div class="loop-t">Ice Palace</div><div class="loop-a">Qrion</div></div><span class="loop-go">Spotify ↗</span></a>
       </div>
 
       <!-- Skills | Recognition -->
@@ -1825,7 +1973,16 @@
     <div class="tw-wrap tia-wrap">
       <div class="tw-kicker">The Work Between · TIAA</div>
       <h1 class="tw-title">What happens after the Figma file handoff?</h1>
-      <div class="tw-meta">Build Design · Accenture Song · 2024</div>
+
+      <div class="p-meta tia-meta" style="grid-template-columns:repeat(5,1fr)">
+        <div><div class="p-meta-lbl">Role</div><div class="p-meta-val">Build Designer</div></div>
+        <div><div class="p-meta-lbl">Duration</div><div class="p-meta-val">2025–2026</div></div>
+        <div><div class="p-meta-lbl">Industry</div><div class="p-meta-val">Financial Services</div></div>
+        <div><div class="p-meta-lbl">Client</div><div class="p-meta-val">TIAA</div></div>
+        <div><div class="p-meta-lbl">Credits</div><div class="p-meta-val">Accenture Song</div></div>
+      </div>
+
+      <p class="tia-outcome">Across <strong>three releases</strong>, <strong>98%</strong> of UX defects were caught and resolved before they ever reached production.</p>
 
       <div class="tia-flow">
         <!-- 1 · halo -->
@@ -1933,7 +2090,7 @@
   <!-- ── NAVIGATOR ── -->
   <div data-view="nav">
     <div class="p-hero">
-      <img src="assets/vantage/thumb-wide.png" alt="FIS 360 Navigator" style="background:#00566A" onerror="this.closest('.p-hero').style.minHeight='380px'">
+      <img src="assets/vantage/hero.jpg" alt="Vantage 360 Navigator · FIS" style="background:#00404f" onerror="this.closest('.p-hero').style.minHeight='380px'">
     </div>
     <div class="p-wrap">
       <h1 class="p-title">Vantage 360 Navigator</h1>
@@ -1941,11 +2098,11 @@
 
       <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
         <div><div class="p-meta-lbl">Role</div><div class="p-meta-val">Product Designer, Design Strategist</div></div>
+        <div><div class="p-meta-lbl">Domain</div><div class="p-meta-val">FP&amp;A · Enterprise Finance</div></div>
+        <div><div class="p-meta-lbl">Scope</div><div class="p-meta-val">Power BI → Web App</div></div>
+        <div><div class="p-meta-lbl">Year</div><div class="p-meta-val">2025</div></div>
         <div><div class="p-meta-lbl">Client</div><div class="p-meta-val">FIS</div></div>
         <div><div class="p-meta-lbl">Credits</div><div class="p-meta-val">Accenture Song</div></div>
-        <div><div class="p-meta-lbl">Domain</div><div class="p-meta-val">FP&amp;A · Enterprise Finance</div></div>
-        <div><div class="p-meta-lbl">Evolution</div><div class="p-meta-val">Power BI → Agentic AI</div></div>
-        <div><div class="p-meta-lbl">Year</div><div class="p-meta-val">2025</div></div>
       </div>
 
       <p class="p-git">If you'd like to learn more, <a href="mailto:aggarwalanoushka02@gmail.com">please get in touch</a>.</p>
@@ -2214,21 +2371,23 @@
   <!-- ── CARMA · AGTUALL ── -->
   <div data-view="carma">
     <div class="p-hero">
-      <div class="p-hero-ph" style="background:linear-gradient(160deg,#07211c 0%,#0a1512 55%,#050a09 100%)"></div>
+      <img src="assets/agtuall/hero.jpg" alt="Carma · Agtuall" style="background:#ff5d00" onerror="this.closest('.p-hero').style.minHeight='380px'">
     </div>
     <div class="p-wrap">
-      <h1 class="p-title" style="font-size:24px">Carma</h1>
+      <div class="p-head-row">
+        <h1 class="p-title" style="font-size:24px">Carma</h1>
+        <a class="lg-btn lg-btn--orange" href="https://agtuall.com/carma" target="_blank" rel="noopener">Shipped &amp; live<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-8.5 8.5M19 13.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
       <p class="p-tag" style="max-width:78%;font-size:32px;line-height:1.3;color:var(--text);font-weight:500;margin-top:0.6rem">Turning climate uncertainty into financial resilience for smallholder farmers.</p>
 
-      <div class="p-meta" style="grid-template-columns:repeat(5,1fr)">
+      <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
         <div><div class="p-meta-lbl">Role</div><div class="p-meta-val">Product Designer</div></div>
-        <div><div class="p-meta-lbl">Type</div><div class="p-meta-val">B2B SaaS · shipped</div></div>
-        <div><div class="p-meta-lbl">Year</div><div class="p-meta-val">2024</div></div>
+        <div><div class="p-meta-lbl">Domain</div><div class="p-meta-val">Agri-Insurance</div></div>
+        <div><div class="p-meta-lbl">Scope</div><div class="p-meta-val">B2B SaaS · Shipped</div></div>
+        <div><div class="p-meta-lbl">Year</div><div class="p-meta-val">2024–2025</div></div>
         <div><div class="p-meta-lbl">Client</div><div class="p-meta-val">Agtuall</div></div>
-        <div><div class="p-meta-lbl">Studio</div><div class="p-meta-val">Studio Carbon</div></div>
+        <div><div class="p-meta-lbl">Credits</div><div class="p-meta-val">Studio Carbon</div></div>
       </div>
-
-      <p class="p-git">Shipped &amp; live — <a href="https://agtuall.com/carma" target="_blank" rel="noopener">agtuall.com/carma</a><a class="lg-ext" href="https://agtuall.com/carma" target="_blank" rel="noopener" aria-label="Open Carma live"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-8.5 8.5M19 13.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
 
       <!-- 01 · The Problem -->
       <div class="cs-row">
@@ -2346,9 +2505,13 @@
       <div class="cs-row">
         <div class="cs-aside"><div class="cs-aside__num">09</div><div class="cs-aside__ttl">Words From My Crew</div></div>
         <div class="cs-body">
-          <div class="cs-feedback">
-            <div class="cs-feedback__q">"I had the pleasure of working with Anoushka during her Post-Graduation Project Internship at Studio Carbon, and from the start, her enthusiasm and dedication stood out. She approached her brief with remarkable energy and quickly became a valuable member of our team. Anoushka's iterative approach and lateral thinking, combined with her keen eye for detail, were instrumental in breaking down complex product architectures. One of her standout contributions was refining a dashboard to make it more intuitive and efficient by analysing and testing suggested workflows — a true testament to her skills as a product designer."</div>
-            <div class="cs-feedback__a"><span class="cs-feedback__av"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>Mallika Lahiry · Digital Product Designer, Studio Carbon</span></div>
+          <div class="ua-fb">
+            <div class="ua-fb__mark" aria-hidden="true">&rdquo;</div>
+            <div class="ua-fb__head">
+              <span class="ua-fb__av"><img src="assets/Logos/studio-carbon.png" alt="Studio Carbon"></span>
+              <span class="ua-fb__name">Mallika Lahiry&nbsp;&nbsp;|&nbsp;&nbsp;Product Designer, Studio Carbon</span>
+            </div>
+            <div class="ua-fb__q">"I had the pleasure of working with Anoushka during her Post-Graduation Project Internship at Studio Carbon, and from the start, her enthusiasm and dedication stood out. She approached her brief with remarkable energy and quickly became a valuable member of our team. Anoushka's iterative approach and lateral thinking, combined with her keen eye for detail, were instrumental in breaking down complex product architectures. One of her standout contributions was refining a dashboard to make it more intuitive and efficient by analysing and testing suggested workflows — a true testament to her skills as a product designer."</div>
           </div>
         </div>
       </div>
@@ -2390,221 +2553,56 @@
   <!-- ── UX AUDIT ── -->
   <div data-view="uxaudit">
     <div class="p-hero">
-      <img src="assets/uxaudit/thumb-wide.png" alt="Unilever UX Audit" onerror="this.closest('.p-hero').style.minHeight='380px'">
+      <img src="assets/uxaudit/hero.jpg" alt="Unilever App · UX Audit" style="background:#1d1178" onerror="this.closest('.p-hero').style.minHeight='380px'">
     </div>
     <div class="p-wrap">
-      <h1 class="p-title">Unilever App · UX Audit</h1>
-      <p class="p-tag" style="max-width:50%">End-to-end UX audit of a retail FMCG mobile app in Vietnam's fast-growing e-commerce market — benchmarked against three regional competitors to surface experience gaps and give stakeholders a clear, prioritised path to improve the product.</p>
+      <h1 class="p-title">Unilever App- UX Audit</h1>
+      <p class="p-tag" style="max-width:72%">Enhancing Unilever's app to make everyday ordering simpler for retailers and sales reps in Vietnam.</p>
 
       <div class="p-meta" style="grid-template-columns:repeat(6,1fr)">
         <div>
-          <div class="p-meta-lbl">Scope</div>
-          <div class="p-meta-val">UX Audit for a B2B app</div>
-        </div>
-        <div>
           <div class="p-meta-lbl">Role</div>
-          <div class="p-meta-val">Lead Designer</div>
+          <div class="p-meta-val">Design Strategist</div>
         </div>
         <div>
-          <div class="p-meta-lbl">Owner</div>
-          <div class="p-meta-val">Accenture Song</div>
+          <div class="p-meta-lbl">Domain</div>
+          <div class="p-meta-val">FMCG Retail</div>
         </div>
         <div>
-          <div class="p-meta-lbl">Client</div>
-          <div class="p-meta-val">Unilever</div>
+          <div class="p-meta-lbl">Scope</div>
+          <div class="p-meta-val">UX Audit + Process</div>
         </div>
         <div>
           <div class="p-meta-lbl">Year</div>
-          <div class="p-meta-val">2025</div>
+          <div class="p-meta-val">2026</div>
         </div>
         <div>
-          <div class="p-meta-lbl">Industry</div>
-          <div class="p-meta-val">FMCG retail</div>
+          <div class="p-meta-lbl">Client</div>
+          <div class="p-meta-val">Unilever + KONE</div>
+        </div>
+        <div>
+          <div class="p-meta-lbl">Credits</div>
+          <div class="p-meta-val">Accenture Song</div>
         </div>
       </div>
 
       <p class="p-git">If you'd like to learn more, <a href="mailto:aggarwalanoushka02@gmail.com">please get in touch</a>.</p>
 
-      <!-- 01 · The Brief -->
+      <!-- Overview -->
       <div class="cs-row">
         <div class="cs-aside">
-          <div class="cs-aside__num">01</div>
-          <div class="cs-aside__ttl">The Brief</div>
+          <div class="cs-aside__ttl">Overview</div>
         </div>
         <div class="cs-body">
-          <div class="cs-dq">"How might we help Unilever compete with regional apps by removing the <em>friction</em> that stops retailers and sales reps from finding, buying, and reordering quickly?"</div>
-          <p>Unilever was scaling their app in Vietnam — a market with strong local competitors and established e-commerce habits. Before committing to a redesign, they needed an honest picture of where the app stood.</p>
-          <p>I was part of the team brought in to find what wasn't working and make sure every finding was backed by <strong>evidence, not opinion.</strong></p>
+          <div class="ua-eyebrow">Unilever · Vietnam</div>
+          <p>Unilever was enhancing its Vietnam retail app to create a more seamless ordering experience for retailers and sales representatives.</p>
+          <p>I analysed the existing interface across key touchpoints in the ordering journey and identified opportunities to improve <strong>usability, discovery, and ordering efficiency.</strong></p>
         </div>
       </div>
 
-      <!-- 02 · Approach -->
+      <!-- Impact -->
       <div class="cs-row">
         <div class="cs-aside">
-          <div class="cs-aside__num">02</div>
-          <div class="cs-aside__ttl">Approach</div>
-        </div>
-        <div class="cs-body">
-          <p>Built an audit framework across <strong>eight UX foundations</strong> — from information architecture to business alignment — giving every finding a clear business rationale, not just a design opinion.</p>
-          <p>Then benchmarked DDT across <strong>six core screens</strong> against three market competitors, covering over 100 screens across two user journeys.</p>
-
-          <p style="margin-top:1.25rem"><span class="ua-drawer-link" onclick="openAudit()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAudit();}">View the full audit framework<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
-
-          <div class="ua-cards" style="grid-template-columns:repeat(4,1fr);margin-top:1.75rem">
-            <div class="ua-card">
-              <div class="ua-card__num">01</div>
-              <div class="ua-card__title">Set the framework</div>
-              <div class="ua-card__body">4 lenses: usability, visual, experience, interaction</div>
-            </div>
-            <div class="ua-card">
-              <div class="ua-card__num">02</div>
-              <div class="ua-card__title">Pick benchmarks</div>
-              <div class="ua-card__body">BEES, Makropro &amp; Big C as comparators</div>
-            </div>
-            <div class="ua-card">
-              <div class="ua-card__num">03</div>
-              <div class="ua-card__title">Audit screen by screen</div>
-              <div class="ua-card__body">6 types, 2 personas, 100+ screens</div>
-            </div>
-            <div class="ua-card">
-              <div class="ua-card__num">04</div>
-              <div class="ua-card__title">Align the team</div>
-              <div class="ua-card__body">Shared criteria, consistent findings</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03 · What I Built -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">03</div>
-          <div class="cs-aside__ttl">What I Built</div>
-        </div>
-        <div class="cs-body">
-          <p>A screen-by-screen audit mapping every problem to a competitive benchmark and a concrete recommendation — six core screens across both user journeys.</p>
-
-          <div class="cs-factors">
-
-            <div class="cs-factor">
-              <div class="cs-factor__text">
-                <div class="cs-factor__screen">Homepage</div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                  <div class="cs-factor__txt">Promotions dominate the first fold, burying product discovery.</div>
-                </div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="cs-factor__txt rec">Add category listings above the fold to reduce clicks to purchase.</div>
-                </div>
-              </div>
-              <div class="cs-factor__media">
-                <img src="assets/uxaudit/finding-1-discovery.png" alt="Homepage — promotions dominate the first fold" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-gif__ph&quot;&gt;&lt;span&gt;GIF coming&lt;/span&gt;&lt;/div&gt;'">
-              </div>
-            </div>
-
-            <div class="cs-factor">
-              <div class="cs-factor__text">
-                <div class="cs-factor__screen">Search</div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                  <div class="cs-factor__txt">SKU-driven, with no room for exploration or brand discovery.</div>
-                </div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="cs-factor__txt rec">Introduce predictive search with trending brands and popular categories.</div>
-                </div>
-              </div>
-              <div class="cs-factor__media">
-                <img src="assets/uxaudit/finding-2-search.png" alt="Search — SKU-driven, no exploration" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-gif__ph&quot;&gt;&lt;span&gt;GIF coming&lt;/span&gt;&lt;/div&gt;'">
-              </div>
-            </div>
-
-            <div class="cs-factor">
-              <div class="cs-factor__text">
-                <div class="cs-factor__screen">Categories</div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                  <div class="cs-factor__txt">Generic icons, no subcategories — browsing feels flat.</div>
-                </div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="cs-factor__txt rec">Replace with real product thumbnails and add subcategory depth.</div>
-                </div>
-              </div>
-              <div class="cs-factor__media">
-                <div class="cs-gif__ph">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
-                  <span>GIF coming</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cs-factor">
-              <div class="cs-factor__text">
-                <div class="cs-factor__screen">PLP</div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                  <div class="cs-factor__txt">Cramped layout, touch targets too small for mobile.</div>
-                </div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="cs-factor__txt rec">2-column grid, prominent filters, sorting options surfaced upfront.</div>
-                </div>
-              </div>
-              <div class="cs-factor__media">
-                <img src="assets/uxaudit/finding-3-browsing.png" alt="PLP — cramped layout, small touch targets" onerror="this.parentElement.innerHTML='&lt;div class=&quot;cs-gif__ph&quot;&gt;&lt;span&gt;GIF coming&lt;/span&gt;&lt;/div&gt;'">
-              </div>
-            </div>
-
-            <div class="cs-factor">
-              <div class="cs-factor__text">
-                <div class="cs-factor__screen">PDP</div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                  <div class="cs-factor__txt">Critical purchase info buried below the fold.</div>
-                </div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="cs-factor__txt rec">Surface final price, order limits, and promotions above the fold.</div>
-                </div>
-              </div>
-              <div class="cs-factor__media">
-                <div class="cs-gif__ph">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
-                  <span>GIF coming</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cs-factor">
-              <div class="cs-factor__text">
-                <div class="cs-factor__screen">Cart</div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--problem" aria-label="Problem" title="Problem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16.3v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-                  <div class="cs-factor__txt">Promotions not tied visually to the final amount.</div>
-                </div>
-                <div class="cs-factor__block">
-                  <span class="cs-factor__ico cs-factor__ico--rec" aria-label="Recommendation" title="Recommendation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.6-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <div class="cs-factor__txt rec">Connect savings directly to the total to make value visible.</div>
-                </div>
-              </div>
-              <div class="cs-factor__media">
-                <div class="cs-gif__ph">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
-                  <span>GIF coming</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- 04 · Impact -->
-      <div class="cs-row">
-        <div class="cs-aside">
-          <div class="cs-aside__num">04</div>
           <div class="cs-aside__ttl">Impact</div>
         </div>
         <div class="cs-body">
@@ -2634,27 +2632,220 @@
         </div>
       </div>
 
-      <!-- 05 · What I'd Change -->
+      <!-- Constraints -->
       <div class="cs-row">
         <div class="cs-aside">
-          <div class="cs-aside__num">05</div>
-          <div class="cs-aside__ttl">What I'd Change</div>
+          <div class="cs-aside__ttl">Constraints</div>
         </div>
         <div class="cs-body">
-          <div class="cs-note">Content coming — reflections on what I'd do differently next time.</div>
+          <p class="ua-20">The audit had to be built from the ground up — with almost nothing to start from.</p>
+          <div class="ua-con-cols">
+            <div class="ua-con-col">
+              <div class="ua-con ua-con--no"><span class="ua-con__ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>No user research</span></div>
+              <div class="ua-con ua-con--no"><span class="ua-con__ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>No analytics to pull from</span></div>
+              <div class="ua-con ua-con--no"><span class="ua-con__ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>No UX audit framework — starting from scratch</span></div>
+            </div>
+            <div class="ua-con-col">
+              <div class="ua-con ua-con--yes"><span class="ua-con__ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Just the demo app to work from</span></div>
+              <div class="ua-con ua-con--yes"><span class="ua-con__ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Three competitors' data to benchmark against</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- 06 · Feedback -->
+      <!-- Users -->
       <div class="cs-row">
         <div class="cs-aside">
-          <div class="cs-aside__num">06</div>
+          <div class="cs-aside__ttl">Users</div>
+        </div>
+        <div class="cs-body">
+          <p class="ua-20">This audit evaluates the ordering experience for both <strong>retailers</strong> and <strong>Sales Reps</strong> using the app.</p>
+          <div class="ua-users">
+            <div class="ua-user"><img src="assets/uxaudit/user-retailer.jpg" alt="Retailer — discover, order, find discounts, reorder products" loading="lazy" decoding="async"></div>
+            <div class="ua-user"><img src="assets/uxaudit/user-salesrep.jpg" alt="Sales Rep — manage store visits, sales, orders, store performance" loading="lazy" decoding="async"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UX Audit framework -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__ttl">UX Audit framework</div>
+        </div>
+        <div class="cs-body">
+          <div class="ua-fwh">
+            <div class="ua-fwh__t">8 foundations · 40+ evaluation criteria</div>
+            <button class="ua-fw-btn" onclick="openAudit()">View the framework<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <div class="ua-fwg">
+            <img src="assets/uxaudit/attributes.svg" alt="Eight UX foundations: FIND — Information Architecture & Navigation, USE — Usability & Interaction, UNDERSTAND — Content & Communication, PERCEIVE — Visual Design, ACCESS — Accessibility & Inclusivity, RESPOND — Performance & Feedback, TRUST — Delight & Trust, ACHIEVE — Business Alignment" loading="lazy" decoding="async">
+          </div>
+          <div class="ua-fwg-m" aria-hidden="true">
+            <img src="assets/uxaudit/fw-find.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-use.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-understand.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-perceive.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-access.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-respond.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-trust.svg" alt="" loading="lazy" decoding="async">
+            <img src="assets/uxaudit/fw-achieve.svg" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience analysis -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__ttl">Experience analysis</div>
+        </div>
+        <div class="cs-body">
+          <p>Every core screen was benchmarked, then mapped to a foundation, a problem, and a concrete recommendation. Move through the screens below.</p>
+
+          <div class="ua-exp">
+          <div class="ua-tabs" id="uaTabs">
+            <button class="ua-tab on" type="button" onclick="uaGo(0)">Homepage</button>
+            <button class="ua-tab" type="button" onclick="uaGo(1)">Search</button>
+            <button class="ua-tab" type="button" onclick="uaGo(2)">Categories</button>
+            <button class="ua-tab" type="button" onclick="uaGo(3)">Product Listing</button>
+            <button class="ua-tab" type="button" onclick="uaGo(4)">Product Details</button>
+          </div>
+
+          <div class="ua-car">
+            <button class="ua-car__arrow" type="button" onclick="uaGo(uaIdx-1)" aria-label="Previous screen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="ua-car__vp">
+              <div class="ua-car__track" id="uaTrack">
+
+                <!-- Homepage -->
+                <div class="ua-car__slide">
+                  <div class="ua-xcard">
+                    <div class="ua-xcard__shot"><img src="assets/uxaudit/phone-homepage.png" alt="Homepage screen — promotions fill the first fold" loading="lazy" decoding="async"></div>
+                    <div class="ua-xcard__panel">
+                      <div class="ua-xcard__top">
+                      <h4 class="ua-xcard__ttl">Homepage/Categories</h4>
+                      <span class="ua-chip ua-chip--found">Information Architecture &amp; Navigation</span>
+                      <div class="ua-crit"><svg class="ua-crit__el" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 4v8.5A3.5 3.5 0 0 0 10.5 16H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 13l3 3-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ua-chip ua-chip--crit">Information Hierarchy &amp; Structure</span></div>
+                      </div>
+                      <div class="ua-xcard__obs">
+                        <div class="ua-ob ua-ob--problem"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>Promotions dominate the first fold, burying product discovery.</span></div>
+                        <div class="ua-ob ua-ob--rec"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Add category listings above the fold to reduce clicks to purchase.</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Search -->
+                <div class="ua-car__slide">
+                  <div class="ua-xcard">
+                    <div class="ua-xcard__shot"><img src="assets/uxaudit/phone-search.png" alt="Search screen — empty state and SKU results" loading="lazy" decoding="async"></div>
+                    <div class="ua-xcard__panel">
+                      <div class="ua-xcard__top">
+                      <h4 class="ua-xcard__ttl">Search</h4>
+                      <span class="ua-chip ua-chip--found">Usability &amp; Interaction</span>
+                      <div class="ua-crit"><svg class="ua-crit__el" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 4v8.5A3.5 3.5 0 0 0 10.5 16H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 13l3 3-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ua-chip ua-chip--crit">Search Experience</span></div>
+                      </div>
+                      <div class="ua-xcard__obs">
+                        <div class="ua-ob ua-ob--problem"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>SKU-driven, with no room for exploration or brand discovery.</span></div>
+                        <div class="ua-ob ua-ob--rec"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Introduce predictive search with trending brands and popular categories.</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="ua-car__slide">
+                  <div class="ua-xcard">
+                    <div class="ua-xcard__shot"><img src="assets/uxaudit/phone-categories.png" alt="Categories screen — generic icon grid" loading="lazy" decoding="async"></div>
+                    <div class="ua-xcard__panel">
+                      <div class="ua-xcard__top">
+                      <h4 class="ua-xcard__ttl">Categories</h4>
+                      <span class="ua-chip ua-chip--found">Information Architecture</span>
+                      <div class="ua-crit"><svg class="ua-crit__el" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 4v8.5A3.5 3.5 0 0 0 10.5 16H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 13l3 3-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ua-chip ua-chip--crit">Feature Grouping</span></div>
+                      </div>
+                      <div class="ua-xcard__obs">
+                        <div class="ua-ob ua-ob--problem"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>Generic icons, no subcategories — browsing feels flat.</span></div>
+                        <div class="ua-ob ua-ob--rec"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Replace with real product thumbnails and add subcategory depth.</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Listing -->
+                <div class="ua-car__slide">
+                  <div class="ua-xcard">
+                    <div class="ua-xcard__shot"><img src="assets/uxaudit/phone-plp.png" alt="Product listing screen — cramped rows" loading="lazy" decoding="async"></div>
+                    <div class="ua-xcard__panel">
+                      <div class="ua-xcard__top">
+                      <h4 class="ua-xcard__ttl">Product listing page</h4>
+                      <span class="ua-chip ua-chip--found">Usability &amp; Interaction</span>
+                      <div class="ua-crit"><svg class="ua-crit__el" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 4v8.5A3.5 3.5 0 0 0 10.5 16H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 13l3 3-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ua-chip ua-chip--crit">Task Flow Efficiency</span></div>
+                      </div>
+                      <div class="ua-xcard__obs">
+                        <div class="ua-ob ua-ob--problem"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>Cramped layout, touch targets too small for mobile.</span></div>
+                        <div class="ua-ob ua-ob--rec"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>2-column grid, prominent filters, sorting options surfaced upfront.</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="ua-car__slide">
+                  <div class="ua-xcard">
+                    <div class="ua-xcard__shot"><img src="assets/uxaudit/phone-pdp.png" alt="Product detail screen — key info below the fold" loading="lazy" decoding="async"></div>
+                    <div class="ua-xcard__panel">
+                      <div class="ua-xcard__top">
+                      <h4 class="ua-xcard__ttl">Product description page</h4>
+                      <span class="ua-chip ua-chip--found">Information Architecture</span>
+                      <div class="ua-crit"><svg class="ua-crit__el" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 4v8.5A3.5 3.5 0 0 0 10.5 16H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M14 13l3 3-3 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ua-chip ua-chip--crit">Information Hierarchy &amp; Structure</span></div>
+                      </div>
+                      <div class="ua-xcard__obs">
+                        <div class="ua-ob ua-ob--problem"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span>Critical purchase info buried below the fold.</span></div>
+                        <div class="ua-ob ua-ob--rec"><span class="ua-ob__ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12.4l2.6 2.6L16 9.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Surface final price, order limits, and promotions above the fold.</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <button class="ua-car__arrow" type="button" onclick="uaGo(uaIdx+1)" aria-label="Next screen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+
+          <div class="ua-car__dots" id="uaDots">
+            <button class="ua-dot on" type="button" onclick="uaGo(0)" aria-label="Homepage"></button>
+            <button class="ua-dot" type="button" onclick="uaGo(1)" aria-label="Search"></button>
+            <button class="ua-dot" type="button" onclick="uaGo(2)" aria-label="Categories"></button>
+            <button class="ua-dot" type="button" onclick="uaGo(3)" aria-label="Product Listing"></button>
+            <button class="ua-dot" type="button" onclick="uaGo(4)" aria-label="Product Details"></button>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learnings -->
+      <div class="cs-row">
+        <div class="cs-aside">
+          <div class="cs-aside__ttl">Learnings</div>
+        </div>
+        <div class="cs-body">
+          <p class="ua-lead">Never be subjective.</p>
+          <p>Ground every UX observation in evidence, a clear rationale, and the user's task.</p>
+          <p>Good recommendations connect user needs to business goals — making design decisions easier to prioritise and act on.</p>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="cs-row">
+        <div class="cs-aside">
           <div class="cs-aside__ttl">Feedback</div>
         </div>
         <div class="cs-body">
-          <div class="cs-feedback">
-            <div class="cs-feedback__q">"Hey Anoushka, it was a pleasure collaborating together; you brought a thoughtful and structured approach to strategy, and your evaluation and articulation helped anchor many of the conversations in a clear direction. I especially appreciated your attention to detail — it showed in the way you reviewed experiences, captured nuances, and ensured the work stayed thorough and consistent. You were receptive to feedback, stayed proactive in discussions, and maintained a steady focus on moving the project forward, which made the collaboration smooth and dependable."</div>
-            <div class="cs-feedback__a">Project Team Member · Accenture Song</div>
+          <div class="ua-fb">
+            <div class="ua-fb__mark" aria-hidden="true">&rdquo;</div>
+            <div class="ua-fb__head">
+              <span class="ua-fb__av ua-fb__av--pad" style="background:#a100ff"><img src="assets/Logos/accenture.png" alt="Accenture"></span>
+              <span class="ua-fb__name">Project Team Member</span>
+            </div>
+            <div class="ua-fb__q">It was a pleasure collaborating together; you brought a thoughtful and structured approach to strategy, and your evaluation and articulation helped anchor many of the conversations in a clear direction. I especially appreciated your attention to detail — it showed in the way you reviewed experiences, captured nuances, and ensured the work stayed thorough and consistent. You were receptive to feedback, stayed proactive in discussions, and maintained a steady focus on moving the project forward, which made the collaboration smooth and dependable."</div>
           </div>
         </div>
       </div>
@@ -2795,6 +2986,17 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAudit(); });
+
+  /* ── UX Audit · Experience analysis carousel ── */
+  let uaIdx = 0;
+  function uaGo(i){
+    const track = document.getElementById('uaTrack');
+    if (!track) return;
+    uaIdx = ((i % 5) + 5) % 5;
+    track.style.transform = 'translateX(-' + (uaIdx * 100) + '%)';
+    document.querySelectorAll('#uaTabs .ua-tab').forEach((t, k) => t.classList.toggle('on', k === uaIdx));
+    document.querySelectorAll('#uaDots .ua-dot').forEach((d, k) => d.classList.toggle('on', k === uaIdx));
+  }
 
   /* overview video — plays with the voiceover on by default; button toggles sound */
   function syncSoundBtn(){
@@ -3032,7 +3234,7 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     const sel = '.p-title, .p-tag, .p-meta, .p-git, .p-body, .p-slbl, .p-shead, ' +
                 '.p-img, .p-img-cap, .ns-head, .ns-item, .p-cta, .cs-row, ' +
                 '.tw-kicker, .tw-title, .tw-meta, .tw-body > *, ' +
-                '.tia-step';
+                '.tia-outcome, .tia-step';
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
