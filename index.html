@@ -870,22 +870,31 @@
     margin-top: 1rem;
     flex-wrap: wrap;
   }
+  /* CTA buttons — liquid glass */
   .p-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.48rem 1rem;
-    border-radius: 6px;
-    border: 1px solid var(--border);
+    gap: 0.45rem;
+    padding: 0.55rem 1.15rem;
+    border-radius: 999px;
     font-size: 13px;
+    font-weight: 600;
     font-family: var(--font);
     cursor: pointer;
-    background: transparent;
     color: var(--text);
-    transition: background 0.1s;
     text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    background: linear-gradient(115deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.18) 62%, rgba(255,255,255,0.06) 100%);
+    background-size: 230% 230%;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 16px rgba(0,0,0,0.28);
+    animation: lgTint 4.2s ease-in-out infinite;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .p-btn:hover { background: var(--hover); }
+  .p-btn:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 8px 22px rgba(0,0,0,0.4); }
+  @media (prefers-reduced-motion: reduce) { .p-btn { animation: none; } }
 
   /* ── UX AUDIT SPECIFIC ─────────────────────────── */
   .ua-cards {
@@ -1451,6 +1460,7 @@
     .cs-tf__arrow { padding: 0.3rem 0; }
     .cs-tf__arrow svg { transform: rotate(90deg); }
     .cs-impact__grid { grid-template-columns: 1fr !important; }
+    .cs-personas3 { grid-template-columns: 1fr; }
   }
   @media (max-width: 1024px) and (min-width: 769px) {
     .cs-agents { grid-template-columns: repeat(2, 1fr); }
@@ -2305,7 +2315,7 @@
 
           <div class="scr-usp">One finance command centre — <em>real-time metrics, AI-surfaced anomalies and forecasting</em> in a single 360° view, so the morning's analysis is done before you sit down.</div>
 
-          <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/dashboard.png" alt="Vantage dashboard — Good morning, James" decoding="async"></div>
+          <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/Dashboard.png" alt="Vantage dashboard — Good morning, James" decoding="async"></div>
           <div class="scr-cap"><b>The morning dashboard.</b> Five live KPIs, a ranked "needs attention" feed and a data-freshness check — the whole morning read in one glance, with Ask-Vantage on top for plain-English questions.</div>
 
           <div class="scr-media" style="margin-top:3.5rem"><img src="assets/vantage/cio-drilldown.gif" alt="Vantage — persona drill-down with agent root cause" loading="lazy"></div>
@@ -3158,7 +3168,13 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
     uxaudit: { label: 'UX Audit',       icon: '' },
   };
 
-  function go(id) {
+  /* view history — powers the mobile edge-swipe-back gesture */
+  let _navStack = [];
+  let _curView = 'home';
+  function go(id, opts) {
+    opts = opts || {};
+    if (!opts.back && _curView && _curView !== id) _navStack.push(_curView);
+    _curView = id;
     document.querySelectorAll('[data-view]').forEach(v => {
       v.classList.toggle('on', v.dataset.view === id);
     });
@@ -3205,6 +3221,34 @@ KPI Mapping||Does every key flow support a measurable business goal?||Does each 
   /* mobile off-canvas nav */
   function toggleNav() { document.body.classList.toggle('nav-open'); }
   function closeNav()  { document.body.classList.remove('nav-open'); }
+
+  /* go back to the previous view (used by the edge-swipe gesture) */
+  function goBack() {
+    if (document.body.classList.contains('nav-open')) { closeNav(); return; }
+    if (_navStack.length) go(_navStack.pop(), { back: true });
+    else if (_curView !== 'home') go('home', { back: true });
+  }
+
+  /* mobile: swipe right from the left screen edge → go back */
+  (function () {
+    let sx = 0, sy = 0, tracking = false, t0 = 0;
+    const EDGE = 30;      // px from left edge to start the gesture
+    const DIST = 65;      // min horizontal travel
+    document.addEventListener('touchstart', e => {
+      if (window.innerWidth > 820) { tracking = false; return; }
+      const t = e.touches[0];
+      if (t.clientX <= EDGE) { sx = t.clientX; sy = t.clientY; t0 = Date.now(); tracking = true; }
+      else tracking = false;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+      if (!tracking) return;
+      tracking = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx, dy = t.clientY - sy;
+      // mostly-horizontal rightward flick, within a reasonable time
+      if (dx > DIST && Math.abs(dy) < dx * 0.65 && (Date.now() - t0) < 700) goBack();
+    }, { passive: true });
+  })();
 
   /* live local time (Mumbai / IST) in the home meta row */
   function updateLocalTime() {
