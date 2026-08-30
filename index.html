@@ -260,27 +260,55 @@
   .h-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; margin-top: 2.5rem; }
   .h-card { border-radius: 18px; overflow: hidden; min-width: 0; }
   .h-card--exp { line-height: 0; }
-  .h-card--exp img { width: 100%; height: auto; display: block; }        /* natural — text never cropped, defines row height */
-  .h-card--photo { line-height: 0; }
-  .h-card--photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-  .h-mid { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; }
-  .h-ship { border-radius: 18px; overflow: hidden; line-height: 0; flex-shrink: 0; }
-  .h-ship img { width: 100%; height: auto; display: block; }
+  .h-card--exp img { width: 100%; height: auto; display: block; }        /* natural — text never cropped, SOLE height driver */
+  /* portrait + 7+ use absolutely-positioned images so they never add their own height;
+     they just cover whatever height the experience card sets */
+  .h-card--photo { position: relative; overflow: hidden; min-height: 0; }
+  .h-card--photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .h-mid { display: flex; flex-direction: column; gap: 1.25rem; min-width: 0; min-height: 0; }
+  .h-ship { flex: 0 0 auto; aspect-ratio: 1.62; border-radius: 18px; overflow: hidden; line-height: 0; }   /* trims only the card's spare padding — all text stays */
+  .h-ship img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
   /* testimonials — rotating */
-  .h-testi { flex: 1; border-radius: 18px; background: #5b6a52; padding: 1.4rem 1.6rem 1.5rem; display: flex; flex-direction: column; color: #eef1e6; overflow: hidden; }
-  .h-testi__label { font-size: 15px; font-weight: 500; color: #eef1e6; margin-bottom: 1.1rem; }
-  .h-testi__stage { display: grid; flex: 1; }
-  .h-testi__item { grid-area: 1 / 1; opacity: 0; transition: opacity 0.55s ease; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; gap: 1.1rem; }
+  .h-testi { flex: 1 1 0; min-height: 0; border-radius: 18px; background: #5b6a52; padding: 1.3rem 1.5rem 1.4rem; display: flex; flex-direction: column; color: #eef1e6; overflow: hidden; }
+  .h-testi__label { font-size: 15px; font-weight: 500; color: #eef1e6; margin-bottom: 0.9rem; flex-shrink: 0; }
+  .h-testi__stage { display: grid; flex: 1; min-height: 0; }
+  .h-testi__item { grid-area: 1 / 1; opacity: 0; transition: opacity 0.55s ease; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; gap: 0.9rem; }
   .h-testi__item.on { opacity: 1; pointer-events: auto; }
-  .h-testi__q { font-size: 15px; line-height: 1.55; color: #e7ebdd; }
-  .h-testi__a { font-size: 14px; color: #cdd4be; }
+  .h-testi__q { font-size: 14px; line-height: 1.5; color: #e7ebdd; }
+  .h-testi__a { font-size: 13.5px; color: #cdd4be; }
   @media (prefers-reduced-motion: reduce) { .h-testi__item { transition: none; } }
 
   @media (max-width: 900px) {
     .h-bento { grid-template-columns: 1fr; }
     .h-sig { width: 260px; max-width: 78%; }
     .h-bio { font-size: 17px; }
+  }
+
+  /* ── Home projects (numbered) + Work in Between ── */
+  .hp-sec { margin-top: 3.75rem; }
+  .hp-sec__hd { font-size: 15px; font-weight: 500; color: var(--text); padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); margin-bottom: 2.6rem; }
+  .hp-list { display: flex; flex-direction: column; gap: 3.5rem; }
+  .hp-proj { display: block; text-decoration: none; color: inherit; cursor: pointer; }
+  .hp-proj__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.4rem; }
+  .hp-proj__ttl { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+  .hp-proj__desc { font-size: 15px; line-height: 1.5; color: var(--muted); margin-top: 0.4rem; max-width: 62ch; }
+  .hp-proj__tags { display: flex; gap: 0.5rem; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  .hp-tag { font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 0.35rem 0.75rem; white-space: nowrap; }
+  .hp-proj__img { border-radius: 14px; overflow: hidden; line-height: 0; background: #111; }
+  .hp-proj__img img { width: 100%; height: auto; display: block; transition: transform 0.45s ease; }
+  .hp-proj:hover .hp-proj__img img { transform: scale(1.015); }
+
+  .hp-wib { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .hp-wib__card { border-radius: 16px; overflow: hidden; line-height: 0; cursor: pointer; transition: transform 0.2s; }
+  .hp-wib__card img { width: 100%; height: auto; display: block; }
+  .hp-wib__card:hover { transform: translateY(-2px); }
+
+  @media (max-width: 820px) {
+    .hp-proj__top { flex-direction: column; gap: 0.55rem; }
+    .hp-proj__tags { justify-content: flex-start; }
+    .hp-proj__ttl { font-size: 19px; }
+    .hp-wib { grid-template-columns: 1fr; }
   }
 
   .s-div {
@@ -1847,7 +1875,7 @@
       <p class="h-bio">I am a Digital Product Designer from Himachal, India, designing thoughtful digital products that bring clarity to complex systems and experiences across enterprise and AI.</p>
 
       <div class="h-bento">
-        <div class="h-card h-card--img"><img src="assets/home/experience.png" alt="Experience — Accenture Song, Digital Product Designer (2024–Present); Studio Carbon, Product Design Intern (2024)" decoding="async"></div>
+        <div class="h-card h-card--exp"><img src="assets/home/experience.png" alt="Experience — Accenture Song, Digital Product Designer (2024–Present); Studio Carbon, Product Design Intern (2024)" decoding="async"></div>
         <div class="h-mid">
           <div class="h-ship"><img src="assets/home/shipped.png" alt="7+ Products Shipped — Mobile ×2, SaaS ×3, Website ×2" decoding="async"></div>
           <div class="h-testi">
@@ -1859,46 +1887,54 @@
             </div>
           </div>
         </div>
-        <div class="h-card h-card--img"><img src="assets/home/portrait.png" alt="Anoushka Aggarwal" decoding="async"></div>
+        <div class="h-card h-card--photo"><img src="assets/home/portrait.png" alt="Anoushka Aggarwal" decoding="async"></div>
       </div>
 
-      <div class="s-div">
-        <div class="s-lbl">Projects</div>
-        <div class="pw">
+      <div class="hp-sec">
+        <div class="hp-sec__hd">Projects</div>
+        <div class="hp-list">
 
-          <div class="pw-item" onclick="go('nav')">
-            <div class="pw-hero pw-hero--banner" style="background:#00404f;padding:0">
-              <img src="assets/vantage/hero.jpg" alt="Vantage 360 Navigator · FIS">
+          <div class="hp-proj" onclick="go('nav')" role="link" tabindex="0" onkeydown="if(event.key==='Enter'){go('nav')}">
+            <div class="hp-proj__top">
+              <div>
+                <div class="hp-proj__ttl">01 · FIS — Vantage Dashboard</div>
+                <div class="hp-proj__desc">Turning fragmented financial reporting into one clear picture.</div>
+              </div>
+              <div class="hp-proj__tags"><span class="hp-tag">Dashboard</span><span class="hp-tag">Financial Services</span></div>
             </div>
-            <div class="pw-info">
-              <div class="pw-name">Vantage 360 Value Navigator for FIS</div>
-              <div class="pw-cat">SaaS Product · Data Visualization · Agentic AI</div>
-              <div class="pw-desc">An FP&amp;A dashboard that brings together real-time data, variance analysis, and AI-driven commentary across all five core metrics — built for the FIS finance team.</div>
-            </div>
+            <div class="hp-proj__img"><img src="assets/vantage/hero.jpg" alt="Vantage 360 Navigator · FIS" decoding="async"></div>
           </div>
 
-          <div class="pw-item" onclick="go('carma')">
-            <div class="pw-hero pw-hero--banner" style="background:#ff5d00;padding:0">
-              <img src="assets/agtuall/hero.jpg" alt="Carma · Agtuall">
+          <div class="hp-proj" onclick="go('uxaudit')" role="link" tabindex="0" onkeydown="if(event.key==='Enter'){go('uxaudit')}">
+            <div class="hp-proj__top">
+              <div>
+                <div class="hp-proj__ttl">02 · Unilever — UX Audit</div>
+                <div class="hp-proj__desc">Enhancing Unilever's app to make everyday ordering simpler for retailers and sales reps in Vietnam.</div>
+              </div>
+              <div class="hp-proj__tags"><span class="hp-tag">Mobile App</span><span class="hp-tag">FMCG Retail</span></div>
             </div>
-            <div class="pw-info">
-              <div class="pw-name">Carma · Agtuall</div>
-              <div class="pw-cat">B2B SaaS · Product Design</div>
-              <div class="pw-desc">A shipped climate-risk platform helping insurers build ag-insurance that de-risks smallholder farmers.</div>
-            </div>
+            <div class="hp-proj__img"><img src="assets/uxaudit/hero.jpg" alt="Unilever App · UX Audit" decoding="async"></div>
           </div>
 
-          <div class="pw-item" onclick="go('uxaudit')">
-            <div class="pw-hero pw-hero--banner" style="background:#1d1178;padding:0">
-              <img src="assets/uxaudit/hero.jpg" alt="Unilever UX Audit">
+          <div class="hp-proj" onclick="go('carma')" role="link" tabindex="0" onkeydown="if(event.key==='Enter'){go('carma')}">
+            <div class="hp-proj__top">
+              <div>
+                <div class="hp-proj__ttl">03 · Agtuall — CARMA Web App</div>
+                <div class="hp-proj__desc">Turning climate uncertainty into financial resilience for smallholder farmers.</div>
+              </div>
+              <div class="hp-proj__tags"><span class="hp-tag">Web App</span><span class="hp-tag">Agri-Insurance</span></div>
             </div>
-            <div class="pw-info">
-              <div class="pw-name">UX Audit</div>
-              <div class="pw-cat">UX Research · Audit</div>
-              <div class="pw-desc">Systematic evaluation of product experiences to identify friction, gaps, and opportunities.</div>
-            </div>
+            <div class="hp-proj__img"><img src="assets/agtuall/hero.jpg" alt="Carma · Agtuall" decoding="async"></div>
           </div>
 
+        </div>
+      </div>
+
+      <div class="hp-sec">
+        <div class="hp-sec__hd">Work in Between</div>
+        <div class="hp-wib">
+          <div class="hp-wib__card" onclick="go('tiaa')" role="link" tabindex="0" onkeydown="if(event.key==='Enter'){go('tiaa')}"><img src="assets/tiaa/banner.png" alt="What happens after the Figma file handoff? — TIAA" decoding="async"></div>
+          <div class="hp-wib__card" onclick="go('articulating')" role="link" tabindex="0" onkeydown="if(event.key==='Enter'){go('articulating')}"><img src="assets/articulating/banner.jpg" alt="Articulating design decisions in the age of AI" decoding="async"></div>
         </div>
       </div>
 
