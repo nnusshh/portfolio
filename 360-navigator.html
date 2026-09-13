@@ -229,20 +229,20 @@ const NAV_GROUPS = [
 // Five core FP&A metrics — period-aware actuals vs plan + forecast signal
 const KPIS = [
   { key:'revenue',   label:'Revenue',   icon:'trend', fmt:'money', dir:'over',
-    P:{ MTD:{a:842,p:858,fc:'At risk'}, QTD:{a:2510,p:2556,fc:'At risk'}, YTD:{a:10027,p:9830,fc:'On track'}, R12:{a:13120,p:12980,fc:'On track'} },
-    spark:[9.6,9.7,9.75,9.82,9.85,9.9,9.96,10.0,10.02,10.03] },
+    P:{ MTD:{a:968,p:952,fc:'On track'}, QTD:{a:2884,p:2820,fc:'On track'}, YTD:{a:11542,p:11210,fc:'On track'}, R12:{a:15020,p:14780,fc:'On track'} },
+    spark:[10.9,11.0,11.08,11.15,11.22,11.3,11.38,11.45,11.5,11.54] },
   { key:'opex',      label:'OpEx',      icon:'wave',  fmt:'money', dir:'under',
-    P:{ MTD:{a:512,p:505,fc:'At risk'}, QTD:{a:1505,p:1520,fc:'On track'}, YTD:{a:5980,p:6085,fc:'On track'}, R12:{a:7840,p:7990,fc:'On track'} },
-    spark:[6.15,6.11,6.08,6.05,6.02,6.0,5.99,5.985,5.982,5.98] },
+    P:{ MTD:{a:548,p:540,fc:'At risk'}, QTD:{a:1612,p:1636,fc:'On track'}, YTD:{a:6420,p:6560,fc:'On track'}, R12:{a:8410,p:8580,fc:'On track'} },
+    spark:[6.62,6.58,6.54,6.5,6.47,6.45,6.43,6.42,6.42,6.42] },
   { key:'capex',     label:'CapEx',     icon:'grid',  fmt:'money', dir:'under',
-    P:{ MTD:{a:82,p:70,fc:'Off track'}, QTD:{a:240,p:210,fc:'Off track'}, YTD:{a:847,p:763,fc:'Off track'}, R12:{a:1090,p:990,fc:'Off track'} },
-    spark:[0.72,0.74,0.76,0.79,0.81,0.825,0.835,0.842,0.845,0.847] },
+    P:{ MTD:{a:96,p:82,fc:'Off track'}, QTD:{a:288,p:250,fc:'Off track'}, YTD:{a:1024,p:905,fc:'Off track'}, R12:{a:1290,p:1150,fc:'Off track'} },
+    spark:[0.88,0.9,0.93,0.96,0.98,0.995,1.005,1.015,1.02,1.024] },
   { key:'headcount', label:'Headcount', icon:'users', fmt:'count', dir:'neutral',
-    P:{ MTD:{a:62461,p:61800,fc:'At risk'}, QTD:{a:62461,p:61900,fc:'At risk'}, YTD:{a:62461,p:61800,fc:'At risk'}, R12:{a:62461,p:60900,fc:'At risk'} },
-    spark:[59.8,60.2,60.6,61.0,61.4,61.7,62.0,62.2,62.35,62.46] },
+    P:{ MTD:{a:64890,p:63700,fc:'At risk'}, QTD:{a:64890,p:63900,fc:'At risk'}, YTD:{a:64890,p:63700,fc:'At risk'}, R12:{a:64890,p:62400,fc:'At risk'} },
+    spark:[62.1,62.5,62.9,63.4,63.8,64.1,64.4,64.6,64.78,64.89] },
   { key:'ebitda',    label:'EBITDA',    icon:'pie',   fmt:'money', dir:'over',
-    P:{ MTD:{a:330,p:353,fc:'Off track'}, QTD:{a:1005,p:1035,fc:'At risk'}, YTD:{a:4047,p:3970,fc:'On track'}, R12:{a:5280,p:5190,fc:'On track'} },
-    spark:[3.95,3.97,3.985,3.995,4.01,4.02,4.03,4.04,4.045,4.047] },
+    P:{ MTD:{a:372,p:398,fc:'Off track'}, QTD:{a:1146,p:1180,fc:'At risk'}, YTD:{a:4612,p:4520,fc:'On track'}, R12:{a:6010,p:5900,fc:'On track'} },
+    spark:[4.42,4.45,4.47,4.49,4.52,4.54,4.57,4.59,4.6,4.612] },
 ];
 
 const PERIODS = [
@@ -468,10 +468,10 @@ const Sidebar = ({ activeKey, onSelect, onNav, collapsed, onToggle, width, mobil
       {/* User card */}
       <div style={{borderTop:`0.5px solid ${SB.divide}`,padding:collapsed?'12px 0':'12px 14px'}}>
         <div style={{display:'flex',alignItems:'center',gap:10,justifyContent:collapsed?'center':'flex-start'}}>
-          <div style={{width:28,height:28,borderRadius:'50%',background:'linear-gradient(135deg,#3A3A42,#17171B)',border:`1px solid ${SB.cardBorder}`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:10.5,fontWeight:600,flexShrink:0}}>JK</div>
+          <div style={{width:28,height:28,borderRadius:'50%',background:'linear-gradient(135deg,#3A3A42,#17171B)',border:`1px solid ${SB.cardBorder}`,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:10.5,fontWeight:600,flexShrink:0}}>AM</div>
           {!collapsed && (<>
             <div style={{flex:1,minWidth:0}}>
-              <div style={{color:SB.text,fontSize:13,fontWeight:500,whiteSpace:'nowrap'}}>James Kehoe</div>
+              <div style={{color:SB.text,fontSize:13,fontWeight:500,whiteSpace:'nowrap'}}>Alex Morgan</div>
               <div style={{color:SB.textMute,fontSize:11}}>FIS CFO</div>
             </div>
             <button title="Logout" style={{background:'none',border:'none',color:SB.textMute,cursor:'pointer',display:'flex',padding:4}}><ILogout/></button>
@@ -763,7 +763,7 @@ const DashboardView = ({ onSubmit, period, setPeriod, onInvestigateKpi, onInvest
     <div style={{position:'relative',zIndex:30,borderBottom:`1px solid ${C.line}`,background:'radial-gradient(130% 150% at 92% -35%, rgba(76,204,230,0.10) 0%, rgba(76,204,230,0) 52%), linear-gradient(162deg, #1C1E22 0%, #191A1D 58%, #161719 100%)',padding:'48px 56px 28px'}}>
       <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:20,gap:16,flexWrap:'wrap'}}>
         <div>
-          <h1 style={{fontFamily:'var(--font-head)',fontSize:'clamp(21px,4vw,26px)',fontWeight:600,color:C.ink,letterSpacing:'-0.5px',marginBottom:6}}>Good morning, James</h1>
+          <h1 style={{fontFamily:'var(--font-head)',fontSize:'clamp(21px,4vw,26px)',fontWeight:600,color:C.ink,letterSpacing:'-0.5px',marginBottom:6}}>Good morning, Alex</h1>
           <p style={{fontSize:14,color:C.ink2}}>Overnight close is complete. 2 items need your attention.</p>
         </div>
         <div style={{display:'flex',alignItems:'center',gap:10,flexShrink:0}}>
@@ -2424,7 +2424,7 @@ const MonthlyCloseScreen = () => {
   const save=()=>{ setSaved(true); setTimeout(()=>setSaved(false),1600); };
   const submit=()=>{ if(submitted) return; setSubmitted(true);
     const now=new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
-    setSubmittedInfo(`Submitted by James Kehoe · ${now}`); };
+    setSubmittedInfo(`Submitted by Alex Morgan · ${now}`); };
 
   const sbTone = status==='Signed off' ? {bg:C.greenBg,color:C.greenDark,border:'#A7F3D0'} : {bg:MC_AMBER.bg,color:MC_AMBER.text,border:MC_AMBER.border};
   const statusBadge = <span style={{fontSize:11,fontWeight:600,padding:'3px 11px',borderRadius:20,background:sbTone.bg,color:sbTone.color,border:`1px solid ${sbTone.border}`,whiteSpace:'nowrap'}}>{status}</span>;
@@ -2591,14 +2591,6 @@ const LoginScreen = ({ onSignIn }) => {
         background:'radial-gradient(120% 100% at 18% 16%, rgba(0,86,106,0.40), transparent 55%), radial-gradient(130% 120% at 90% 92%, rgba(0,86,106,0.24), transparent 55%), linear-gradient(155deg,#1C1D1F 0%,#111214 55%,#0A0B0C 100%)'}}>
         <div style={{position:'absolute',inset:0,backgroundImage:grain,backgroundSize:'180px 180px',opacity:0.24,mixBlendMode:'overlay',pointerEvents:'none'}}/>
         <div style={{position:'absolute',top:'-14%',left:'-12%',width:540,height:540,borderRadius:'50%',background:'radial-gradient(circle, rgba(0,86,106,0.34), transparent 62%)',filter:'blur(72px)',animation:'plOrb 20s ease-in-out infinite',pointerEvents:'none'}}/>
-        {/* chip top-left */}
-        <div style={{position:'absolute',top:26,left:26,display:'inline-flex',alignItems:'center',gap:10,background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.10)',borderRadius:12,padding:'9px 13px',backdropFilter:'blur(6px)'}}>
-          <span style={{width:30,height:30,borderRadius:8,background:TEAL,display:'flex',alignItems:'center',justifyContent:'center',color:'#fff',flexShrink:0}}><IAI w={17}/></span>
-          <div style={{lineHeight:1.25}}>
-            <div style={{fontSize:12,fontWeight:600}}>Enterprise Sign-in</div>
-            <div style={{fontSize:10.5,color:'#9A9DA4'}}>Secure access · SSO enabled</div>
-          </div>
-        </div>
         {/* lockup bottom-left */}
         <img src="vantage-lockup.svg" alt="Vantage" style={{position:'absolute',left:30,bottom:56,width:'clamp(150px,16vw,204px)',height:'auto'}}/>
         <div style={{position:'absolute',left:32,right:32,bottom:24,fontSize:11,color:'#7B7E85'}}>© 2026 FIS · Confidential · For internal use only</div>
