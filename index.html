@@ -321,6 +321,10 @@
     .h-bento { grid-template-columns: 1fr; }
     .h-sig { width: 260px; max-width: 78%; }
     .h-bio { font-size: 17px; }
+    /* single-column: the testimonials card has no leftover height to fill,
+       so size it to its content instead of collapsing to the label */
+    .h-testi { flex: 0 0 auto; min-height: 0; overflow: visible; }
+    .h-testi__stage { min-height: auto; }
   }
 
   /* ── Home projects (numbered) + Work in Between ── */
